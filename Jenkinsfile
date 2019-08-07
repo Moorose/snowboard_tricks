@@ -9,14 +9,15 @@ pipeline {
         stage('set pepline name'){
             steps {
                 script {
-                    currentBuild.displayName = "brunch_v:"+env.GIT_BRANCH
+                    #<build number> ​[origin/<branch name>] ​(<commit hash>)
+                    currentBuild.displayName = "#"+env.BUILD_NUMBER+" ​["+env.GIT_BRANCH+"] ​("+env.GIT_COMMIT+")"
                 }
             }
         }
         stage('npm install') {
             steps {
                 dir("client"){
-                    sh 'npm nstall'
+                    sh 'npm install'
                 }
             }
         }
