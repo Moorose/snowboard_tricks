@@ -36,10 +36,3 @@ pipeline {
         }
     }
 }
-
-curl --user "username" --data @- https://api.github.com/repos/Moorose/snowboard_tricks/commits/:sha
-{
-  "state": "success",
-  "description": "The build succeeded!",
-  "context": "default"
-}
