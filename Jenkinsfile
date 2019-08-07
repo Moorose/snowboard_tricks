@@ -16,7 +16,7 @@ pipeline {
         stage('npm install') {
             steps {
                 dir("client"){
-                    sh 'npm install'
+                    sh 'npm nstall'
                 }
             }
         }
