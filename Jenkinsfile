@@ -9,7 +9,7 @@ pipeline {
         stage('set pepline name'){
             steps {
                 script {
-                    currentBuild.displayName = "#${env.BUILD_NUMBER}​:[${env.GIT_BRANCH}](${env.GIT_COMMIT})"
+                    currentBuild.displayName = "#${env.BUILD_NUMBER}​[${env.GIT_BRANCH}](${env.GIT_COMMIT})".trim()
                 }
             }
         }
