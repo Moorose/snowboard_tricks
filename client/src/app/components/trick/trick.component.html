@@ -1,0 +1,9 @@
+<div *ngIf="trick">
+    <p>{{ trick.id }}</p>
+    <p>{{ trick.name }}</p>
+    <p>{{ trick.complexity }}</p>
+    <p>{{ trick.description }}</p>
+</div>
+<div *ngIf="!trick">
+    <span>This trick was not found :(</span>
+</div>
