@@ -10,9 +10,6 @@ pipeline {
             steps {
                 script {
                     currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
-                    echo env.GIT_BRANCH
-                    echo env.GIT_COMMIT
-                    echo env.GIT_COMMIT.take(7)
                 }
             }
         }
