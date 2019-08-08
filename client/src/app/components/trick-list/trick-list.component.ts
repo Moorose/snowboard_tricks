@@ -9,7 +9,7 @@ import { TriksService } from 'src/app/services/triks.service';
 })
 export class TrickListComponent implements OnInit {
 
-  tricks: Trick[];
+  tricks: Trick[] = [];
 
   constructor(
     private trickService: TriksService
@@ -21,7 +21,7 @@ export class TrickListComponent implements OnInit {
 
   getTricks(){
     this.trickService.getTrickList().subscribe(
-      (tricks) => {console.log(tricks);this.tricks = tricks;},
+      (tricks) => {console.log(tricks);this.tricks = tricks["trickList"];},
       (err) => {console.log('Error: ',err);}
     );
   }

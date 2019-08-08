@@ -3,4 +3,10 @@ div {
     background-color: cadetblue;
     padding: 1em;
     width: 50vh;
+
+    .name {
+        text-align: center;
+        font-weight: bold;
+    }
+    // .complexity {}
 }
