@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('set pepline name'){
+        stage('set pepline name') {
             steps {
                 script {
                     currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
@@ -15,21 +15,21 @@ pipeline {
         }
         stage('npm install') {
             steps {
-                dir("client"){
+                dir("client") {
                     sh 'npm install'
                 }
             }
         }
         stage('Unit Tests') {
             steps {
-                dir("client"){
+                dir("client") {
                     sh 'npm run test:ci'
                 }
             }
         }
         stage('e2e tests') {
             steps {
-                dir("client"){
+                dir("client") {
                    sh 'npm run e2e:ci'
                 }
             }
