@@ -1,12 +1,22 @@
 {
     "name": "snowboard_tricks_server",
     "version": "1.0.0",
+    "description": "Backend server for client",
+    "main": "app.js",
     "scripts": {
         "start": "node app.js",
         "dev": "nodemon app.js"
     },
     "dependencies": {
-        "koa": "^2.7.0"
+        "bunyan": "^1.8.12",
+        "koa": "^2.7.0",
+        "koa-body": "^4.1.0",
+        "koa-bunyan": "^1.0.2",
+        "koa-generic-session-sequelize": "^2.2.0",
+        "koa-router": "^7.4.0",
+        "mocha": "^6.2.0",
+        "pg": "^7.12.0",
+        "sequelize": "^5.12.3"
     },
     "devDependencies": {
         "nodemon": "^1.19.1"
