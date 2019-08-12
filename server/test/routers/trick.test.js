@@ -185,11 +185,8 @@ describe("Test trick controller", function() {
           .delete("/tricks/1")
           .send();
       });
-      it("Should be status 200", function() {
-        assert.equal(this.response.status, 200);
-      });
-      it("Response equalse 0", function() {
-        assert.equal(this.response.text, 0);
+      it("Should be status 404", function() {
+        assert.equal(this.response.status, 404);
       });
     });
   });
@@ -234,12 +231,65 @@ describe("Test trick controller", function() {
           .delete("/tricks")
           .send();
       });
-      it("Should be status 200", function() {
-        assert.equal(this.response.status, 200);
-      });
-      it("Delete response equalse 0", function() {
-        assert.equal(this.response.text, 0);
+      it("Should be status 404", function() {
+        assert.equal(this.response.status, 404);
       });
     });
   });
+
+  describe("PUT /tricks", function() {
+    describe("Update trick", function() {
+      before(async function() {
+        await chai
+          .request(this.app)
+          .delete("/tricks")
+          .send();
+        this.trick = await chai
+          .request(this.app)
+          .post("/tricks")
+          .send({
+            name: `trick`,
+            complexity: 100,
+            description: "Test text...",
+          });
+          this.response = await chai
+          .request(this.app)
+          .put("/tricks")
+          .send({
+            id: this.trick.body.id,
+            name: `newtrick`,
+            complexity: 120,
+            description: "Test text...",
+          });
+      });
+      it("Should be status 200", function() {
+        assert.equal(this.response.status, 200);
+      });
+      it("Check object", function() {
+        assert.equal(this.response.body.name, "newtrick");
+        assert.notEqual(this.response.body.name, this.trick.body.name);
+      });
+    });
+    describe("Without tricks", function() {
+      before(async function() {
+        await chai
+          .request(this.app)
+          .delete("/tricks")
+          .send();
+          this.response = await chai
+          .request(this.app)
+          .put("/tricks")
+          .send({
+            id: 56,
+            name: `newtrick`,
+            complexity: 120,
+            description: "Test text...",
+          });
+      });
+      it("Should be status 404", function() {
+        assert.equal(this.response.status, 404);
+      });
+    });
+  });
+
 });

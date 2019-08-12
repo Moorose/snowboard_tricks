@@ -10,6 +10,18 @@ exports.addTrick = async ({ name, complexity, description }) => {
   });
 };
 
+exports.updateTrick = async ({ id, name, complexity, description }) => {
+  return await Trick.update({
+    name: name,
+    complexity: complexity,
+    description: description,
+  },{
+    where: {
+      id: id
+    }
+  });
+};
+
 exports.getTrickById = async id => {
   return await Trick.findByPk(id);
 };

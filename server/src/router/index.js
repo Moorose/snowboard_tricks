@@ -5,6 +5,7 @@ const router = new Router();
 router
     .get('/tricks',trickController.getTrickList)
     .get('/tricks/:id', trickController.getTrickById)
+    .put('/tricks', trickController.putTrick)
     .post('/tricks', trickController.postTrick)
     .delete('/tricks/:id', trickController.deleteTrickById)
     .delete('/tricks', trickController.deleteAllTrick);
