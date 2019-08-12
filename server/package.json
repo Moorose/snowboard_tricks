@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
-        "dev": "nodemon app.js"
+        "dev": "nodemon app.js",
+        "test": "NODE_ENV=test mocha --exit --recursive ./test/support/hook.js './test/**/*.test.js'"
     },
     "dependencies": {
         "bunyan": "^1.8.12",
@@ -19,6 +20,9 @@
         "sequelize": "^5.12.3"
     },
     "devDependencies": {
-        "nodemon": "^1.19.1"
+        "nodemon": "^1.19.1",
+        "chai": "*",
+        "chai-http": "*",
+        "mocha": "*"
     }
 }

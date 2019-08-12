@@ -14,36 +14,25 @@ const PORT = process.env.PORT || 3000;
 
 const app = new Koa();
 
-if (process.env.NODE_ENV === "test") {
-  sequelize.sync({ force: true })
-    .then(() => {
-      console.log('Database FORCE synchronized successfully');
-    }).catch((err) => {
-      console.log('Database wasn`t synchronized: ', err);
-    });
-} else {
-  sequelize.sync().then((result) => {
-    console.log('Database FORCE synchronized successfully');
-  }).catch((err) => {
-    console.log('Database wasn`t synchronized: ', err);
+const runServer = async function() {
+  if (process.env.NODE_ENV === "test") {
+    await sequelize.sync({ force: true });
+  } else {
+    await sequelize.sync();
+  }
+
+  app.use(koaBody());
+  app.use(koaLogger(logger));
+  app.use(httpConf.setCORS);
+  // app.use(httpConf.setContentType);
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+
+  return app.listen(PORT, () => {
+    console.log(`Server start http://localhost:${PORT}`);
   });
-}
+};
 
-// app.use(
-//   session({
-//     store: new SequelizeSessionStore(sequelize, {
-//       tableName: "sessions",
-//     }),
-//   }),
-// );
+const server = runServer();
 
-app.use(koaBody());
-app.use(koaLogger(logger));
-app.use(httpConf.setCORS);
-app.use(httpConf.setContentType);
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-app.listen(PORT, () => {
-  console.log(`Server start http://localhost:${PORT}`);
-});
+module.exports = server;

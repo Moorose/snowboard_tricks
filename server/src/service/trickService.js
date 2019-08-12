@@ -1,27 +1,33 @@
-'use strict';
+"use strict";
 
 const { Trick } = require("../models");
 
-exports.addTrick = async ({name, complexity, description}) => {
-    return await Trick.create({
-        name:name,
-        complexity:complexity,
-        description:description
-    });
+exports.addTrick = async ({ name, complexity, description }) => {
+  return await Trick.create({
+    name: name,
+    complexity: complexity,
+    description: description,
+  });
 };
 
-exports.getTrickById = async (id) => {
-    return await Trick.findById(id);
+exports.getTrickById = async id => {
+  return await Trick.findByPk(id);
 };
 
 exports.getTrickList = async () => {
-    return await Trick.findAll();
+  return await Trick.findAll();
 };
 
-exports.destroyTrickById = async (id) => {
-    return await Trick.destroyById(id);
+exports.destroyTrickById = async id => {
+  return await Trick.destroy({
+    where: {
+      id: id,
+    },
+  });
 };
 
 exports.destroyAllTrick = async () => {
-    return await Trick.clearTable();
+  return await Trick.destroy({
+    where: {},
+  });
 };
