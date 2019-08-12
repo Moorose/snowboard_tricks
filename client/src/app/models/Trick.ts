@@ -1,5 +1,5 @@
 export class Trick {
-    id:number;
+    id: number;
     name: string;
     complexity: number;
     description: string;
