@@ -21,7 +21,7 @@ export class TrickListComponent implements OnInit {
 
   getTricks(){
     this.trickService.getTrickList().subscribe(
-      (tricks) => {console.log(tricks);this.tricks = tricks["trickList"];},
+      (tricks) => {console.log(tricks);this.tricks = tricks;},
       (err) => {console.log('Error: ',err);}
     );
   }
