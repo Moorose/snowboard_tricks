@@ -20,6 +20,20 @@ pipeline {
                 }
             }
         }
+        stage('Linter check') {
+            steps {
+                dir("client") {
+                    sh 'ng lint'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir("client") {
+                    sh 'ng build'
+                }
+            }
+        }
         stage('Unit Tests') {
             steps {
                 dir("client") {
