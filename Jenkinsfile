@@ -1,6 +1,10 @@
-
 pipeline {
-  agent any
+   agent {
+        docker {
+            image 'teracy/angular-cli'
+            args '-u 0:0 --entrypoint=""'
+        }
+    }
   environment {
     POSTGRES_HOST = 'localhost'
     POSTGRES_USER = 'myuser'
@@ -16,12 +20,12 @@ pipeline {
 // You can your image here but you need psql to be installed inside
                 docker.image('postgres:9.6').inside("--link ${db.id}:db") {
                   sh '''
-psql --version
-until psql -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -c "select 1" > /dev/null 2>&1 || [ $RETRIES -eq 0 ]; do
-  echo "Waiting for postgres server, $((RETRIES-=1)) remaining attempts..."
-  sleep 1
-done
-'''
+                    psql --version
+                    until psql -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -c "select 1" > /dev/null 2>&1 || [ $RETRIES -eq 0 ]; do
+                    echo "Waiting for postgres server, $((RETRIES-=1)) remaining attempts..."
+                    sleep 1
+                    done
+                    '''
                   sh 'echo "your commands here"'
                 }
               }
