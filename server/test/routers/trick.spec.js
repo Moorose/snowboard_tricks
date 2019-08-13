@@ -1,6 +1,9 @@
+// "test": "NODE_ENV=test mocha --exit --recursive ./test/support/hook.js './test/**/*.test.js'"
+// for integration tests
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-// const app = require('../../app');
+
 const { assert } = chai;
 chai.use(chaiHttp);
 

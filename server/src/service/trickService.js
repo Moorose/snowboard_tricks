@@ -23,7 +23,12 @@ exports.updateTrick = async ({ id, name, complexity, description }) => {
 };
 
 exports.getTrickById = async id => {
-  return await Trick.findByPk(id);
+  return await Trick.findOne({
+    where: {
+        id: id,
+    },
+});
+  // return await Trick.findByPk(id);
 };
 
 exports.getTrickList = async () => {
