@@ -14,12 +14,6 @@ pipeline {
         }
     }
     stage('run postgres') {
-        agent {
-            docker {
-                image 'teracy/angular-cli'
-                args '-u 0:0 --entrypoint=""'
-            }
-        }
       steps {
         script {
             docker.image('postgres:9.6').withRun(
@@ -39,9 +33,16 @@ pipeline {
             }
       }
     }
+    stage('') {
+        agent {
+            docker {
+                image 'teracy/angular-cli'
+                args '-u 0:0 --entrypoint=""'
+            }
+        }
+    }
   }
 }
-
 // 54aeecff4030
 // pipeline {
 //     agent {
