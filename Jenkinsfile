@@ -12,7 +12,6 @@ pipeline {
             docker.image('postgres:9.6').withRun(
                 "-h ${env.POSTGRES_HOST} -e POSTGRES_USER=${env.POSTGRES_USER}"
             ) { db ->
-// You can your image here but you need psql to be installed inside
                 docker.image('postgres:9.6').inside("--link ${db.id}:db") {
                   sh '''
                     psql --version
@@ -27,18 +26,16 @@ pipeline {
             }
       }
     }
-    stage('run angular system') {
-        agent {
-            docker {
-                image 'teracy/angular-cli'
-                args '-u 0:0 --entrypoint=""'
-            }
+    agent {
+        docker {
+            image 'teracy/angular-cli'
+            args '-u 0:0 --entrypoint=""'
         }
-        stage('set pepline name') {
-            steps {
-                script {
-                    currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
-                }
+    }
+    stage('set pepline name') {
+        steps {
+            script {
+                currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
             }
         }
     }
