@@ -26,13 +26,13 @@ pipeline {
             }
       }
     }
-    agent {
-        docker {
-            image 'teracy/angular-cli'
-            args '-u 0:0 --entrypoint=""'
-        }
-    }
     stage('set pepline name') {
+        agent {
+            docker {
+                image 'teracy/angular-cli'
+                args '-u 0:0 --entrypoint=""'
+            }
+        }
         steps {
             script {
                 currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
