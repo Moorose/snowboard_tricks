@@ -31,6 +31,7 @@ pipeline {
                                     done
                                 '''
                                 sh 'echo "your commands here"'
+                        }
                     }
                 }
             }
