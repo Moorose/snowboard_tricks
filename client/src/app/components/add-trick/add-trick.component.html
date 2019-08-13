@@ -1,0 +1,20 @@
+<div>
+  <form [formGroup]="trickForm" (ngSubmit)="onSubmit()">
+    <label>
+      Trick name:
+      <input type="text" formControlName="name" />
+    </label>
+
+    <label>
+        Complexity:
+      <input type="number" formControlName="complexity" />
+    </label>
+
+    <label>
+        Description:
+        <input type="text" formControlName="description" />
+      </label>
+
+    <button type="submit" [disabled]="!trickForm.valid">Submit</button>
+  </form>
+</div>

@@ -6,17 +6,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TrickComponent } from './components/trick/trick.component';
 import { TrickListComponent } from './components/trick-list/trick-list.component';
+import { AddTrickComponent } from './components/add-trick/add-trick.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     TrickComponent,
-    TrickListComponent
+    TrickListComponent,
+    AddTrickComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
