@@ -1,17 +1,12 @@
 pipeline {
-   agent {
-        docker {
-            image 'teracy/angular-cli'
-            args '-u 0:0 --entrypoint=""'
-        }
-    }
+  agent none
   environment {
     POSTGRES_HOST = 'localhost'
     POSTGRES_USER = 'myuser'
   }
 
   stages {
-    stage('run!') {
+    stage('run postgres') {
       steps {
         script {
             docker.image('postgres:9.6').withRun(
@@ -31,6 +26,14 @@ pipeline {
               }
             }
       }
+    }
+    stage('run angular system') {
+        agent {
+            docker {
+                image 'teracy/angular-cli'
+                args '-u 0:0 --entrypoint=""'
+            }
+        }
     }
   }
 }
