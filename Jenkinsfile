@@ -6,7 +6,20 @@ pipeline {
   }
 
   stages {
+    stage('set pepline name') {
+        steps {
+            script {
+                currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
+            }
+        }
+    }
     stage('run postgres') {
+        agent {
+            docker {
+                image 'teracy/angular-cli'
+                args '-u 0:0 --entrypoint=""'
+            }
+        }
       steps {
         script {
             docker.image('postgres:9.6').withRun(
@@ -26,20 +39,9 @@ pipeline {
             }
       }
     }
-    stage('set pepline name') {
-        agent {
-            docker {
-                image 'teracy/angular-cli'
-            }
-        }
-        steps('step name') {
-            script {
-                currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
-            }
-        }
-    }
   }
 }
+// 54aeecff4030
 // pipeline {
 //     agent {
 //         docker {
