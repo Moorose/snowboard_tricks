@@ -30,10 +30,9 @@ pipeline {
         agent {
             docker {
                 image 'teracy/angular-cli'
-                args '-u 0:0 --entrypoint=""'
             }
         }
-        steps {
+        steps('step name') {
             script {
                 currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
             }
