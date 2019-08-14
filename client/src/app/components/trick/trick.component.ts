@@ -1,4 +1,4 @@
-import { Trick } from '../../models/Trick';
+import { Trick } from '../../models/trick';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

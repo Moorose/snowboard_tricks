@@ -1,7 +1,7 @@
 <div *ngIf="trick">
-    <p>{{ trick.id }}</p>
-    <p class="name">{{ trick.name }}</p>
-    <p class="complexity">{{ trick.complexity }}</p>
+    <p><span>ID</span> {{ trick.id }}</p>
+    <p class="name"><span>Name </span>{{ trick.name }}</p>
+    <p class="complexity"><span>complexity</span>{{ trick.complexity }}</p>
     <p class="description">{{ trick.description }}</p>
 </div>
 <div *ngIf="!trick">

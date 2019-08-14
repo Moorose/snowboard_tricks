@@ -19,8 +19,13 @@ exports.postTrick = async ctx => {
     ctx.response.set("Content-Type", "application/json");
     ctx.status = 201;
   } catch (err) {
-    ctx.status = 500;
-    ctx.body = `Internal error: ${err}`;
+    if (err.parent.code == '23505') {
+      ctx.status = 409;
+      ctx.body = `Internal error: ${err.parent.detail}`;
+    }else {
+      ctx.status = 500;
+      ctx.body = `Internal error: ${err}`;
+    }
   }
 };
 
@@ -38,16 +43,26 @@ exports.putTrick = async ctx => {
       ctx.body = 'Not Found';
     }
   } catch (err) {
-    ctx.status = 500;
-    ctx.body = `Internal error: ${err}`;
+    if (err.parent.code == '23505') {
+      ctx.status = 409;
+      ctx.body = `Internal error: ${err.parent.detail}`;
+    }else {
+      ctx.status = 500;
+      ctx.body = `Internal error: ${err}`;
+    }
   }
 };
 
 exports.getTrickById = async ctx => {
   try {
     const result = await trickService.getTrickById(ctx.params.id);
-    ctx.response.body = JSON.stringify(result);
-    ctx.response.set("Content-Type", "application/json");
+    if (result == null) {
+      ctx.status = 404;
+      ctx.body = 'Not Found';
+    } else {
+      ctx.response.body = JSON.stringify(result);
+      ctx.response.set("Content-Type", "application/json");
+    }
   } catch (err) {
     ctx.status = 500;
     ctx.body = `Internal error: ${err}`;

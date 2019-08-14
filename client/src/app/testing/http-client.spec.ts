@@ -1,4 +1,4 @@
-import { Trick } from 'src/app/models/Trick';
+import { Trick } from 'src/app/models/trick';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 // Other imports
