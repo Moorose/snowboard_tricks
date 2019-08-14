@@ -1,14 +1,14 @@
-import { Trick } from "src/app/models/trick";
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
-import { TrickService } from "src/app/services/trick.service";
-import { FormBuilder, Validators } from "@angular/forms";
+import { Trick } from 'src/app/models/trick';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { TrickService } from 'src/app/services/trick.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: "app-edit-trick",
-  templateUrl: "./edit-trick.component.html",
-  styleUrls: ["./edit-trick.component.scss"],
+  selector: 'app-edit-trick',
+  templateUrl: './edit-trick.component.html',
+  styleUrls: ['./edit-trick.component.scss'],
 })
 export class EditTrickComponent implements OnInit {
   constructor(
@@ -18,25 +18,25 @@ export class EditTrickComponent implements OnInit {
     private fb: FormBuilder,
   ) {}
 
-  trick: Trick = null
+  trick: Trick = null;
 
   trickForm = this.fb.group({
-    name: ["", [Validators.required, Validators.minLength(5)]],
+    name: ['', [Validators.required, Validators.minLength(5)]],
     complexity: [
-      "",
+      '',
       [Validators.required, Validators.min(1), Validators.max(1000)],
     ],
-    description: [""],
+    description: [''],
   });
 
-  duplicateName: boolean = false;
+  duplicateName = false;
 
   ngOnInit() {
     this.getTrick();
   }
 
   getTrick(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
+    const id = +this.route.snapshot.paramMap.get('id');
     this.trickService.getTrickById(id).subscribe(trick => {
       this.trick = trick;
       this.trickForm = this.fb.group({
@@ -60,7 +60,7 @@ export class EditTrickComponent implements OnInit {
         this.location.back();
       },
       err => {
-        if (err.status == 409) {
+        if (err.status === 409) {
           this.duplicateName = true;
         }
       },

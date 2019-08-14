@@ -1,14 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Trick } from "src/app/models/trick";
-import { TrickService } from "src/app/services/trick.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { Trick } from 'src/app/models/trick';
+import { TrickService } from 'src/app/services/trick.service';
 
 @Component({
-  selector: "app-trick-list",
-  templateUrl: "./trick-list.component.html",
-  styleUrls: ["./trick-list.component.scss"],
+  selector: 'app-trick-list',
+  templateUrl: './trick-list.component.html',
+  styleUrls: ['./trick-list.component.scss'],
 })
 export class TrickListComponent implements OnInit {
-  @Input() adminRole: boolean = false;
+  @Input() adminRole = false;
 
   tricks: Trick[] = [];
 
@@ -24,7 +24,7 @@ export class TrickListComponent implements OnInit {
         this.tricks = tricks;
       },
       err => {
-        console.log("Error: ", err);
+        console.log('Error: ', err);
       },
     );
   }
