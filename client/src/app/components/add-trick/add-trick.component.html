@@ -1,0 +1,31 @@
+<div>
+  <form [formGroup]="trickForm" (ngSubmit)="onSubmit()">
+    <label>
+      Trick name:
+      <input type="text" formControlName="name" />
+    </label>
+
+    <div *ngIf="duplicateName">
+      This name already exist
+    </div>
+
+    <label>
+      Complexity:
+      <input type="number" formControlName="complexity" />
+    </label>
+
+    <label>
+      Description:
+      <input type="text" formControlName="description" />
+    </label>
+
+    <button type="submit" [disabled]="!trickForm.valid">Submit</button>
+  </form>
+  <br />
+  <div>
+    <p>Form Value: {{ trickForm.value | json }}</p>
+    <p>Form Status: {{ trickForm.status }}</p>
+  </div>
+  <br />
+  <button (click)="goBack()">go back</button>
+</div>

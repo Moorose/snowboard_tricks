@@ -3,11 +3,13 @@ import { Trick } from 'src/app/trick/models/trick';
 import { TrickService } from 'src/app/trick/trick.service';
 
 @Component({
-  selector: 'app-trick-list',
-  templateUrl: './trick-list.component.html',
-  styleUrls: ['./trick-list.component.scss'],
+  selector: "app-trick-list",
+  templateUrl: "./trick-list.component.html",
+  styleUrls: ["./trick-list.component.scss"],
 })
 export class TrickListComponent implements OnInit {
+  @Input() adminRole: boolean = false;
+
   tricks: Trick[] = [];
   error: string;
 
