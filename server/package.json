@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node app.js",
         "dev": "nodemon app.js",
-        "test": " mocha --exit --recursive './test/**/*.test.js'"
+        "unit-test": " mocha --exit --recursive './test/**/*.test.js'",
+        "integration-test": "NODE_ENV=test mocha --exit --recursive ./test/support/hook.js './test/**/*.spec.js'"
     },
     "dependencies": {
         "bunyan": "^1.8.12",
