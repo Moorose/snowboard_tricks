@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-        stage('Unit Tests') {
+        stage('Unit tests client') {
             steps {
                 dir("client") {
                     sh 'npm run test:ci'
@@ -55,7 +55,7 @@ pipeline {
                 }
             }
         }
-        stage('Unit Tests') {
+        stage('Unit tests server') {
             steps {
                 dir("client") {
                     sh 'npm run unit-test'
