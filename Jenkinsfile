@@ -58,7 +58,7 @@ pipeline {
         stage('Unit tests server') {
             steps {
                 dir("server") {
-                    sh 'npm run unit-test'
+                    sh 'npm run test'
                 }
             }
         }

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TrickListComponent } from './components/trick-list/trick-list.component';
+import { TrickListComponent } from './trick-module/trick-list/trick-list.component';
 
 const routes: Routes = [{
-  path: '', component: TrickListComponent
+  path: '',
+  component: TrickListComponent,
 }];
 
 @NgModule({

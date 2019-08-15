@@ -1,5 +1,5 @@
-import { Trick } from '../../models/Trick';
 import { Component, OnInit, Input } from '@angular/core';
+import { Trick } from '../models/trick';
 
 @Component({
   selector: 'app-trick',

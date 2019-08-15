@@ -4,6 +4,7 @@ const Koa = require("koa");
 const koaBody = require("koa-body");
 const bunyan = require("bunyan");
 const koaLogger = require("koa-bunyan");
+const resultSetter = require("./src/middlewares/resultSetter");
 
 const httpConf = require("./src/middlewares/httpConf");
 const logger = require("./src/middlewares/logger");
@@ -24,7 +25,7 @@ const runServer = async function() {
   app.use(koaBody());
   app.use(koaLogger(logger));
   app.use(httpConf.setCORS);
-  // app.use(httpConf.setContentType);
+  app.use(resultSetter.errorHandler);
   app.use(router.routes());
   app.use(router.allowedMethods());
 

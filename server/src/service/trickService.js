@@ -2,20 +2,20 @@
 
 const { Trick } = require("../models");
 
-exports.addTrick = async ({ name, complexity, description }) => {
+exports.createTrick = async ({ name, complexity, description }) => {
   return await Trick.create({
-    name: name,
-    complexity: complexity,
-    description: description,
+    name,
+    complexity,
+    description,
   });
 };
 
 exports.updateTrick = async ({ id, name, complexity, description }) => {
   return await Trick.update(
     {
-      name: name,
-      complexity: complexity,
-      description: description,
+      name,
+      complexity,
+      description,
     },
     {
       where: {
@@ -31,7 +31,6 @@ exports.getTrickById = async id => {
       id: id,
     },
   });
-  // return await Trick.findByPk(id);
 };
 
 exports.getTrickList = async () => {
@@ -46,7 +45,7 @@ exports.destroyTrickById = async id => {
   });
 };
 
-exports.destroyAllTrick = async () => {
+exports.destroyAllTricks = async () => {
   return await Trick.destroy({
     where: {},
   });

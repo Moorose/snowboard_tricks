@@ -5,9 +5,9 @@ const router = new Router();
 router
     .get('/tricks',trickController.getTrickList)
     .get('/tricks/:id', trickController.getTrickById)
-    .put('/tricks', trickController.putTrick)
-    .post('/tricks', trickController.postTrick)
+    .patch('/tricks', trickController.updateTrick)
+    .post('/tricks', trickController.createTrick)
     .delete('/tricks/:id', trickController.deleteTrickById)
-    .delete('/tricks', trickController.deleteAllTrick);
+    .delete('/tricks', trickController.deleteAllTricks);
 
 module.exports = router;

@@ -6,8 +6,7 @@
     "scripts": {
         "start": "node app.js",
         "dev": "nodemon app.js",
-        "unit-test": " mocha --exit --recursive './test/**/*.test.js'",
-        "integration-test": "NODE_ENV=test mocha --exit --recursive ./test/support/hook.js './test/**/*.spec.js'"
+        "test": "mocha --exit --recursive './test/**/*.test.js'"
     },
     "dependencies": {
         "bunyan": "^1.8.12",
@@ -16,14 +15,13 @@
         "koa-bunyan": "^1.0.2",
         "koa-generic-session-sequelize": "^2.2.0",
         "koa-router": "^7.4.0",
-        "mocha": "^6.2.0",
         "pg": "^7.12.0",
         "sequelize": "^5.12.3"
     },
     "devDependencies": {
-        "chai": "*",
-        "chai-http": "*",
-        "mocha": "*",
+        "chai": "^4.2.0",
+        "chai-http": "^4.3.0",
+        "mocha": "^6.2.0",
         "nodemon": "^1.19.1",
         "proxyquire": "^2.1.3",
         "sequelize-mock": "^0.10.2"

@@ -1,27 +1,23 @@
-var SequelizeMock = require("sequelize-mock");
-var proxyquire = require("proxyquire");
+const SequelizeMock = require("sequelize-mock");
+const proxyquire = require("proxyquire");
 const chai = require("chai");
 
 const { assert } = chai;
-var dbMock = new SequelizeMock();
+const dbMock = new SequelizeMock();
 
-var TrickMock = dbMock.define("Trick");
+const TrickMock = dbMock.define("Trick");
 
-var trickService = proxyquire("../../src/service/trickService", {
+const trickService = proxyquire("../../src/service/trickService", {
   "../../src/models": {
     sequelize: SequelizeMock,
     Trick: TrickMock,
   },
 });
 
-describe("Tric mock unit test", function() {
-  describe("#getTrickById", function() {
-    before(function() {
-      TrickMock.$queryInterface.$useHandler(function(
-        query,
-        queryOptions,
-        done,
-      ) {
+describe("Tric mock unit test", () => {
+  describe("#getTrickById", () => {
+    before(() => {
+      TrickMock.$queryInterface.$useHandler((query, queryOptions, done) => {
         if (query === "findOne") {
           return TrickMock.build({
             id: 1,
@@ -34,19 +30,19 @@ describe("Tric mock unit test", function() {
         }
       });
     });
-    it("should return a trick by id", async function() {
+    it("should return a trick by id", async () => {
       const result = await trickService.getTrickById(1);
       assert.equal(result.id, 1);
       assert.equal(result.name, "Backflip");
       assert.equal(result.complexity, "100");
       assert.equal(result.description, "description");
     });
-    after(function() {
+    after(() => {
       TrickMock.$queryInterface.$clearResults();
     });
   });
-  describe("#getTrickList", function() {
-    before(function() {
+  describe("#getTrickList", () => {
+    before(() => {
       TrickMock.$queryInterface.$queueResult([
         TrickMock.build({
           id: 1,
@@ -68,21 +64,17 @@ describe("Tric mock unit test", function() {
         }),
       ]);
     });
-    it("should return a trick list with 3 item", async function() {
+    it("should return a trick list with 3 item", async () => {
       const result = await trickService.getTrickList();
       assert.equal(result.length, 3);
     });
-    after(function() {
+    after(() => {
       TrickMock.$queryInterface.$clearResults();
     });
   });
-  describe("#destroyTrickById", function() {
-    before(function() {
-      TrickMock.$queryInterface.$useHandler(function(
-        query,
-        queryOptions,
-        done,
-      ) {
+  describe("#destroyTrickById", () => {
+    before(() => {
+      TrickMock.$queryInterface.$useHandler((query, queryOptions, done) => {
         if (query === "destroy" && queryOptions[0].where.id === 1) {
           return 1;
         } else {
@@ -90,21 +82,17 @@ describe("Tric mock unit test", function() {
         }
       });
     });
-    it("should return 1", async function() {
+    it("should return 1", async () => {
       const result = await trickService.destroyTrickById(1);
       assert.equal(result, 1);
     });
-    after(function() {
+    after(() => {
       TrickMock.$queryInterface.$clearResults();
     });
   });
-  describe("#destroyAllTrick", function() {
-    before(function() {
-      TrickMock.$queryInterface.$useHandler(function(
-        query,
-        queryOptions,
-        done,
-      ) {
+  describe("#destroyAllTrick", () => {
+    before(() => {
+      TrickMock.$queryInterface.$useHandler((query, queryOptions, done) => {
         if (
           query === "destroy" &&
           Object.keys(queryOptions[0].where).length === 0
@@ -115,21 +103,17 @@ describe("Tric mock unit test", function() {
         }
       });
     });
-    it("should return 100", async function() {
-      const result = await trickService.destroyAllTrick();
+    it("should return 100", async () => {
+      const result = await trickService.destroyAllTricks();
       assert.equal(result, 100);
     });
-    after(function() {
+    after(() => {
       TrickMock.$queryInterface.$clearResults();
     });
   });
-  describe("#addTrick", function() {
-    before(function() {
-      TrickMock.$queryInterface.$useHandler(function(
-        query,
-        queryOptions,
-        done,
-      ) {
+  describe("#addTrick", () => {
+    before(() => {
+      TrickMock.$queryInterface.$useHandler((query, queryOptions, done) => {
         if (query === "create") {
           return TrickMock.build({
             id: 1,
@@ -142,19 +126,19 @@ describe("Tric mock unit test", function() {
         }
       });
     });
-    it("should return 100", async function() {
+    it("should return 100", async () => {
       const trick = {
         name: "trick",
         complexity: 100,
         description: "description",
       };
-      const result = await trickService.addTrick(trick);
+      const result = await trickService.createTrick(trick);
       assert.equal(result.id, 1);
       assert.equal(result.name, trick.name);
       assert.equal(result.complexity, trick.complexity);
       assert.equal(result.description, trick.description);
     });
-    after(function() {
+    after(() => {
       TrickMock.$queryInterface.$clearResults();
     });
   });

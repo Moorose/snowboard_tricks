@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { TrickComponent } from './components/trick/trick.component';
-import { TrickListComponent } from './components/trick-list/trick-list.component';
+import { TrickComponent } from './trick-module/trick/trick.component';
+import { TrickListComponent } from './trick-module/trick-list/trick-list.component';
 
 @NgModule({
   declarations: [
