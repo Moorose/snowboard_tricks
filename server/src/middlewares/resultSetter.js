@@ -1,7 +1,6 @@
 exports.setResult = async (ctx, result, status) => {
   if (result) {
-    ctx.response.set("Content-Type", "application/json");
-    ctx.response.body = JSON.stringify(result);
+    ctx.response.body = result;
   }
   if (status) {
     ctx.status = status;
@@ -17,7 +16,6 @@ exports.errorHandler = async (ctx, next) => {
     }
   } catch (err) {
     ctx.status = err.status || 500;
-    ctx.response.set("Content-Type", "application/json");
-    ctx.body = JSON.stringify({ error: err.message });
+    ctx.body = { error: err.message };
   }
 };

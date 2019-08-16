@@ -16,10 +16,14 @@ const PORT = process.env.PORT || 3000;
 const app = new Koa();
 
 const runServer = async function() {
-  if (process.env.NODE_ENV === "test") {
-    await sequelize.sync({ force: true });
-  } else {
-    await sequelize.sync();
+  try {
+    if (process.env.NODE_ENV === "test") {
+      await sequelize.sync({ force: true });
+    } else {
+      await sequelize.sync();
+    }
+  } catch (error) {
+    console.log('Database is not allowed!');
   }
 
   app.use(koaBody());

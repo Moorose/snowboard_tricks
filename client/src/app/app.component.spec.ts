@@ -1,8 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { TrickComponent } from './trick-module/trick/trick.component';
-import { TrickListComponent } from './trick-module/trick-list/trick-list.component';
+import { TrickComponent } from './trick/trick/trick.component';
+import { TrickListComponent } from './trick/trick-list/trick-list.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

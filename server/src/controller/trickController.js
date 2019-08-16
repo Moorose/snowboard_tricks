@@ -3,18 +3,18 @@ const trickService = require("../service/trickService");
 const resultSetter = require("../middlewares/resultSetter");
 
 exports.getTrickList = async ctx => {
-  const result = await trickService.getTrickList();
-  resultSetter.setResult(ctx, result);
+  const trickList = await trickService.getTrickList();
+  resultSetter.setResult(ctx, trickList);
 };
 
 exports.createTrick = async ctx => {
-  const result = await trickService.createTrick({ ...ctx.request.body });
-  resultSetter.setResult(ctx, result, 201);
+  const newTrick = await trickService.createTrick({ ...ctx.request.body });
+  resultSetter.setResult(ctx, newTrick, 201);
 };
 
 exports.updateTrick = async ctx => {
-  const put = await trickService.updateTrick({ ...ctx.request.body });
-  if (put[0] === 1) {
+  const updateCount = await trickService.updateTrick({ ...ctx.request.body });
+  if (updateCount[0] === 1) {
     resultSetter.setResult(ctx, null, 204);
   } else {
     ctx.throw(404);
@@ -22,28 +22,24 @@ exports.updateTrick = async ctx => {
 };
 
 exports.getTrickById = async ctx => {
-  const result = await trickService.getTrickById(ctx.params.id);
-  if (result === null) {
+  const updateTrick = await trickService.getTrickById(ctx.params.id);
+  if (updateTrick === null) {
     ctx.throw(404);
   } else {
-    resultSetter.setResult(ctx, result);
+    resultSetter.setResult(ctx, updateTrick);
   }
 };
 
 exports.deleteTrickById = async ctx => {
-  const result = await trickService.destroyTrickById(ctx.params.id);
-  if (result === 0) {
-    ctx.throw(404);
-  } else {
+  const deletedCount = await trickService.destroyTrickById(ctx.params.id);
+  if (deletedCount) {
     resultSetter.setResult(ctx, null, 204);
+  } else {
+    ctx.throw(404);
   }
 };
 
 exports.deleteAllTricks = async ctx => {
-  const result = await trickService.destroyAllTricks();
-  if (result === 0) {
-    ctx.throw(404);
-  } else {
-    resultSetter.setResult(ctx, null, 204);
-  }
+  const deletedCount = await trickService.destroyAllTricks();
+  resultSetter.setResult(ctx, null, 204);
 };

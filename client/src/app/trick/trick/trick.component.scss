@@ -4,8 +4,13 @@ div {
     padding: 1em;
     width: 50vh;
 
-    .name {
+    .trick {
+        margin: 1em;
+    }
+
+    .trick__name {
         text-align: center;
         font-weight: bold;
     }
+
 }

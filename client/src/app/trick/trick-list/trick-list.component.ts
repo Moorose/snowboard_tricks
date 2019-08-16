@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Trick } from 'src/app/trick-module/models/trick';
-import { TrickService } from 'src/app/trick-module/trick.service';
+import { Trick } from 'src/app/trick/models/trick';
+import { TrickService } from 'src/app/trick/trick.service';
 
 @Component({
   selector: 'app-trick-list',
@@ -9,6 +9,7 @@ import { TrickService } from 'src/app/trick-module/trick.service';
 })
 export class TrickListComponent implements OnInit {
   tricks: Trick[] = [];
+  error: string;
 
   constructor(private trickService: TrickService) {}
 
@@ -21,9 +22,7 @@ export class TrickListComponent implements OnInit {
       tricks => {
         this.tricks = tricks;
       },
-      err => {
-        console.log('Error: ', err);
-      },
+      error => this.error = error
     );
   }
 }

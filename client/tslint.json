@@ -1,4 +1,4 @@
-{
+  {
   "extends": "tslint:recommended",
   "rules": {
     "indent": [true, "spaces", 2],

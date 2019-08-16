@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrickComponent } from "./trick.component";
-import { Trick } from "../models/trick";
+import { TrickComponent } from './trick.component';
+import { Trick } from '../models/trick';
 
-describe("TrickComponent", () => {
+describe('TrickComponent', () => {
   let component: TrickComponent;
   let quoteEl: HTMLElement;
   let fixture: ComponentFixture<TrickComponent>;
@@ -16,9 +16,9 @@ describe("TrickComponent", () => {
 
     trickMock = {
       id: 1,
-      name: "BackFlip",
+      name: 'BackFlip',
       complexity: 100,
-      description: "description",
+      description: 'description',
     };
 
     fixture = TestBed.createComponent(TrickComponent);
@@ -28,13 +28,13 @@ describe("TrickComponent", () => {
     quoteEl = fixture.nativeElement.querySelector('div');
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should show div with trick after component initialized", () => {
-    expect(quoteEl.textContent.replace(/\s\s+/g, " ")).toBe(
-      "1BackFlip100description",
+  it('should show div with trick after component initialized', () => {
+    expect(quoteEl.textContent.replace(/\s\s+/g, ' ')).toBe(
+      '1BackFlip100description',
     );
   });
 });
