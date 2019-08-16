@@ -33,8 +33,6 @@ describe('TrickComponent', () => {
   });
 
   it('should show div with trick after component initialized', () => {
-    expect(quoteEl.textContent.replace(/\s\s+/g, ' ')).toBe(
-      '1BackFlip100description',
-    );
+    expect(quoteEl.textContent).toBe('1BackFlip100description');
   });
 });

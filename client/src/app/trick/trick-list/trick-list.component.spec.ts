@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrickListComponent } from './trick-list.component';
 import { TrickService } from '../trick.service';
 import { Trick } from '../models/trick';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('TrickListComponent', () => {
   let component: TrickListComponent;
@@ -46,7 +46,16 @@ describe('TrickListComponent', () => {
 
     it('should show div with trick after component initialized', () => {
       fixture.detectChanges();
-      expect(quoteEl.textContent.replace(/\s\s+/g, ' ')).toContain('1BackFlip100description');
+      expect(quoteEl.textContent).toBe('1BackFlip100description');
+      expect(trickServiceSpy.getTrickList.calls.any()).toBe(true);
+    });
+
+    it('should show div with error after component initialized', () => {
+      trickServiceSpy.getTrickList.and.returnValue(
+        throwError(new Error('error'))
+      );
+      fixture.detectChanges();
+      expect(quoteEl.textContent).toBe('error');
       expect(trickServiceSpy.getTrickList.calls.any()).toBe(true);
     });
   });
@@ -65,7 +74,7 @@ describe('TrickListComponent', () => {
 
     it('should show div with message after component initialized', () => {
       fixture.detectChanges();
-      expect(quoteEl.textContent.replace(/\s\s+/g, ' ')).toContain('Tricks was not found!');
+      expect(quoteEl.textContent).toBe('Tricks was not found!');
       expect(trickServiceSpy.getTrickList.calls.any()).toBe(true);
     });
   });
