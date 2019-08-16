@@ -1,9 +1,8 @@
-
+import { Trick } from 'src/app/models/trick';
+import { TrickService } from '../../services/trick.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { TrickService } from '../trick.service';
-import { Trick } from '../models/trick';
 
 @Component({
   selector: 'app-add-trick',
@@ -28,9 +27,10 @@ export class AddTrickComponent {
     private location: Location,
   ) {}
 
-  save() {
+  onSubmit() {
     this.trikService.addTrick(this.trickForm.value as Trick).subscribe(
-      () => {
+      trick => {
+        this.duplicateName = false;
         this.location.back();
       },
       err => {

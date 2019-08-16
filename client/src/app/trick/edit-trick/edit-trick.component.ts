@@ -1,9 +1,9 @@
+import { Trick } from 'src/app/models/trick';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { TrickService } from 'src/app/services/trick.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { TrickService } from '../trick.service';
-import { Trick } from '../models/trick';
 
 @Component({
   selector: 'app-edit-trick',
