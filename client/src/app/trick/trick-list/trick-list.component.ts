@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Trick } from 'src/app/trick/models/trick';
@@ -15,7 +14,6 @@ import { TrickService } from 'src/app/trick/trick.service';
 })
 export class TrickListComponent implements OnInit {
   @Input() adminRole = true;
-
 
   tricks: Trick[] = [];
   error: string;
