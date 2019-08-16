@@ -6,11 +6,11 @@ div {
 
     .trick {
         margin: 1em;
-    }
 
-    .trick__name {
-        text-align: center;
-        font-weight: bold;
+        &__name {
+            text-align: center;
+            font-weight: bold;
+        }
     }
 
 }
