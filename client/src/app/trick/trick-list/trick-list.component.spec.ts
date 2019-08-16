@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrickListComponent } from './trick-list.component';
 import { TrickService } from '../trick.service';
 import { Trick } from '../models/trick';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TrickModule } from '../trick.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -29,6 +29,7 @@ describe('TrickListComponent', () => {
 
     fixture = TestBed.createComponent(TrickListComponent);
     component = fixture.componentInstance;
+    component.adminRole = false;
     quoteEl = fixture.nativeElement.querySelector('.tricks');
   });
 

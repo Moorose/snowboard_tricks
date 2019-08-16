@@ -10,10 +10,10 @@
         </a>
     </div>
     <div class="alert">
-        <span *ngIf="!tricks.length" class="alert__text">Tricks was not found!</span>
+        <span *ngIf="!tricks.length && !error" class="alert__text">Tricks was not found!</span>
     </div>
     <div class="alert">
-        <span *ngIf="error" class="alert__text">{{ error }}</span>
+        <span *ngIf="error" class="alert__text">{{ error.message }}</span>
     </div>
 </div>
 

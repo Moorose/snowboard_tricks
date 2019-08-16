@@ -1,11 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-import { Trick } from 'src/app/trick/models/trick';
-import { TrickService } from 'src/app/trick/trick.service';
-import { Component, OnInit } from '@angular/core';
-import { Trick } from 'src/app/trick/models/trick';
-import { TrickService } from 'src/app/trick/trick.service';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Trick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-trick-list',

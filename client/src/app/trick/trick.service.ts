@@ -24,7 +24,6 @@ export class TrickService {
     );
   }
 
-
   getTrickById(id: number): Observable<Trick> {
     return this.http.get<Trick>(`${this.url}/tricks/${id}`).pipe(
       catchError(this.handleError)
