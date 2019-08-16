@@ -1,9 +1,9 @@
 module.exports = {
     development: {
       db: {
-        name: 'snowboardTricksDB',
-        username: 'koa-server',
-        password: 'koa-serverSnowboardTricksDB',
+        name: 'snowboard-tricks',
+        username: 'postgres',
+        password: 'root',
         host: 'localhost',
         port: 5432,
         dialect: 'postgres',
@@ -12,13 +12,13 @@ module.exports = {
     },
     test: {
       db: {
-        name: 'snowboardTricksDB',
-        username: 'koa-server',
-        password: 'koa-serverSnowboardTricksDB',
+        name: 'snowboard-tricks',
+        username: 'postgres',
+        password: 'root',
         host: 'localhost',
         port: 5432,
         dialect: 'postgres',
-        logging: false,
+        logging: true,
       },
     },
   };

@@ -4,8 +4,6 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
-
-
 @NgModule({
   declarations: [
     UserPageComponent,

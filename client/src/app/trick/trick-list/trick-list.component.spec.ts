@@ -1,10 +1,11 @@
-import { TrickComponent } from './../trick/trick.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TrickListComponent } from './trick-list.component';
 import { TrickService } from '../trick.service';
 import { Trick } from '../models/trick';
 import { of } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { TrickModule } from '../trick.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TrickListComponent', () => {
   let component: TrickListComponent;
@@ -16,8 +17,13 @@ describe('TrickListComponent', () => {
     trickServiceSpy = jasmine.createSpyObj('TrickService', ['getTrickList']);
 
     TestBed.configureTestingModule({
-      declarations: [TrickListComponent, TrickComponent],
+      declarations: [],
       providers: [{ provide: TrickService, useValue: trickServiceSpy }],
+      imports: [
+        CommonModule,
+        TrickModule,
+        RouterTestingModule
+      ]
     });
 
     fixture = TestBed.createComponent(TrickListComponent);
