@@ -1,11 +1,11 @@
-import { TrickComponent } from './../trick/trick.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TrickComponent} from '../trick/trick.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TrickService } from '../trick.service';
-import { AddTrickComponent } from './add-trick.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import {TrickService} from '../trick.service';
+import {AddTrickComponent} from './add-trick.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {of} from 'rxjs';
 
 describe('AddTrickComponent', () => {
     let component: AddTrickComponent;

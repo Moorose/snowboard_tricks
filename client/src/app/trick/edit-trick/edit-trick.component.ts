@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { TrickService } from '../trick.service';
-import { Trick } from '../models/trick';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {FormBuilder, Validators} from '@angular/forms';
+import {TrickService} from '../trick.service';
+import {Trick} from '../models/trick';
 
 @Component({
   selector: 'app-edit-trick',
@@ -11,23 +11,21 @@ import { Trick } from '../models/trick';
   styleUrls: ['./edit-trick.component.scss'],
 })
 export class EditTrickComponent implements OnInit {
+  trickForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(5)]],
+    complexity: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
+    description: [''],
+  });
+
+  trick: Trick = null;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private trickService: TrickService,
     private fb: FormBuilder,
-  ) {}
-
-  trick: Trick = null;
-
-  trickForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(5)]],
-    complexity: [
-      '',
-      [Validators.required, Validators.min(1), Validators.max(1000)],
-    ],
-    description: [''],
-  });
+  ) {
+  }
 
   duplicateName = false;
 
@@ -41,10 +39,7 @@ export class EditTrickComponent implements OnInit {
       this.trick = trick;
       this.trickForm = this.fb.group({
         name: [trick.name, [Validators.required, Validators.minLength(5)]],
-        complexity: [
-          trick.complexity,
-          [Validators.required, Validators.min(1), Validators.max(1000)],
-        ],
+        complexity: [trick.complexity, [Validators.required, Validators.min(1), Validators.max(1000)]],
         description: [trick.description],
       });
     });

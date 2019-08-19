@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TrickListComponent } from './trick-list.component';
-import { TrickService } from '../trick.service';
-import { Trick } from '../models/trick';
-import { of, throwError } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { TrickModule } from '../trick.module';
-import { RouterTestingModule } from '@angular/router/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TrickListComponent} from './trick-list.component';
+import {TrickService} from '../trick.service';
+import {Trick} from '../models/trick';
+import {of, throwError} from 'rxjs';
+import {CommonModule} from '@angular/common';
+import {TrickModule} from '../trick.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('TrickListComponent', () => {
   let component: TrickListComponent;
@@ -58,7 +58,7 @@ describe('TrickListComponent', () => {
       expect(trickServiceSpy.getTrickList.calls.any()).toBe(true);
     });
 
-    it('should show div with error after component initialized', () => {
+    it('should show div with ERROR message after component initialized', () => {
       trickServiceSpy.getTrickList.and.returnValue(
         throwError(new Error('error'))
       );

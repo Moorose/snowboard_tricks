@@ -1,66 +1,87 @@
-// import { TrickComponent } from './../trick/trick.component';
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TrickComponent} from '../trick/trick.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-// import { TrickService } from '../trick.service';
-// import { ReactiveFormsModule } from '@angular/forms';
-// import { RouterTestingModule } from '@angular/router/testing';
-// import { of } from 'rxjs';
-// import { EditTrickComponent } from './edit-trick.component';
-// import { Trick } from '../models/trick';
+import {TrickService} from '../trick.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {of} from 'rxjs';
+import {EditTrickComponent} from './edit-trick.component';
+import {Trick} from '../models/trick';
+import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
-// describe('EditTrickComponent', () => {
-//     let component: EditTrickComponent;
-//     let fixture: ComponentFixture<EditTrickComponent>;
-//     let trickServiceSpy: any;
+describe('EditTrickComponent', () => {
+  let component: EditTrickComponent;
+  let fixture: ComponentFixture<EditTrickComponent>;
+  let trickServiceSpy: any;
+  let trickMock: Trick;
 
-//     beforeEach(() => {
-//         trickServiceSpy = jasmine.createSpyObj('TrickService', ['getTrickById', 'updateTrick']);
+  beforeEach(() => {
+    trickServiceSpy = jasmine.createSpyObj('TrickService', ['getTrickById', 'updateTrick']);
+    TestBed.configureTestingModule({
+      declarations: [EditTrickComponent, TrickComponent],
+      providers: [
+        {provide: TrickService, useValue: trickServiceSpy},
+        {
+          provide: ActivatedRoute,
+          useValue: {snapshot: {paramMap: convertToParamMap({id: 1})}}
+        },
+      ],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule
+      ]
+    });
+    fixture = TestBed.createComponent(EditTrickComponent);
+    component = fixture.componentInstance;
+  });
 
-//         TestBed.configureTestingModule({
-//             declarations: [EditTrickComponent, TrickComponent],
-//             providers: [{ provide: TrickService, useValue: trickServiceSpy }],
-//             imports: [
-//                 ReactiveFormsModule,
-//                 RouterTestingModule
-//             ]
-//         });
-//         trickServiceSpy.addTrick.and.returnValue(of({}));
-//         fixture = TestBed.createComponent(EditTrickComponent);
-//         component = fixture.componentInstance;
-//     });
+  describe('EditTrickComponent', () => {
 
-//     describe('', () => {
+    beforeEach(() => {
+      trickMock = {
+        id: 1,
+        name: 'BackFlip',
+        complexity: 100,
+        description: 'description',
+      };
+      trickServiceSpy.getTrickById.and.returnValue(of(trickMock));
+      trickServiceSpy.updateTrick.and.returnValue(of({}));
+    });
 
-//         beforeEach(() => {
-//             const trickMock: Trick = {
-//                     id: 1,
-//                     name: 'BackFlip',
-//                     complexity: 100,
-//                     description: 'description',
-//                 };
-//             trickServiceSpy.getTrickById.and.returnValue(
-//                 of(trickMock),
-//             );
-//         });
+    it('should have a Component', () => {
+      expect(component).toBeTruthy();
+    });
 
-//         it('should have a Component', () => {
-//             expect(component).toBeTruthy();
-//         });
+    it('should call getTrickById with 1', () => {
+      fixture.detectChanges();
+      expect(trickServiceSpy.getTrickById).toHaveBeenCalledWith(1);
+    });
 
-//         // it('save() should call trickService ', () => {
-//         //     expect(component.trickForm.valid).toBeFalsy();
-//         //     /* tslint:disable:no-string-literal */
-//         //     component.trickForm.controls['name'].setValue('BackFlip');
-//         //     component.trickForm.controls['complexity'].setValue(100);
-//         //     component.trickForm.controls['description'].setValue('Very hard');
-//         //     /* tslint:enable:no-string-literal */
-//         //     expect(component.trickForm.valid).toBeTruthy();
-//         //     component.save();
-//         //     expect(trickServiceSpy.addTrick).toHaveBeenCalledWith(jasmine.objectContaining({
-//         //         name: 'BackFlip',
-//         //         complexity: 100,
-//         //         description: 'Very hard'
-//         //     }));
-//         // });
-//     });
-// });
+    it('should valid form', () => {
+      fixture.detectChanges();
+      /* tslint:disable:no-string-literal */
+      expect(component.trickForm.controls['name']).toEqual(trickMock.name);
+      expect(component.trickForm.controls['complexity']).toEqual(trickMock.complexity);
+      expect(component.trickForm.controls['description']).toEqual(trickMock.description);
+      /* tslint:enable:no-string-literal */
+      expect(component.trickForm.valid).toBeTruthy();
+    });
+
+    it('should call updateTrick with obj', () => {
+      fixture.detectChanges();
+      /* tslint:disable:no-string-literal */
+      component.trickForm.controls['name'].setValue('DoubleBackFlip');
+      component.trickForm.controls['complexity'].setValue(222);
+      component.trickForm.controls['description'].setValue('Very Very hard');
+      /* tslint:enable:no-string-literal */
+      expect(component.trickForm.valid).toBeTruthy();
+      component.onSubmit();
+      expect(trickServiceSpy.updateTrick).toHaveBeenCalledWith(jasmine.objectContaining({
+        id: trickMock.id,
+        name: 'DoubleBackFlip',
+        complexity: 222,
+        description: 'Very Very hard'
+      }));
+    });
+  });
+});
