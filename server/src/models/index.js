@@ -11,10 +11,11 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
 });
 
 const Trick = require("./Trick")(sequelize);
-
+const User = require("./User")(sequelize);
 
 // module.exports =   Trick;
 module.exports = {
   sequelize,
-  Trick
+  Trick,
+  User
 };
