@@ -73,64 +73,47 @@ describe('EditTrickComponent', () => {
   });
 
   describe('save()', () => {
+    beforeEach(() => {
+      trickMock = {
+        id: 1,
+        name: 'BackFlip',
+        complexity: 100,
+        description: 'description',
+      };
+      trickServiceSpy.getTrickById.and.returnValue(of(trickMock));
+      trickServiceSpy.updateTrick.and.returnValue(of({}));
+      fixture.detectChanges();
+      component.trickForm.controls.name.setValue('DoubleBackFlip');
+      component.trickForm.controls.complexity.setValue(222);
+      component.trickForm.controls.description.setValue('Very Very hard');
+    });
+
+    it('should call updateTrick with obj', () => {
+      component.save();
+      expect(trickServiceSpy.updateTrick).toHaveBeenCalledWith(jasmine.objectContaining({
+        id: trickMock.id,
+        name: 'DoubleBackFlip',
+        complexity: 222,
+        description: 'Very Very hard'
+      }));
+    });
 
     describe('when update trick request is successful', () => {
-
-      beforeEach(() => {
-        trickMock = {
-          id: 1,
-          name: 'BackFlip',
-          complexity: 100,
-          description: 'description',
-        };
-        trickServiceSpy.getTrickById.and.returnValue(of(trickMock));
-        trickServiceSpy.updateTrick.and.returnValue(of({}));
-        fixture.detectChanges();
-        component.trickForm.controls.name.setValue('DoubleBackFlip');
-        component.trickForm.controls.complexity.setValue(222);
-        component.trickForm.controls.description.setValue('Very Very hard');
-      });
-
-      it('should call updateTrick with obj', () => {
-        component.save();
-        expect(trickServiceSpy.updateTrick).toHaveBeenCalledWith(jasmine.objectContaining({
-          id: trickMock.id,
-          name: 'DoubleBackFlip',
-          complexity: 222,
-          description: 'Very Very hard'
-        }));
-      });
-
       it('should call back() once', () => {
         component.save();
         expect(locationSpy.back.calls.count()).toBe(1);
       });
-
     });
 
     describe('when update trick request is failed', () => {
-
       beforeEach(() => {
-        trickMock = {
-          id: 1,
-          name: 'BackFlip',
-          complexity: 100,
-          description: 'description',
-        };
-        trickServiceSpy.getTrickById.and.returnValue(of(trickMock));
         trickServiceSpy.updateTrick.and.returnValue(throwError(new Error('error')));
       });
 
-      it('this.error exist after request', () => {
-        fixture.detectChanges();
-        component.trickForm.controls.name.setValue('DoubleBackFlip');
-        component.trickForm.controls.complexity.setValue(222);
-        component.trickForm.controls.description.setValue('Very Very hard');
-        expect(component.trickForm.valid).toBeTruthy();
+      it('should set error', () => {
         component.save();
         expect(component.error).toBeTruthy();
       });
-
     });
   });
 

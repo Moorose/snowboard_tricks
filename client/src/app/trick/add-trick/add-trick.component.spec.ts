@@ -48,30 +48,27 @@ describe('AddTrickComponent', () => {
   });
 
   describe('save()', () => {
+    beforeEach(() => {
+      trickServiceSpy.addTrick.and.returnValue(of({}));
+      component.trickForm.controls.name.setValue('BackFlip');
+      component.trickForm.controls.complexity.setValue(100);
+      component.trickForm.controls.description.setValue('Very hard');
+    });
+
+    it('should call trickService', () => {
+      component.save();
+      expect(trickServiceSpy.addTrick).toHaveBeenCalledWith(jasmine.objectContaining({
+        name: 'BackFlip',
+        complexity: 100,
+        description: 'Very hard'
+      }));
+    });
 
     describe('when adding tricks request is successful', () => {
-
-      beforeEach(() => {
-        trickServiceSpy.addTrick.and.returnValue(of({}));
-        component.trickForm.controls.name.setValue('BackFlip');
-        component.trickForm.controls.complexity.setValue(100);
-        component.trickForm.controls.description.setValue('Very hard');
-      });
-
       it('should call back()', () => {
         component.save();
         expect(locationSpy.back.calls.count()).toBe(1);
       });
-
-      it('should call trickService when save called', () => {
-        component.save();
-        expect(trickServiceSpy.addTrick).toHaveBeenCalledWith(jasmine.objectContaining({
-          name: 'BackFlip',
-          complexity: 100,
-          description: 'Very hard'
-        }));
-      });
-
     });
 
     describe('when adding tricks request is failed', () => {

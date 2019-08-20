@@ -13,13 +13,14 @@ import { TrickService } from '../trick.service';
 })
 export class EditTrickComponent implements OnInit {
   error: string;
-  trick: Trick = null;
 
   trickForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     complexity: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
     description: [''],
   });
+
+  private trick: Trick = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +35,7 @@ export class EditTrickComponent implements OnInit {
   }
 
   save() {
-    const id = this.trick.id;
-    this.trick = { id, ...this.trickForm.value };
+    this.trick = { ...this.trick, ...this.trickForm.value };
     this.trickService.updateTrick(this.trick).subscribe(
       () => {
         this.location.back();
