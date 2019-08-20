@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TrickService } from 'src/app/trick/trick.service';
+
+import { JSONInterceptor } from '../interceptor/JSONInterceptor';
 
 import { AddTrickComponent } from './add-trick/add-trick.component';
 import { EditTrickComponent } from './edit-trick/edit-trick.component';
@@ -17,7 +19,14 @@ import { TrickComponent } from './trick/trick.component';
     AddTrickComponent,
     EditTrickComponent,
   ],
-  providers: [TrickService],
+  providers: [
+    TrickService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JSONInterceptor,
+      multi: true
+    }
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

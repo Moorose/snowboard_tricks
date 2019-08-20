@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -10,10 +10,6 @@ import { Trick } from './models/trick';
   providedIn: 'root',
 })
 export class TrickService {
-
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   url = environment.apiUrl;
 
@@ -50,13 +46,13 @@ export class TrickService {
   }
 
   addTrick(trick: Trick): Observable<Trick> {
-    return this.http.post<Trick>(`${this.url}/tricks`, trick, this.httpOptions).pipe(
+    return this.http.post<Trick>(`${this.url}/tricks`, trick).pipe(
       catchError(TrickService.handleError)
     );
   }
 
   updateTrick(trick: Trick): Observable<void> {
-    return this.http.patch<void>(`${this.url}/tricks`, trick, this.httpOptions).pipe(
+    return this.http.patch<void>(`${this.url}/tricks`, trick).pipe(
       catchError(TrickService.handleError)
     );
   }
