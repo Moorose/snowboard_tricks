@@ -11,7 +11,7 @@ exports.joinTrickToUser = async (userId, trickId) => {
 };
 
 
-exports.unjoinTrickToUser = async (userId, trickId) => {
+exports.unJoinTrickToUser = async (userId, trickId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const tricks = await user.getTricks();
