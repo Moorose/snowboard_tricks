@@ -1,10 +1,13 @@
-import { TrickComponent } from './../trick/trick.component';
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of, throwError } from 'rxjs';
+
+import { ITrick } from '../models/trick';
+import { TrickModule } from '../trick.module';
+import { TrickService } from '../trick.service';
 
 import { TrickListComponent } from './trick-list.component';
-import { TrickService } from '../trick.service';
-import { Trick } from '../models/trick';
-import { of, throwError } from 'rxjs';
 
 describe('TrickListComponent', () => {
   let component: TrickListComponent;
@@ -16,18 +19,25 @@ describe('TrickListComponent', () => {
     trickServiceSpy = jasmine.createSpyObj('TrickService', ['getTrickList']);
 
     TestBed.configureTestingModule({
-      declarations: [TrickListComponent, TrickComponent],
+      declarations: [],
       providers: [{ provide: TrickService, useValue: trickServiceSpy }],
+      imports: [
+        CommonModule,
+        TrickModule,
+        RouterTestingModule
+      ]
+
     });
 
     fixture = TestBed.createComponent(TrickListComponent);
     component = fixture.componentInstance;
+    component.adminRole = false;
     quoteEl = fixture.nativeElement.querySelector('.tricks');
   });
 
   describe('with tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [
+      const trickMock: ITrick[] = [
         {
           id: 1,
           name: 'BackFlip',
@@ -50,7 +60,7 @@ describe('TrickListComponent', () => {
       expect(trickServiceSpy.getTrickList.calls.any()).toBe(true);
     });
 
-    it('should show div with error after component initialized', () => {
+    it('should show div with ERROR message after component initialized', () => {
       trickServiceSpy.getTrickList.and.returnValue(
         throwError(new Error('error'))
       );
@@ -62,7 +72,7 @@ describe('TrickListComponent', () => {
 
   describe('without tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [];
+      const trickMock: ITrick[] = [];
       trickServiceSpy.getTrickList.and.returnValue(
         of(trickMock),
       );

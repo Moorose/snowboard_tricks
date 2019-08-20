@@ -1,8 +1,13 @@
-
+<nav>
+    <a routerLink="/list/addTrick">ADD TRICK</a>
+</nav>
 <h2>All tricks</h2>
 <div class="tricks">
     <div *ngFor="let trick of tricks">
         <app-trick [trick]="trick"></app-trick>
+        <a *ngIf="adminRole" routerLink="/list/editTrick/{{trick.id}}">
+            EDIT TRICK
+        </a>
     </div>
     <div class="alert">
         <span *ngIf="!tricks.length && !error" class="alert__text">Tricks was not found!</span>

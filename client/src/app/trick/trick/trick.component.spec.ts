@@ -1,13 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ITrick } from '../models/trick';
+
 import { TrickComponent } from './trick.component';
-import { Trick } from '../models/trick';
 
 describe('TrickComponent', () => {
   let component: TrickComponent;
   let quoteEl: HTMLElement;
   let fixture: ComponentFixture<TrickComponent>;
-  let trickMock: Trick;
+  let trickMock: ITrick;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

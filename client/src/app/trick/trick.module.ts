@@ -1,20 +1,38 @@
-import { AppRoutingModule } from './../app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { TrickComponent } from './../trick/trick/trick.component';
-import { TrickListComponent } from './trick-list/trick-list.component';
-import { TrickService } from 'src/app/trick/trick.service';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TrickService } from 'src/app/trick/trick.service';
+
+import { JSONInterceptor } from '../interceptor/JSONInterceptor';
+
+import { AddTrickComponent } from './add-trick/add-trick.component';
+import { EditTrickComponent } from './edit-trick/edit-trick.component';
+import { TrickListComponent } from './trick-list/trick-list.component';
+import { TrickRoutingModule } from './trick-routing.module';
+import { TrickComponent } from './trick/trick.component';
 
 @NgModule({
-  declarations: [TrickListComponent, TrickComponent],
-  providers: [ TrickService ],
+  declarations: [
+    TrickListComponent,
+    TrickComponent,
+    AddTrickComponent,
+    EditTrickComponent,
+  ],
+  providers: [
+    TrickService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JSONInterceptor,
+      multi: true
+    }
+  ],
   imports: [
     CommonModule,
-    BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    TrickRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class TrickModule { }
+export class TrickModule {
+}

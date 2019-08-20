@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Trick } from 'src/app/trick/models/trick';
-import { TrickService } from 'src/app/trick/trick.service';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-trick-list',
@@ -8,7 +9,9 @@ import { TrickService } from 'src/app/trick/trick.service';
   styleUrls: ['./trick-list.component.scss'],
 })
 export class TrickListComponent implements OnInit {
-  tricks: Trick[] = [];
+  @Input() adminRole = true;
+
+  tricks: ITrick[] = [];
   error: string;
 
   constructor(private trickService: TrickService) {}
