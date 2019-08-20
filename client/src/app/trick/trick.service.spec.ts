@@ -57,9 +57,7 @@ describe('TrickService', () => {
     it('should return object with id', () => {
       trickService.addTrick(trickMockWithoutId as Trick).subscribe(result => expect(result).toEqual(trickMock));
       expect(httpClientSpy.post.calls.count()).toBe(1);
-      expect(httpClientSpy.post).toHaveBeenCalledWith(
-        'http://localhost:3000/tricks', trickMockWithoutId, jasmine.any(Object)
-      );
+      expect(httpClientSpy.post).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMockWithoutId);
     });
 
   });
@@ -77,9 +75,7 @@ describe('TrickService', () => {
     it('should called with mock', () => {
       trickService.updateTrick(trickMock);
       expect(httpClientSpy.patch.calls.count()).toBe(1);
-      expect(httpClientSpy.patch).toHaveBeenCalledWith(
-        'http://localhost:3000/tricks', trickMock, jasmine.any(Object)
-      );
+      expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMock);
     });
 
   });

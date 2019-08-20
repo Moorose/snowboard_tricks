@@ -29,8 +29,6 @@ export class EditTrickComponent implements OnInit {
   ) {
   }
 
-  duplicateName = false;
-
   ngOnInit() {
     this.getTrick();
   }
@@ -40,7 +38,6 @@ export class EditTrickComponent implements OnInit {
     this.trick = { id, ...this.trickForm.value };
     this.trickService.updateTrick(this.trick).subscribe(
       () => {
-        this.duplicateName = false;
         this.location.back();
       },
       error => this.error = error

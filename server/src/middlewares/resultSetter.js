@@ -15,7 +15,7 @@ exports.errorHandler = async (ctx, next) => {
       ctx.throw(404);
     }
   } catch (err) {
-    if (err.parent.code === '23505') {
+    if (err.name === 'SequelizeUniqueConstraintError') {
       err.status = 409;
     }
     ctx.status = err.status || 500;

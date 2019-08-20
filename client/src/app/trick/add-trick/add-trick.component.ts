@@ -11,7 +11,6 @@ import { TrickService } from '../trick.service';
   styleUrls: ['./add-trick.component.scss'],
 })
 export class AddTrickComponent {
-  duplicateName = false;
   error: string;
 
   trickForm = this.fb.group({
@@ -32,7 +31,6 @@ export class AddTrickComponent {
   save() {
     this.trickService.addTrick(this.trickForm.value as Trick).subscribe(
       () => {
-        this.duplicateName = false;
         this.location.back();
       },
       error => this.error = error

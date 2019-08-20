@@ -34,52 +34,71 @@ describe('AddTrickComponent', () => {
     component = fixture.componentInstance;
   });
 
-  describe('save()', () => {
+  it('should have a Component', () => {
+    expect(component).toBeTruthy();
+  });
 
-    beforeEach(() => {
-      trickServiceSpy.addTrick.and.returnValue(of({}));
-    });
+  describe('goBack()', () => {
 
-    it('should have a Component', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should call back()', () => {
-      component.trickForm.controls.name.setValue('BackFlip');
-      component.trickForm.controls.complexity.setValue(100);
-      component.trickForm.controls.description.setValue('Very hard');
-      component.save();
+    it('when call, it should call back()', () => {
+      component.goBack();
       expect(locationSpy.back.calls.count()).toBe(1);
     });
 
-    it('should call trickService ', () => {
+  });
+
+  describe('save()', () => {
+
+    describe('when adding tricks request is successful', () => {
+
+      beforeEach(() => {
+        trickServiceSpy.addTrick.and.returnValue(of({}));
+        component.trickForm.controls.name.setValue('BackFlip');
+        component.trickForm.controls.complexity.setValue(100);
+        component.trickForm.controls.description.setValue('Very hard');
+      });
+
+      it('should call back()', () => {
+        component.save();
+        expect(locationSpy.back.calls.count()).toBe(1);
+      });
+
+      it('should call trickService when save called', () => {
+        component.save();
+        expect(trickServiceSpy.addTrick).toHaveBeenCalledWith(jasmine.objectContaining({
+          name: 'BackFlip',
+          complexity: 100,
+          description: 'Very hard'
+        }));
+      });
+
+    });
+
+    describe('when adding tricks request is failed', () => {
+
+      beforeEach(() => {
+        trickServiceSpy.addTrick.and.returnValue(throwError(new Error('error')));
+      });
+
+      it('should set error', () => {
+        component.save();
+        expect(component.error).toBeTruthy();
+      });
+    });
+  });
+
+  describe('form validation', () => {
+    it('is not passed when all fields are empty', () => {
       expect(component.trickForm.valid).toBeFalsy();
+    });
+
+    it('is passed when all fields are correctly set', () => {
       component.trickForm.controls.name.setValue('BackFlip');
       component.trickForm.controls.complexity.setValue(100);
       component.trickForm.controls.description.setValue('Very hard');
       expect(component.trickForm.valid).toBeTruthy();
-      component.save();
-      expect(trickServiceSpy.addTrick).toHaveBeenCalledWith(jasmine.objectContaining({
-        name: 'BackFlip',
-        complexity: 100,
-        description: 'Very hard'
-      }));
     });
+
   });
 
-  describe('save() with wrong request', () => {
-
-    beforeEach(() => {
-      trickServiceSpy.addTrick.and.returnValue(throwError(new Error('error')));
-    });
-
-    it('should have a Component', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('this.error exist after request', () => {
-      component.save();
-      expect(component.error).toBeTruthy();
-    });
-  });
 });
