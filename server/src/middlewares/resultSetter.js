@@ -15,7 +15,10 @@ exports.errorHandler = async (ctx, next) => {
       ctx.throw(404);
     }
   } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      err.status = 409;
+    }
     ctx.status = err.status || 500;
-    ctx.body = { error: err.message };
+    ctx.body = err.message;
   }
 };

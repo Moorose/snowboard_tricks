@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { Trick } from '../models/trick';
 import { TrickService } from '../trick.service';
 

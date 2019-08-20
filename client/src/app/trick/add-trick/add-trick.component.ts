@@ -1,8 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { TrickService } from '../trick.service';
+
 import { Trick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-add-trick',
@@ -10,7 +11,7 @@ import { Trick } from '../models/trick';
   styleUrls: ['./add-trick.component.scss'],
 })
 export class AddTrickComponent {
-  duplicateName = false;
+  error: string;
 
   trickForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -23,21 +24,16 @@ export class AddTrickComponent {
 
   constructor(
     private fb: FormBuilder,
-    private trikService: TrickService,
+    private trickService: TrickService,
     private location: Location,
   ) {}
 
   save() {
-    this.trikService.addTrick(this.trickForm.value as Trick).subscribe(
-     () => {
-        this.duplicateName = false;
+    this.trickService.addTrick(this.trickForm.value as Trick).subscribe(
+      () => {
         this.location.back();
       },
-      err => {
-        if (err.status === 409) {
-          this.duplicateName = true;
-        }
-      },
+      error => this.error = error
     );
   }
 
