@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Trick } from '../models/trick';
+import { ITrick } from '../models/trick';
 
 import { TrickComponent } from './trick.component';
 
@@ -8,7 +8,7 @@ describe('TrickComponent', () => {
   let component: TrickComponent;
   let quoteEl: HTMLElement;
   let fixture: ComponentFixture<TrickComponent>;
-  let trickMock: Trick;
+  let trickMock: ITrick;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

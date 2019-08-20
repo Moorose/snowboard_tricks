@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { Trick } from '../models/trick';
+import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class EditTrickComponent implements OnInit {
     description: [''],
   });
 
-  private trick: Trick = null;
+  private trick: ITrick = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +35,7 @@ export class EditTrickComponent implements OnInit {
   }
 
   save() {
-    const trick = { ...this.trickForm.value } as Trick;
+    const trick = { ...this.trickForm.value };
     this.trickService.updateTrick(this.trick.id, trick).subscribe(
       () => {
         this.location.back();

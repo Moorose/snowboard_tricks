@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 
-import { Trick } from './models/trick';
+import { ITrick } from './models/trick';
 import { TrickService } from './trick.service';
 
 describe('TrickService', () => {
@@ -8,7 +8,7 @@ describe('TrickService', () => {
   let httpClientSpy: any;
 
   describe('getTrickList()', () => {
-    let trickMock: Trick[];
+    let trickMock: ITrick[];
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
@@ -25,7 +25,7 @@ describe('TrickService', () => {
   });
 
   describe('getTrickById()', () => {
-    let trickMock: Trick;
+    let trickMock: ITrick;
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
@@ -43,7 +43,7 @@ describe('TrickService', () => {
   });
   describe('addTrick()', () => {
 
-    let trickMock: Trick;
+    let trickMock: ITrick;
     let trickMockWithoutId: any;
 
     beforeAll(() => {
@@ -55,7 +55,7 @@ describe('TrickService', () => {
     });
 
     it('should return object with id', () => {
-      trickService.addTrick(trickMockWithoutId as Trick).subscribe(result => expect(result).toEqual(trickMock));
+      trickService.addTrick(trickMockWithoutId).subscribe(result => expect(result).toEqual(trickMock));
       expect(httpClientSpy.post.calls.count()).toBe(1);
       expect(httpClientSpy.post).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMockWithoutId);
     });
@@ -63,11 +63,11 @@ describe('TrickService', () => {
   });
   describe('updateTrick()', () => {
 
-    let trickMock: Trick;
+    let trickMock: ITrick;
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['patch']);
-      trickMock = { name: 'BackFlip', complexity: 100, description: 'description' } as Trick;
+      trickMock = { name: 'BackFlip', complexity: 100, description: 'description' };
       httpClientSpy.patch.and.returnValue(of());
       trickService = new TrickService(httpClientSpy);
     });

@@ -1,5 +1,5 @@
-export class Trick {
-  id: number;
+export interface ITrick {
+  id?: number;
   name: string;
   complexity: number;
   description: string;

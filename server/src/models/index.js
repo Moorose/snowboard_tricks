@@ -13,7 +13,7 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
 const Trick = require("./Trick")(sequelize);
 
 
-// module.exports =   Trick;
+// module.exports =   ITrick;
 module.exports = {
   sequelize,
   Trick

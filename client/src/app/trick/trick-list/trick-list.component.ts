@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Trick } from '../models/trick';
+import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { TrickService } from '../trick.service';
 export class TrickListComponent implements OnInit {
   @Input() adminRole = true;
 
-  tricks: Trick[] = [];
+  tricks: ITrick[] = [];
   error: string;
 
   constructor(private trickService: TrickService) {}
