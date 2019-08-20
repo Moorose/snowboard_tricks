@@ -67,15 +67,15 @@ describe('TrickService', () => {
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['patch']);
-      trickMock = { id: 1, name: 'BackFlip', complexity: 100, description: 'description' };
+      trickMock = { name: 'BackFlip', complexity: 100, description: 'description' } as Trick;
       httpClientSpy.patch.and.returnValue(of());
       trickService = new TrickService(httpClientSpy);
     });
 
     it('should called with mock', () => {
-      trickService.updateTrick(trickMock);
+      trickService.updateTrick(1, trickMock);
       expect(httpClientSpy.patch.calls.count()).toBe(1);
-      expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMock);
+      expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks/1', trickMock);
     });
 
   });

@@ -35,8 +35,8 @@ export class EditTrickComponent implements OnInit {
   }
 
   save() {
-    this.trick = { ...this.trick, ...this.trickForm.value };
-    this.trickService.updateTrick(this.trick).subscribe(
+    const trick = { ...this.trickForm.value } as Trick;
+    this.trickService.updateTrick(this.trick.id, trick).subscribe(
       () => {
         this.location.back();
       },

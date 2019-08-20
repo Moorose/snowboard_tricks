@@ -82,6 +82,7 @@ describe('EditTrickComponent', () => {
       };
       trickServiceSpy.getTrickById.and.returnValue(of(trickMock));
       trickServiceSpy.updateTrick.and.returnValue(of({}));
+      component.ngOnInit();
       fixture.detectChanges();
       component.trickForm.controls.name.setValue('DoubleBackFlip');
       component.trickForm.controls.complexity.setValue(222);
@@ -90,12 +91,11 @@ describe('EditTrickComponent', () => {
 
     it('should call updateTrick with obj', () => {
       component.save();
-      expect(trickServiceSpy.updateTrick).toHaveBeenCalledWith(jasmine.objectContaining({
-        id: trickMock.id,
+      expect(trickServiceSpy.updateTrick).toHaveBeenCalledWith(1, {
         name: 'DoubleBackFlip',
         complexity: 222,
         description: 'Very Very hard'
-      }));
+      });
     });
 
     describe('when update trick request is successful', () => {

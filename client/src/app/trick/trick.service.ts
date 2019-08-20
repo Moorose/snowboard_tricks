@@ -51,8 +51,8 @@ export class TrickService {
     );
   }
 
-  updateTrick(trick: Trick): Observable<void> {
-    return this.http.patch<void>(`${this.url}/tricks`, trick).pipe(
+  updateTrick(id: number, trick: Trick): Observable<void> {
+    return this.http.patch<void>(`${this.url}/tricks/${id}`, trick).pipe(
       catchError(TrickService.handleError)
     );
   }
