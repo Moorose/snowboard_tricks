@@ -21,5 +21,5 @@ module.exports = {
   sequelize,
   Trick,
   User,
-  TrickToUser
+    Grade
 };
