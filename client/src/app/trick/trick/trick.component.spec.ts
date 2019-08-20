@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrickComponent } from './trick.component';
 import { Trick } from '../models/trick';
+
+import { TrickComponent } from './trick.component';
 
 describe('TrickComponent', () => {
   let component: TrickComponent;
