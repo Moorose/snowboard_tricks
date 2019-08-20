@@ -35,10 +35,10 @@ describe('userService', () => {
         after(resetHistory);
 
         it('called User.findOne', () => {
-            expect(User.findOne).to.have.been.calledWith(match({where: {id}}));
+            expect(User.findOne).to.have.been.calledOnce;
         });
 
-        it('returned the user', () => {
+        it('should return the user', () => {
             expect(result).to.deep.equal(userMock)
         });
     });
@@ -57,7 +57,7 @@ describe('userService', () => {
             expect(User.create).to.have.been.calledWith(match(data));
         });
 
-        it('returned the user', () => {
+        it('should return user', () => {
             expect(result).to.deep.equal(userMock)
         });
     });
@@ -72,11 +72,10 @@ describe('userService', () => {
         after(resetHistory);
 
         it('called User.update', () => {
-            // expect(User.findOne).to.have.been.calledWith(match({ where: {id } }));
             expect(User.update).to.have.been.calledWith(match(data));
         });
 
-        it('returned the user', () => {
+        it('should return user', () => {
             expect(result).to.deep.equal(userMock)
         });
 
@@ -95,7 +94,7 @@ describe('userService', () => {
             expect(User.findAll).to.have.been.calledWith();
         });
 
-        it('returned the user mas with 1 member', () => {
+        it('should return mas with 1 user ', () => {
             expect(result).to.have.lengthOf(1);
             expect(result).to.include(userMock);
         });
@@ -115,7 +114,7 @@ describe('userService', () => {
             expect(User.destroy).to.have.been.calledWith(match({where: {id}}));
         });
 
-        it('returned the user mas with 1 member', () => {
+        it('should return 1', () => {
             expect(result).to.equal(1);
         });
 

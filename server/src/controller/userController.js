@@ -22,13 +22,14 @@ exports.createUser = async ctx => {
 };
 
 exports.updateUser = async ctx => {
-    const updateCount = await userService.updateUser({...ctx.request.body});
-    if (updateCount[0] === 1) {
+    const [updateCount] = await userService.updateUser({...ctx.request.body});
+    if (updateCount === 1) {
         await resultSetter.setResult(ctx, null, 204);
     } else {
         ctx.throw(404);
     }
 };
+
 exports.deleteUserById = async ctx => {
     const deletedCount = await userService.destroyUserById(ctx.params.id);
     if (deletedCount) {
