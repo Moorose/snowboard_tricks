@@ -1,16 +1,16 @@
 div {
-    border-radius: 1em;
-    background-color: cadetblue;
-    padding: 1em;
-    width: 50vh;
+  margin: 50px auto 0;
+  border-radius: 1em;
+  background-color: cadetblue;
+  padding: 1em;
+  width: 50vh;
 
-    .trick {
-        margin: 1em;
+  .trick {
+    margin: 1em;
 
-        &__name {
-            text-align: center;
-            font-weight: bold;
-        }
+    &__name {
+      text-align: center;
+      font-weight: bold;
     }
-
+  }
 }

@@ -1,8 +1,24 @@
   {
   "extends": "tslint:recommended",
   "rules": {
-    "indent": [true, "spaces", 2],
-    "array-type": [true, "array-simple"],
+    "no-constant-condition": true,
+    "object-curly-spacing": [
+      true,
+      "always"
+    ],
+    "ter-indent": [
+      true,
+      2
+    ],
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "array-type": [
+      true,
+      "array-simple"
+    ],
     "arrow-parens": false,
     "deprecation": {
       "severity": "warning"
@@ -32,7 +48,10 @@
       true,
       120
     ],
-    "member-access": [true, "no-public"],
+    "member-access": [
+      true,
+      "no-public"
+    ],
     "member-ordering": [
       true,
       {
@@ -68,7 +87,12 @@
       "as-needed"
     ],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "ordered-imports": [
+      true,
+      {
+        "grouped-imports": true
+      }
+    ],
     "quotemark": [
       true,
       "single"
@@ -88,6 +112,7 @@
     "use-pipe-transform-interface": true
   },
   "rulesDirectory": [
-    "codelyzer"
+    "codelyzer",
+    "node_modules/tslint-eslint-rules/dist/rules"
   ]
 }

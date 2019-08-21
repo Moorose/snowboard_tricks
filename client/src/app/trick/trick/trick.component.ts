@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Trick } from '../models/trick';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { ITrick } from '../models/trick';
 
 @Component({
   selector: 'app-trick',
@@ -8,9 +9,10 @@ import { Trick } from '../models/trick';
 })
 export class TrickComponent implements OnInit {
 
-  @Input() trick: Trick;
+  @Input() trick: ITrick;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

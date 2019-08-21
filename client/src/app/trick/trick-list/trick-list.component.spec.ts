@@ -1,11 +1,12 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {TrickListComponent} from './trick-list.component';
-import {TrickService} from '../trick.service';
-import {Trick} from '../models/trick';
-import {of, throwError} from 'rxjs';
-import {CommonModule} from '@angular/common';
-import {TrickModule} from '../trick.module';
-import {RouterTestingModule} from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of, throwError } from 'rxjs';
+
+import { ITrick } from '../models/trick';
+import { TrickModule } from '../trick.module';
+import { TrickService } from '../trick.service';
+import { TrickListComponent } from './trick-list.component';
 
 describe('TrickListComponent', () => {
   let component: TrickListComponent;
@@ -35,7 +36,7 @@ describe('TrickListComponent', () => {
 
   describe('with tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [
+      const trickMock: ITrick[] = [
         {
           id: 1,
           name: 'BackFlip',
@@ -70,7 +71,7 @@ describe('TrickListComponent', () => {
 
   describe('without tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [];
+      const trickMock: ITrick[] = [];
       trickServiceSpy.getTrickList.and.returnValue(
         of(trickMock),
       );

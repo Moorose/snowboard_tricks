@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
-import {FormBuilder, Validators} from '@angular/forms';
-import {TrickService} from '../trick.service';
-import {Trick} from '../models/trick';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-edit-trick',
@@ -11,13 +12,15 @@ import {Trick} from '../models/trick';
   styleUrls: ['./edit-trick.component.scss'],
 })
 export class EditTrickComponent implements OnInit {
+  error: string;
+
   trickForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     complexity: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
     description: [''],
   });
 
-  trick: Trick = null;
+  private trick: ITrick = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,39 +30,28 @@ export class EditTrickComponent implements OnInit {
   ) {
   }
 
-  duplicateName = false;
-
   ngOnInit() {
     this.getTrick();
   }
 
-  getTrick(): void {
+  save() {
+    const trick = { ...this.trickForm.value };
+    this.trickService.updateTrick(this.trick.id, trick).subscribe(
+      () => {
+        this.location.back();
+      },
+      error => this.error = error
+    );
+  }
+
+  private getTrick(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.trickService.getTrickById(id).subscribe(trick => {
       this.trick = trick;
-      this.trickForm = this.fb.group({
-        name: [trick.name, [Validators.required, Validators.minLength(5)]],
-        complexity: [trick.complexity, [Validators.required, Validators.min(1), Validators.max(1000)]],
-        description: [trick.description],
-      });
+      this.trickForm.controls.name.setValue(trick.name);
+      this.trickForm.controls.complexity.setValue(trick.complexity);
+      this.trickForm.controls.description.setValue(trick.description);
     });
-  }
-
-  onSubmit() {
-    this.trick.name = this.trickForm.value.name;
-    this.trick.complexity = this.trickForm.value.complexity;
-    this.trick.description = this.trickForm.value.description;
-    this.trickService.updateTrick(this.trick).subscribe(
-      () => {
-        this.duplicateName = false;
-        this.location.back();
-      },
-      err => {
-        if (err.status === 409) {
-          this.duplicateName = true;
-        }
-      },
-    );
   }
 
   goBack(): void {
