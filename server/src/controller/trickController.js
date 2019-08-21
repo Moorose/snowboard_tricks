@@ -13,8 +13,8 @@ exports.createTrick = async ctx => {
 };
 
 exports.updateTrick = async ctx => {
-    const updateCount = await trickService.updateTrick({...ctx.params, ...ctx.request.body});
-    if (updateCount[0] === 1) {
+    const [updateCount] = await trickService.updateTrick({...ctx.params, ...ctx.request.body});
+    if (updateCount === 1) {
         await resultSetter.setResult(ctx, null, 204);
     } else {
         ctx.throw(404);
