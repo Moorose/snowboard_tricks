@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ITrick } from '../models/trick';
+
 import { TrickComponent } from './trick.component';
 
 describe('TrickComponent', () => {
