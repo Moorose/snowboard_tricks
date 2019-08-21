@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 
-import { Trick } from './models/trick';
+import { ITrick } from './models/trick';
 import { TrickService } from './trick.service';
 
 describe('TrickService', () => {
@@ -8,7 +8,7 @@ describe('TrickService', () => {
   let httpClientSpy: any;
 
   describe('getTrickList()', () => {
-    let trickMock: Trick[];
+    let trickMock: ITrick[];
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
@@ -25,7 +25,7 @@ describe('TrickService', () => {
   });
 
   describe('getTrickById()', () => {
-    let trickMock: Trick;
+    let trickMock: ITrick;
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
@@ -39,11 +39,10 @@ describe('TrickService', () => {
       expect(httpClientSpy.get.calls.count()).toBe(1);
       expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/tricks/1');
     });
-
   });
+  
   describe('addTrick()', () => {
-
-    let trickMock: Trick;
+    let trickMock: ITrick;
     let trickMockWithoutId: any;
 
     beforeAll(() => {
@@ -55,27 +54,26 @@ describe('TrickService', () => {
     });
 
     it('should return object with id', () => {
-      trickService.addTrick(trickMockWithoutId as Trick).subscribe(result => expect(result).toEqual(trickMock));
+      trickService.addTrick(trickMockWithoutId).subscribe(result => expect(result).toEqual(trickMock));
       expect(httpClientSpy.post.calls.count()).toBe(1);
       expect(httpClientSpy.post).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMockWithoutId);
     });
 
   });
   describe('updateTrick()', () => {
-
-    let trickMock: Trick;
+    let trickMock: ITrick;
 
     beforeAll(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['patch']);
-      trickMock = { id: 1, name: 'BackFlip', complexity: 100, description: 'description' };
+      trickMock = { name: 'BackFlip', complexity: 100, description: 'description' };
       httpClientSpy.patch.and.returnValue(of());
       trickService = new TrickService(httpClientSpy);
     });
 
     it('should called with mock', () => {
-      trickService.updateTrick(trickMock);
+      trickService.updateTrick(1, trickMock);
       expect(httpClientSpy.patch.calls.count()).toBe(1);
-      expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMock);
+      expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks/1', trickMock);
     });
 
   });

@@ -2,7 +2,6 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { Trick } from '../models/trick';
 import { TrickService } from '../trick.service';
 
 @Component({
@@ -29,7 +28,7 @@ export class AddTrickComponent {
   ) {}
 
   save() {
-    this.trickService.addTrick(this.trickForm.value as Trick).subscribe(
+    this.trickService.addTrick(this.trickForm.value).subscribe(
       () => {
         this.location.back();
       },

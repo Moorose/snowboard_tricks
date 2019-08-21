@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
-import { Trick } from '../models/trick';
+import { ITrick } from '../models/trick';
 import { TrickModule } from '../trick.module';
 import { TrickService } from '../trick.service';
 
@@ -37,7 +37,7 @@ describe('TrickListComponent', () => {
 
   describe('with tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [
+      const trickMock: ITrick[] = [
         {
           id: 1,
           name: 'BackFlip',
@@ -72,7 +72,7 @@ describe('TrickListComponent', () => {
 
   describe('without tricks', () => {
     beforeEach(() => {
-      const trickMock: Trick[] = [];
+      const trickMock: ITrick[] = [];
       trickServiceSpy.getTrickList.and.returnValue(
         of(trickMock),
       );
