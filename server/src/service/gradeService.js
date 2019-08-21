@@ -1,6 +1,7 @@
 "use strict";
 
-const {User, Trick} = require("../models");
+
+const {sequelize, User, Trick} = require("../models");
 
 exports.joinTrickToUser = async (userId, trickId) => {
     const user = await User.findByPk(userId);
@@ -14,29 +15,23 @@ exports.joinTrickToUser = async (userId, trickId) => {
 exports.unJoinTrickToUser = async (userId, trickId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
-    const tricks = await user.getTricks();
-    if (!tricks) throw new Error('Tricks were not found!');
-    for (trick of tricks) {
-        if (trick.id === trickId) {
-            return await trick.grade.destroy();
-        }
-    }
+    const [trick] = await user.getTricks({where: {id: trickId}});
+    if (!trick) throw new Error('Tricks were not found!');
+    return await trick.grade.destroy();
 };
 
-exports.markTrickAsDone = async (userId, trickId) => {
+exports.markTrick = async (userId, trickId, done) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
-    const trick = await user.findOne({where: {id: trickId}});
+    const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Trick was not found!');
-    await trick.grade.update({mark: true});
-};
-
-exports.unmarkTrickAsDone = async (userId, trickId) => {
-    const user = await User.findByPk(userId);
-    if (!user) throw new Error('User was not found!');
-    const trick = await user.findOne({where: {id: trickId}});
-    if (!trick) throw new Error('Trick was not found!');
-    await trick.grade.update({mark: true});
+    const updateCount = await sequelize.query('UPDATE grade SET mark=:done WHERE "UserId" = :userId AND "TrickId" = :trickId;',
+        {
+            replacements: {done, userId, trickId},
+            type: sequelize.QueryTypes.UPDATE
+        });
+    if (updateCount === 0)
+        throw new Error('Update query error');
 };
 
 exports.getUserListByTrickId = async (trickId) => {

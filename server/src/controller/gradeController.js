@@ -4,23 +4,27 @@ const resultSetter = require("../middlewares/resultSetter");
 const sessionService = require("../middlewares/checkUser");
 
 exports.joinTrickToUser = async ctx => {
-    const userId = await sessionService.isUser(1);
-    await gradeService.joinTrickToUser(userId, ctx.params.id);
+    const user = await sessionService.isUser(1);
+    await gradeService.joinTrickToUser(user.id, ctx.params.id);
+    await resultSetter.setResult(ctx, null, 201);
 };
 
 exports.unJoinTrickToUser = async ctx => {
-    const userId = await sessionService.isUser(1);
-    await gradeService.unJoinTrickToUser(userId, ctx.params.id);
+    const user = await sessionService.isUser(1);
+    await gradeService.unJoinTrickToUser(user.id, ctx.params.id);
+    await resultSetter.setResult(ctx, null, 204);
 };
 
 exports.markTrickAsDone = async ctx => {
-    const userId = await sessionService.isUser(1);
-    await gradeService.markTrickAsDone(userId, ctx.params.id);
+    const user = await sessionService.isUser(1);
+    await gradeService.markTrick(user.id, ctx.params.id, true);
+    await resultSetter.setResult(ctx, null, 201);
 };
 
 exports.unmarkTrickAsDone = async ctx => {
-    const userId = await sessionService.isUser(1);
-    await gradeService.unmarkTrickAsDone(userId, ctx.params.id);
+    const user = await sessionService.isUser(1);
+    await gradeService.markTrick(user.id, ctx.params.id, false);
+    await resultSetter.setResult(ctx, null, 204);
 };
 
 exports.getUserListByTrickId = async ctx => {
@@ -30,9 +34,7 @@ exports.getUserListByTrickId = async ctx => {
 };
 
 exports.getTrickListByUserId = async ctx => {
-    const userId = await sessionService.isUser(1);
-    const trickList = await gradeService.getTrickListByUserId(userId);
+    const user = await sessionService.isUser(1);
+    const trickList = await gradeService.getTrickListByUserId(user.id);
     await resultSetter.setResult(ctx, trickList);
 };
-
-// exports.getTrickListByUserId = async (userId) => {
