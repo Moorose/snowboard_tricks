@@ -5,7 +5,6 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
-
 import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 import { TrickComponent } from '../trick/trick.component';
@@ -46,7 +45,6 @@ describe('EditTrickComponent', () => {
   });
 
   describe('onInit()', () => {
-
     beforeEach(() => {
       trickMock = {
         id: 1,
