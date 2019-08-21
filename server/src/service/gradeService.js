@@ -42,7 +42,20 @@ exports.getUserListByTrickId = async (trickId) => {
 
 exports.getTrickListByUserId = async (userId) => {
     const user = await User.findByPk(userId);
-    if (!user) throw new Error('Users were not found!');
+    if (!user) throw new Error('User was not found!');
     return await user.getTricks();
 };
 
+exports.getUserLevel = async (userId) => {
+    const user = await User.findByPk(userId);
+    if (!user) throw new Error('User was not found!');
+    const tricks = await user.getTricks();
+    let exp = 0;
+    for (let trick of tricks) {
+        exp += trick.complexity;
+    }
+    return {
+        level: Math.floor(exp / 1000),
+        exp
+    };
+};

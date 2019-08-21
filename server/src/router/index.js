@@ -16,6 +16,7 @@ router
     .post('/tricks', trickController.createTrick)
     .delete('/tricks', trickController.deleteAllTricks)
     .delete('/tricks/:id', trickController.deleteTrickById)
+    .get('/grade/level/:id', gradeController.getUserLevelById)
     .get('/grade/tricks', gradeController.getTrickListByUserId)
     .get('/grade/tricks/:id', gradeController.getUserListByTrickId)
     .post('/grade/join/:id', gradeController.joinTrickToUser)

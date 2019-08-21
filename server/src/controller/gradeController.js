@@ -38,3 +38,8 @@ exports.getTrickListByUserId = async ctx => {
     const trickList = await gradeService.getTrickListByUserId(user.id);
     await resultSetter.setResult(ctx, trickList);
 };
+
+exports.getUserLevelById = async ctx => {
+    const level = await gradeService.getUserLevel(ctx.params.id);
+    await resultSetter.setResult(ctx, level);
+};

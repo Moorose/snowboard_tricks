@@ -18,7 +18,7 @@ describe('gradeService', () => {
     });
 
     const userMock = {id: 1, addTrick: stub(), getTricks: stub()};
-    const trickMock = {id: 1, grade: {destroy: stub()}, getUsers: stub()};
+    const trickMock = {id: 1, complexity: 500, grade: {destroy: stub()}, getUsers: stub()};
     let result;
 
     context('joinTrickToUser', () => {
@@ -178,6 +178,33 @@ describe('gradeService', () => {
         it('should return mas with 1 trick ', () => {
             expect(result).to.have.lengthOf(1);
             expect(result).to.include(trickMock);
+        });
+
+    });
+
+    context('getUserLevel', () => {
+        before(async () => {
+            User.findByPk.resolves(userMock);
+            userMock.getTricks.resolves([trickMock, trickMock, trickMock]);
+            result = await gradeService.getUserLevel(1);
+        });
+
+        after(resetHistory);
+
+        it('should called User.findByPk', () => {
+            expect(User.findByPk).to.have.been.calledOnce;
+            expect(User.findByPk).to.have.been.calledWith(1);
+        });
+
+        it('should called userMock.getTricks', () => {
+            expect(userMock.getTricks).to.have.been.calledOnce;
+        });
+
+        it('should return object with level and exp ', () => {
+            expect(result).to.include({
+                level: 1,
+                exp: 1500
+            });
         });
 
     });
