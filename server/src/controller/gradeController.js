@@ -1,45 +1,33 @@
 "use strict";
 const gradeService = require("../service/gradeService");
 const resultSetter = require("../middlewares/resultSetter");
-const sessionService = require("../middlewares/checkUser");
 
 exports.joinTrickToUser = async ctx => {
-    const user = await sessionService.isUser(1);
-    await gradeService.joinTrickToUser(user.id, ctx.params.id);
+    await gradeService.joinTrickToUser({...ctx.params});
     await resultSetter.setResult(ctx, null, 201);
 };
 
 exports.unJoinTrickToUser = async ctx => {
-    const user = await sessionService.isUser(1);
-    await gradeService.unJoinTrickToUser(user.id, ctx.params.id);
+    await gradeService.unJoinTrickToUser({...ctx.params});
     await resultSetter.setResult(ctx, null, 204);
 };
 
-exports.markTrickAsDone = async ctx => {
-    const user = await sessionService.isUser(1);
-    await gradeService.markTrick(user.id, ctx.params.id, true);
+exports.markTrick = async ctx => {
+    await gradeService.markTrick({...ctx.request.body, ...ctx.params});
     await resultSetter.setResult(ctx, null, 201);
 };
 
-exports.unmarkTrickAsDone = async ctx => {
-    const user = await sessionService.isUser(1);
-    await gradeService.markTrick(user.id, ctx.params.id, false);
-    await resultSetter.setResult(ctx, null, 204);
-};
-
 exports.getUserListByTrickId = async ctx => {
-    await sessionService.isUser(1);
-    const userList = await gradeService.getUserListByTrickId(ctx.params.id);
+    const userList = await gradeService.getUserListByTrickId(ctx.params.trickId);
     await resultSetter.setResult(ctx, userList);
 };
 
 exports.getTrickListByUserId = async ctx => {
-    const user = await sessionService.isUser(1);
-    const trickList = await gradeService.getTrickListByUserId(user.id);
+    const trickList = await gradeService.getTrickListByUserId(ctx.params.userId);
     await resultSetter.setResult(ctx, trickList);
 };
 
 exports.getUserLevelById = async ctx => {
-    const level = await gradeService.getUserLevel(ctx.params.id);
+    const level = await gradeService.getUserLevel(ctx.params.userId);
     await resultSetter.setResult(ctx, level);
 };

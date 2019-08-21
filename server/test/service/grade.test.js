@@ -81,7 +81,7 @@ describe('gradeService', () => {
 
         describe('mark as done', () => {
             before(async () => {
-                await gradeService.markTrick(1, 1, true);
+                await gradeService.markTrick(true, 1, 1);
             });
 
             after(resetHistory);
@@ -107,7 +107,7 @@ describe('gradeService', () => {
 
         describe('mark as undone', () => {
             before(async () => {
-                await gradeService.markTrick(1, 1, false);
+                await gradeService.markTrick(false, 1, 1);
             });
 
             after(resetHistory);

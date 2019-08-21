@@ -16,12 +16,11 @@ router
     .post('/tricks', trickController.createTrick)
     .delete('/tricks', trickController.deleteAllTricks)
     .delete('/tricks/:id', trickController.deleteTrickById)
-    .get('/grade/level/:id', gradeController.getUserLevelById)
-    .get('/grade/tricks', gradeController.getTrickListByUserId)
-    .get('/grade/tricks/:id', gradeController.getUserListByTrickId)
-    .post('/grade/join/:id', gradeController.joinTrickToUser)
-    .post('/grade/mark/:id', gradeController.markTrickAsDone)
-    .delete('/grade/join/:id', gradeController.unJoinTrickToUser)
-    .delete('/grade/mark/:id', gradeController.unmarkTrickAsDone);
+    .get('/grade/user/:userId/level', gradeController.getUserLevelById)
+    .get('/grade/user/:userId/tricks', gradeController.getTrickListByUserId)
+    .get('/grade/tricks/:userId', gradeController.getUserListByTrickId)
+    .post('/grade/user/:userId/tricks/:trickId', gradeController.joinTrickToUser)
+    .patch('/grade/user/:userId/tricks/:trickId', gradeController.markTrick)
+    .delete('/grade/user/:userId/tricks/:trickId', gradeController.unJoinTrickToUser);
 
 module.exports = router;
