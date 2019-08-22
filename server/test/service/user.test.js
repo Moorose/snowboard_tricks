@@ -94,7 +94,7 @@ describe('userService', () => {
             expect(User.findAll).to.have.been.calledWith();
         });
 
-        it('should return mas with 1 user ', () => {
+        it('should return list with 1 user ', () => {
             expect(result).to.have.lengthOf(1);
             expect(result).to.include(userMock);
         });
