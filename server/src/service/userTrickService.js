@@ -56,7 +56,7 @@ exports.getUserLevel = async (userId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const tricks = await exports.getTrickListByUserId(userId);
-    let exp = tricks.reduce((sum, trick) => sum += trick.complexity, 0);
+    const exp = tricks.reduce((sum, trick) => sum += trick.complexity, 0);
     return {
         level: Math.floor(exp / 1000),
         nextExp: Math.ceil(exp / 1000) * 1000,

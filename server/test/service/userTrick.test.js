@@ -18,7 +18,7 @@ describe('userTrickService', () => {
     });
 
     const userMock = {dataValues: {id: 1}, addTrick: stub(), getTricks: stub(), removeTrick: stub()};
-    const trickMock = {dataValues: {id: 1}, complexity: 500, grade: {destroy: stub()}, getUsers: stub()};
+    const trickMock = {dataValues: {id: 1}, complexity: 500, getUsers: stub()};
     const userTrickMock = {id: 1, UserId: 1, TrickId: 1, is_done: false};
     let result;
 
@@ -189,7 +189,7 @@ describe('userTrickService', () => {
             expect(trickMock.getUsers).to.have.been.calledOnce;
         });
 
-        it('should return mas with 1 user ', () => {
+        it('should return list with 1 user ', () => {
             expect(result).to.have.lengthOf(1);
             expect(result).to.include(userMock);
         });
