@@ -4,8 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-
-import { IUser } from './model/user';
+import { ILevel } from '../user/model/level';
+import { IUser } from '../user/model/user';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +39,20 @@ export class UserService {
     );
   }
 
-  getUserById(id: number): Observable<IUser> {
+  getUserById(id?: number): Observable<IUser> {
+    if (!id) {
+      id = environment.userId;
+    }
     return this.http.get<IUser>(`${this.url}/user/${id}`).pipe(
+      catchError(UserService.handleError)
+    );
+  }
+
+  getUserLevel(id?: number): Observable<ILevel> {
+    if (!id) {
+      id = environment.userId;
+    }
+    return this.http.get<ILevel>(`${this.url}/grade/user/${id}/level`).pipe(
       catchError(UserService.handleError)
     );
   }
@@ -51,14 +63,14 @@ export class UserService {
     );
   }
 
-  updateUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${this.url}/user`, user).pipe(
+  updateUser(user: IUser): Observable<void> {
+    return this.http.patch<void>(`${this.url}/user`, user).pipe(
       catchError(UserService.handleError)
     );
   }
 
-  deleteUserById(id: number): Observable<IUser> {
-    return this.http.delete<IUser>(`${this.url}/user/${id}`).pipe(
+  deleteUserById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/user/${id}`).pipe(
       catchError(UserService.handleError)
     );
   }

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
-import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-edit-trick',

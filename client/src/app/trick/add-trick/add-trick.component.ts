@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { TrickService } from '../trick.service';
+import { TrickService } from '../../service/trick.service';
 
 @Component({
   selector: 'app-add-trick',
