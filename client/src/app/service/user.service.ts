@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { ILevel } from '../user/model/level';
+import { IRank } from '../user/model/rank';
 import { IUser } from '../user/model/user';
 
 @Injectable({
@@ -41,18 +41,18 @@ export class UserService {
 
   getUserById(id?: number): Observable<IUser> {
     if (!id) {
-      id = environment.userId;
+      id = environment.currentUser;
     }
     return this.http.get<IUser>(`${this.url}/user/${id}`).pipe(
       catchError(UserService.handleError)
     );
   }
 
-  getUserLevel(id?: number): Observable<ILevel> {
+  getUserLevel(id?: number): Observable<IRank> {
     if (!id) {
-      id = environment.userId;
+      id = environment.currentUser;
     }
-    return this.http.get<ILevel>(`${this.url}/grade/user/${id}/level`).pipe(
+    return this.http.get<IRank>(`${this.url}/grade/user/${id}/level`).pipe(
       catchError(UserService.handleError)
     );
   }

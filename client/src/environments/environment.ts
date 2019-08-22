@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
   userId: 1,
-  adminId: 1
+  adminId: 2,
+  currentUser: 1
 };
 
 /*
