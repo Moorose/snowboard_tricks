@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { ITrick } from '../trick/models/trick';
-import { IUser } from "../user/model/user";
+import { IUser } from '../user/model/user';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,7 @@ export class GradeService {
   }
 
   private static handleError(error: HttpErrorResponse) {
+    console.log(error);
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
@@ -52,12 +53,12 @@ export class GradeService {
     if (!userId) {
       userId = environment.currentUser;
     }
-    return this.http.post<void>(`${this.url}/grade/user/${userId}/tricks/${trickId}`, {}).pipe(
+    return this.http.post<void>(`${this.url}/grade/user/${userId}/tricks/${trickId}`, { responseType: 'text' }).pipe(
       catchError(GradeService.handleError)
     );
   }
 
-  unJoinTrickToUser(trickId: number, userId?: number): Observable<void> {
+  unJoinTrickToUser(trickId: () => void, userId?: number): Observable<void> {
     if (!userId) {
       userId = environment.currentUser;
     }

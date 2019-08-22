@@ -1,9 +1,10 @@
 import { of } from 'rxjs';
-import { IUser } from '../user/model/user';
-import { GradeService } from "./grade.service";
-import { ITrick } from "../trick/models/trick";
-import { environment } from "../../environments/environment";
 
+import { environment } from '../../environments/environment';
+import { ITrick } from '../trick/models/trick';
+import { IUser } from '../user/model/user';
+
+import { GradeService } from './grade.service';
 
 describe('GradeService', () => {
   let gradeService: GradeService;
