@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const trickController = require("../controller/trickController");
 const userController = require("../controller/userController");
 const gradeController = require("../controller/gradeController");
+
 const router = new Router();
 
 router
