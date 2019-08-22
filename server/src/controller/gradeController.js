@@ -3,18 +3,18 @@ const gradeService = require("../service/gradeService");
 const resultSetter = require("../middlewares/resultSetter");
 
 exports.joinTrickToUser = async ctx => {
-    await gradeService.joinTrickToUser({...ctx.params});
-    await resultSetter.setResult(ctx, null, 201);
+    const grade = await gradeService.joinTrickToUser({...ctx.params});
+    await resultSetter.setResult(ctx, grade, 201);
 };
 
 exports.unJoinTrickToUser = async ctx => {
-    await gradeService.unJoinTrickToUser({...ctx.params});
+    const grade = await gradeService.unJoinTrickToUser({...ctx.params});
     await resultSetter.setResult(ctx, null, 204);
 };
 
 exports.markTrick = async ctx => {
-    await gradeService.markTrick({...ctx.request.body, ...ctx.params});
-    await resultSetter.setResult(ctx, null, 201);
+    const grade = await gradeService.markTrick({...ctx.request.body, ...ctx.params});
+    await resultSetter.setResult(ctx, grade, 201);
 };
 
 exports.getUserListByTrickId = async ctx => {

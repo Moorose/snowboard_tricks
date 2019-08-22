@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { environment } from '../../../environments/environment';
 import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
 
@@ -9,13 +10,17 @@ import { ITrick } from '../models/trick';
   styleUrls: ['./trick-list.component.scss'],
 })
 export class TrickListComponent implements OnInit {
-  @Input() adminRole = true;
+  adminRole = false;
   tricks: ITrick[] = [];
   error: string;
 
-  constructor(private trickService: TrickService) {}
+  constructor(private trickService: TrickService) {
+  }
 
   ngOnInit() {
+    if (environment.currentUser === 2) {
+      this.adminRole = true;
+    }
     this.getTricks();
   }
 
