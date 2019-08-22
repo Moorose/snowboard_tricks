@@ -1,6 +1,7 @@
 import { of } from 'rxjs';
 
-import { ITrick } from './models/trick';
+import { ITrick } from '../trick/models/trick';
+
 import { TrickService } from './trick.service';
 
 describe('TrickService', () => {

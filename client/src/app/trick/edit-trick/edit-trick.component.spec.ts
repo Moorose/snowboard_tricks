@@ -5,8 +5,8 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
+import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
-import { TrickService } from '../trick.service';
 import { TrickComponent } from '../trick/trick.component';
 
 import { EditTrickComponent } from './edit-trick.component';

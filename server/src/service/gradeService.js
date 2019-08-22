@@ -56,6 +56,7 @@ exports.getUserLevel = async (userId) => {
     }
     return {
         level: Math.floor(exp / 1000),
+        nextExp: Math.ceil(exp / 1000) * 1000,
         exp
     };
 };

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
-import { TrickService } from '../trick.service';
+import { TrickService } from '../../service/trick.service';
 import { TrickComponent } from '../trick/trick.component';
 
 import { AddTrickComponent } from './add-trick.component';
