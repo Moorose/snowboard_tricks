@@ -1,4 +1,4 @@
-export interface ILevel {
+export interface IRank {
   level: number;
   nextExp: number;
   exp: number;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../service/user.service';
-import { ILevel } from '../model/level';
+import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
 
 @Component({
@@ -11,8 +11,8 @@ import { IUser } from '../model/user';
 })
 export class UserPageComponent implements OnInit {
 
-  user: IUser = null;
-  level: ILevel = null;
+  user: IUser;
+  rank: IRank;
 
   constructor(private userService: UserService) {
   }
@@ -30,7 +30,7 @@ export class UserPageComponent implements OnInit {
 
   getLevel(): void {
     this.userService.getUserLevel().subscribe(
-      level => this.level = level
+      rank => this.rank = rank
     );
   }
 

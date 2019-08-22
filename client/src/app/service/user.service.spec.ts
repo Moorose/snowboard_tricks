@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 
-import { ILevel } from '../user/model/level';
+import { IRank } from '../user/model/rank';
 import { IUser } from '../user/model/user';
 
 import { UserService } from './user.service';
@@ -57,7 +57,7 @@ describe('UserService', () => {
   });
 
   describe('getUserLevel()', () => {
-    let levelMock: ILevel;
+    let levelMock: IRank;
 
     beforeEach(() => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);

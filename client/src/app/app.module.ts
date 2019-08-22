@@ -8,7 +8,7 @@ import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
@@ -18,4 +18,5 @@ import { UserModule } from './user/user.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

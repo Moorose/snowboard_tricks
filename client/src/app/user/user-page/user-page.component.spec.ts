@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { UserService } from '../../service/user.service';
-import { ILevel } from '../model/level';
+import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
 
 import { UserPageComponent } from './user-page.component';
@@ -12,7 +12,7 @@ describe('UserPageComponent', () => {
   let fixture: ComponentFixture<UserPageComponent>;
   let userServiceSpy: any;
   let userMock: IUser;
-  let levelMock: ILevel;
+  let levelMock: IRank;
 
   beforeEach(() => {
     userServiceSpy = jasmine.createSpyObj('UserService', ['getUserById', 'getUserLevel']);
