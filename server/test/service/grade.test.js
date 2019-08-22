@@ -25,7 +25,7 @@ describe('gradeService', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             Trick.findByPk.resolves(trickMock);
-            await gradeService.joinTrickToUser(1, 1);
+            await gradeService.joinTrickToUser({userId: 1, trickId: 1});
         });
 
         after(resetHistory);
@@ -50,7 +50,7 @@ describe('gradeService', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock]);
-            await gradeService.unJoinTrickToUser(1, 1);
+            await gradeService.unJoinTrickToUser({userId: 1, trickId: 1});
         });
 
         after(resetHistory);
@@ -71,8 +71,6 @@ describe('gradeService', () => {
     });
 
     context('markTrick', () => {
-        let query = 'UPDATE grade SET mark=:done WHERE "UserId" = :userId AND "TrickId" = :trickId;';
-
         beforeEach(() => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock]);
@@ -81,7 +79,7 @@ describe('gradeService', () => {
 
         describe('mark as done', () => {
             before(async () => {
-                await gradeService.markTrick(1, 1, true);
+                await gradeService.markTrick({is_done: true, userId: 1, trickId: 1});
             });
 
             after(resetHistory);
@@ -97,17 +95,13 @@ describe('gradeService', () => {
 
             it('should called sequelize.query', () => {
                 expect(sequelize.query).to.have.been.calledOnce;
-                expect(sequelize.query).to.have.been.calledWithMatch(query, {
-                    replacements: {done: true, userId: 1, trickId: 1},
-                    type: sequelize.QueryTypes.UPDATE
-                });
             });
 
         });
 
         describe('mark as undone', () => {
             before(async () => {
-                await gradeService.markTrick(1, 1, false);
+                await gradeService.markTrick({is_done: true, userId: 1, trickId: 1});
             });
 
             after(resetHistory);
@@ -124,10 +118,6 @@ describe('gradeService', () => {
 
             it('should called sequelize.query', () => {
                 expect(sequelize.query).to.have.been.calledOnce;
-                expect(sequelize.query).to.have.been.calledWith(query, {
-                    replacements: {done: false, userId: 1, trickId: 1},
-                    type: sequelize.QueryTypes.UPDATE
-                });
             });
         });
     });
@@ -175,7 +165,7 @@ describe('gradeService', () => {
             expect(userMock.getTricks).to.have.been.calledOnce;
         });
 
-        it('should return mas with 1 trick ', () => {
+        it('should return list with 1 trick ', () => {
             expect(result).to.have.lengthOf(1);
             expect(result).to.include(trickMock);
         });

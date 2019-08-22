@@ -3,7 +3,7 @@
 
 const {sequelize, User, Trick} = require("../models");
 
-exports.joinTrickToUser = async (userId, trickId) => {
+exports.joinTrickToUser = async ({userId, trickId}) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const trick = await Trick.findByPk(trickId);
@@ -12,7 +12,7 @@ exports.joinTrickToUser = async (userId, trickId) => {
 };
 
 
-exports.unJoinTrickToUser = async (userId, trickId) => {
+exports.unJoinTrickToUser = async ({userId, trickId}) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const [trick] = await user.getTricks({where: {id: trickId}});
@@ -20,14 +20,14 @@ exports.unJoinTrickToUser = async (userId, trickId) => {
     return await trick.grade.destroy();
 };
 
-exports.markTrick = async (userId, trickId, done) => {
+exports.markTrick = async ({is_done, userId, trickId}) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Trick was not found!');
-    const updateCount = await sequelize.query('UPDATE grade SET mark=:done WHERE "UserId" = :userId AND "TrickId" = :trickId;',
+    const updateCount = await sequelize.query('UPDATE grade SET mark=:is_done WHERE "UserId" = :userId AND "TrickId" = :trickId;',
         {
-            replacements: {done, userId, trickId},
+            replacements: {done: is_done, userId, trickId},
             type: sequelize.QueryTypes.UPDATE
         });
     if (updateCount === 0)
@@ -56,6 +56,7 @@ exports.getUserLevel = async (userId) => {
     }
     return {
         level: Math.floor(exp / 1000),
+        nextExp: Math.ceil(exp / 1000) * 1000,
         exp
     };
 };
