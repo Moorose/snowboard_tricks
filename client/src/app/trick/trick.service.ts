@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 import { ITrick } from './models/trick';
 
+
 @Injectable({
   providedIn: 'root',
 })

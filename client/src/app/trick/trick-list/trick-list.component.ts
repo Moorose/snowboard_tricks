@@ -10,7 +10,6 @@ import { TrickService } from '../trick.service';
 })
 export class TrickListComponent implements OnInit {
   @Input() adminRole = true;
-
   tricks: ITrick[] = [];
   error: string;
 

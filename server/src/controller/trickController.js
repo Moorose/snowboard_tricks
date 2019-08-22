@@ -4,7 +4,7 @@ const resultSetter = require("../middlewares/resultSetter");
 
 exports.getTrickList = async ctx => {
     const trickList = await trickService.getTrickList();
-    resultSetter.setResult(ctx, trickList);
+    await resultSetter.setResult(ctx, trickList);
 };
 
 exports.createTrick = async ctx => {
@@ -13,9 +13,9 @@ exports.createTrick = async ctx => {
 };
 
 exports.updateTrick = async ctx => {
-    const updateCount = await trickService.updateTrick({...ctx.params, ...ctx.request.body});
-    if (updateCount[0] === 1) {
-        resultSetter.setResult(ctx, null, 204);
+    const [updateCount] = await trickService.updateTrick({...ctx.params, ...ctx.request.body});
+    if (updateCount === 1) {
+        await resultSetter.setResult(ctx, null, 204);
     } else {
         ctx.throw(404);
     }
@@ -26,14 +26,14 @@ exports.getTrickById = async ctx => {
     if (updateTrick === null) {
         ctx.throw(404);
     } else {
-        resultSetter.setResult(ctx, updateTrick);
+        await resultSetter.setResult(ctx, updateTrick);
     }
 };
 
 exports.deleteTrickById = async ctx => {
     const deletedCount = await trickService.destroyTrickById(ctx.params.id);
     if (deletedCount) {
-        resultSetter.setResult(ctx, null, 204);
+        await resultSetter.setResult(ctx, null, 204);
     } else {
         ctx.throw(404);
     }
@@ -41,5 +41,5 @@ exports.deleteTrickById = async ctx => {
 
 exports.deleteAllTricks = async ctx => {
     await trickService.destroyAllTricks();
-    resultSetter.setResult(ctx, null, 204);
+    await resultSetter.setResult(ctx, null, 204);
 };

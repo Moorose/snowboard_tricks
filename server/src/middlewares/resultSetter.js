@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 
-
 exports.setResult = async (ctx, result, status) => {
     if (result) {
         ctx.response.body = result;

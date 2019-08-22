@@ -65,6 +65,7 @@ describe('AddTrickComponent', () => {
     });
 
     describe('when adding tricks request is successful', () => {
+
       it('should call back()', () => {
         component.save();
         expect(locationSpy.back.calls.count()).toBe(1);

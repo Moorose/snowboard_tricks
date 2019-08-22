@@ -39,10 +39,9 @@ describe('TrickService', () => {
       expect(httpClientSpy.get.calls.count()).toBe(1);
       expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/tricks/1');
     });
-
   });
+  
   describe('addTrick()', () => {
-
     let trickMock: ITrick;
     let trickMockWithoutId: any;
 
@@ -62,7 +61,6 @@ describe('TrickService', () => {
 
   });
   describe('updateTrick()', () => {
-
     let trickMock: ITrick;
 
     beforeAll(() => {
