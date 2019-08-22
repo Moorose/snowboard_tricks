@@ -1,14 +1,20 @@
 "use strict";
 
 
-const {sequelize, User, Trick} = require("../models");
+const {User, Trick, UserTrick} = require("../models");
 
 exports.joinTrickToUser = async ({userId, trickId}) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const trick = await Trick.findByPk(trickId);
     if (!trick) throw new Error('Trick was not found!');
-    await user.addTrick(trick, {through: {mark: false}});
+    await user.addTrick(trick, {through: {is_done: false}});
+    return await UserTrick.findOne({
+        where: {
+            UserId: user.dataValues.id,
+            TrickId: trick.dataValues.id
+        }
+    });
 };
 
 
@@ -17,7 +23,7 @@ exports.unJoinTrickToUser = async ({userId, trickId}) => {
     if (!user) throw new Error('User was not found!');
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Tricks were not found!');
-    return await trick.grade.destroy();
+    await user.removeTrick(trick);
 };
 
 exports.markTrick = async ({is_done, userId, trickId}) => {
@@ -25,13 +31,13 @@ exports.markTrick = async ({is_done, userId, trickId}) => {
     if (!user) throw new Error('User was not found!');
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Trick was not found!');
-    const updateCount = await sequelize.query('UPDATE grade SET mark=:is_done WHERE "UserId" = :userId AND "TrickId" = :trickId;',
-        {
-            replacements: {done: is_done, userId, trickId},
-            type: sequelize.QueryTypes.UPDATE
-        });
-    if (updateCount === 0)
-        throw new Error('Update query error');
+    await user.addTrick(trick, {through: {is_done}});
+    return await UserTrick.findOne({
+        where: {
+            UserId: user.dataValues.id,
+            TrickId: trick.dataValues.id
+        }
+    });
 };
 
 exports.getUserListByTrickId = async (trickId) => {
@@ -49,11 +55,8 @@ exports.getTrickListByUserId = async (userId) => {
 exports.getUserLevel = async (userId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
-    const tricks = await user.getTricks();
-    let exp = 0;
-    for (let trick of tricks) {
-        exp += trick.complexity;
-    }
+    const tricks = await exports.getTrickListByUserId(userId);
+    let exp = tricks.reduce((sum, trick) => sum += trick.complexity, 0);
     return {
         level: Math.floor(exp / 1000),
         nextExp: Math.ceil(exp / 1000) * 1000,

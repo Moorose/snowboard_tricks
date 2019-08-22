@@ -1,6 +1,8 @@
 "use strict";
+
 const trickService = require("../service/trickService");
 const resultSetter = require("../middlewares/resultSetter");
+const userTrickService = require("../service/userTrickService");
 
 exports.getTrickList = async ctx => {
     const trickList = await trickService.getTrickList();
@@ -42,4 +44,9 @@ exports.deleteTrickById = async ctx => {
 exports.deleteAllTricks = async ctx => {
     await trickService.destroyAllTricks();
     await resultSetter.setResult(ctx, null, 204);
+};
+
+exports.getUserListByTrickId = async ctx => {
+    const userList = await userTrickService.getUserListByTrickId(ctx.params.trickId);
+    await resultSetter.setResult(ctx, userList);
 };

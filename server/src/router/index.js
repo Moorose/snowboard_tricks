@@ -1,26 +1,25 @@
 const Router = require('koa-router');
 const trickController = require("../controller/trickController");
 const userController = require("../controller/userController");
-const gradeController = require("../controller/gradeController");
 const router = new Router();
 
 router
     .get('/user', userController.getUserList)
     .get('/user/:id', userController.getUserById)
+    .get('/user/:userId/level', userController.getUserLevelById)
+    .get('/user/:userId/tricks', userController.getTrickListByUserId)
     .post('/user', userController.createUser)
+    .post('/user/:userId/tricks/:trickId', userController.joinTrickToUser)
     .patch('/user', userController.updateUser)
+    .patch('/user/:userId/tricks/:trickId/mark', userController.markTrick)
     .delete('/user/:id', userController.deleteUserById)
+    .delete('/user/:userId/tricks/:trickId', userController.unJoinTrickToUser)
     .get('/tricks', trickController.getTrickList)
     .get('/tricks/:id', trickController.getTrickById)
-    .patch('/tricks/:id', trickController.updateTrick)
+    .get('/tricks/users/:userId', trickController.getUserListByTrickId)
     .post('/tricks', trickController.createTrick)
+    .patch('/tricks/:id', trickController.updateTrick)
     .delete('/tricks', trickController.deleteAllTricks)
-    .delete('/tricks/:id', trickController.deleteTrickById)
-    .get('/grade/user/:userId/level', gradeController.getUserLevelById)
-    .get('/grade/user/:userId/tricks', gradeController.getTrickListByUserId)
-    .get('/grade/tricks/:userId', gradeController.getUserListByTrickId)
-    .post('/grade/user/:userId/tricks/:trickId', gradeController.joinTrickToUser)
-    .patch('/grade/user/:userId/tricks/:trickId', gradeController.markTrick)
-    .delete('/grade/user/:userId/tricks/:trickId', gradeController.unJoinTrickToUser);
+    .delete('/tricks/:id', trickController.deleteTrickById);
 
 module.exports = router;

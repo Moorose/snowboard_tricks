@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
     return sequelize.define(
-        "Grade",
+        "UserTrick",
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -10,14 +10,14 @@ module.exports = sequelize => {
                 primaryKey: true,
                 allowNull: false
             },
-            mark: {
+            is_done: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false
             }
         },
         {
             timestamps: false,
-            tableName: "grade",
+            tableName: "usertrick",
         },
     );
 };

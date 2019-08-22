@@ -7,25 +7,27 @@ const {makeMockModels} = require('sequelize-test-helpers');
 const expect = chai.expect;
 chai.use(sinonChai);
 
-describe('gradeService', () => {
+describe('userTrickService', () => {
     const User = {findByPk: stub(), addTrick: stub()};
     const Trick = {findByPk: stub()};
-    const sequelize = {query: stub(), QueryTypes: {UPDATE: 'type'}};
-    const mockModels = makeMockModels({User, Trick, sequelize});
+    const UserTrick = {findOne: stub()};
+    const mockModels = makeMockModels({User, Trick, UserTrick});
 
-    const gradeService = proxyquire('../../src/service/gradeService', {
+    const userTrickService = proxyquire('../../src/service/userTrickService', {
         '../../src/models': mockModels
     });
 
-    const userMock = {id: 1, addTrick: stub(), getTricks: stub()};
-    const trickMock = {id: 1, complexity: 500, grade: {destroy: stub()}, getUsers: stub()};
+    const userMock = {dataValues: {id: 1}, addTrick: stub(), getTricks: stub(), removeTrick: stub()};
+    const trickMock = {dataValues: {id: 1}, complexity: 500, grade: {destroy: stub()}, getUsers: stub()};
+    const userTrickMock = {id: 1, UserId: 1, TrickId: 1, is_done: false};
     let result;
 
     context('joinTrickToUser', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             Trick.findByPk.resolves(trickMock);
-            await gradeService.joinTrickToUser({userId: 1, trickId: 1});
+            UserTrick.findOne.resolves(userTrickMock);
+            result = await userTrickService.joinTrickToUser({userId: 1, trickId: 1});
         });
 
         after(resetHistory);
@@ -42,7 +44,21 @@ describe('gradeService', () => {
 
         it('should called userMock.addTrick', () => {
             expect(userMock.addTrick).to.have.been.calledOnce;
-            expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {mark: false}});
+            expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {is_done: false}});
+        });
+
+        it('should called UserTrick.findOne', () => {
+            expect(UserTrick.findOne).to.have.been.calledOnce;
+            expect(UserTrick.findOne).to.have.been.calledWith({
+                where: {
+                    UserId: userMock.dataValues.id,
+                    TrickId: trickMock.dataValues.id
+                }
+            });
+        });
+
+        it('should return userTrickMock', () => {
+            expect(result).to.deep.equal(userTrickMock);
         });
     });
 
@@ -50,7 +66,7 @@ describe('gradeService', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock]);
-            await gradeService.unJoinTrickToUser({userId: 1, trickId: 1});
+            result = await userTrickService.unJoinTrickToUser({userId: 1, trickId: 1});
         });
 
         after(resetHistory);
@@ -65,8 +81,9 @@ describe('gradeService', () => {
             expect(userMock.getTricks).to.have.been.calledWith({where: {id: 1}});
         });
 
-        it('should called trick.grade.destroy', () => {
-            expect(trickMock.grade.destroy).to.have.been.calledOnce;
+        it('should called userMock.removeTrick', () => {
+            expect(userMock.removeTrick).to.have.been.calledOnce;
+            expect(userMock.removeTrick).to.have.been.calledWith(trickMock);
         });
     });
 
@@ -74,12 +91,13 @@ describe('gradeService', () => {
         beforeEach(() => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock]);
-            sequelize.query.resolves(1);
         });
 
         describe('mark as done', () => {
             before(async () => {
-                await gradeService.markTrick({is_done: true, userId: 1, trickId: 1});
+                userTrickMock.is_done = true;
+                UserTrick.findOne.resolves(userTrickMock);
+                result = await userTrickService.markTrick({is_done: true, userId: 1, trickId: 1});
             });
 
             after(resetHistory);
@@ -93,15 +111,31 @@ describe('gradeService', () => {
                 expect(userMock.getTricks).to.have.been.calledWith({where: {id: 1}});
             });
 
-            it('should called sequelize.query', () => {
-                expect(sequelize.query).to.have.been.calledOnce;
+            it('should called userMock.addTrick', () => {
+                expect(userMock.addTrick).to.have.been.calledOnce;
+                expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {is_done: true}});
             });
 
+            it('should called UserTrick.findOne', () => {
+                expect(UserTrick.findOne).to.have.been.calledOnce;
+                expect(UserTrick.findOne).to.have.been.calledWith({
+                    where: {
+                        UserId: userMock.dataValues.id,
+                        TrickId: trickMock.dataValues.id
+                    }
+                });
+            });
+
+            it('should return userTrickMock', () => {
+                expect(result).to.deep.equal(userTrickMock);
+            });
         });
 
         describe('mark as undone', () => {
             before(async () => {
-                await gradeService.markTrick({is_done: true, userId: 1, trickId: 1});
+                userTrickMock.is_done = false;
+                UserTrick.findOne.resolves(userTrickMock);
+                result = await userTrickService.markTrick({is_done: false, userId: 1, trickId: 1});
             });
 
             after(resetHistory);
@@ -116,8 +150,23 @@ describe('gradeService', () => {
                 expect(userMock.getTricks).to.have.been.calledWith({where: {id: 1}});
             });
 
-            it('should called sequelize.query', () => {
-                expect(sequelize.query).to.have.been.calledOnce;
+            it('should called userMock.addTrick', () => {
+                expect(userMock.addTrick).to.have.been.calledOnce;
+                expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {is_done: false}});
+            });
+
+            it('should called UserTrick.findOne', () => {
+                expect(UserTrick.findOne).to.have.been.calledOnce;
+                expect(UserTrick.findOne).to.have.been.calledWith({
+                    where: {
+                        UserId: userMock.dataValues.id,
+                        TrickId: trickMock.dataValues.id
+                    }
+                });
+            });
+
+            it('should return userTrickMock', () => {
+                expect(result).to.deep.equal(userTrickMock);
             });
         });
     });
@@ -126,7 +175,7 @@ describe('gradeService', () => {
         before(async () => {
             Trick.findByPk.resolves(trickMock);
             trickMock.getUsers.resolves([userMock]);
-            result = await gradeService.getUserListByTrickId(1);
+            result = await userTrickService.getUserListByTrickId(1);
         });
 
         after(resetHistory);
@@ -151,7 +200,7 @@ describe('gradeService', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock]);
-            result = await gradeService.getTrickListByUserId(1);
+            result = await userTrickService.getTrickListByUserId(1);
         });
 
         after(resetHistory);
@@ -176,13 +225,13 @@ describe('gradeService', () => {
         before(async () => {
             User.findByPk.resolves(userMock);
             userMock.getTricks.resolves([trickMock, trickMock, trickMock]);
-            result = await gradeService.getUserLevel(1);
+            result = await userTrickService.getUserLevel(1);
         });
 
         after(resetHistory);
 
         it('should called User.findByPk', () => {
-            expect(User.findByPk).to.have.been.calledOnce;
+            expect(User.findByPk).to.have.been.calledTwice;
             expect(User.findByPk).to.have.been.calledWith(1);
         });
 
@@ -193,6 +242,7 @@ describe('gradeService', () => {
         it('should return object with level and exp ', () => {
             expect(result).to.include({
                 level: 1,
+                nextExp: 2000,
                 exp: 1500
             });
         });

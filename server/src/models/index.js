@@ -12,14 +12,14 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
 
 const Trick = require("./Trick")(sequelize);
 const User = require("./User")(sequelize);
-const Grade = require("./Grade")(sequelize);
+const UserTrick = require("./UserTrick")(sequelize);
 
-User.belongsToMany(Trick, {through: Grade});
-Trick.belongsToMany(User, {through: Grade});
+User.belongsToMany(Trick, {through: UserTrick});
+Trick.belongsToMany(User, {through: UserTrick});
 
 module.exports = {
   sequelize,
   Trick,
   User,
-  Grade
+    UserTrick
 };
