@@ -1,36 +1,44 @@
-<div>
-  <form (ngSubmit)="save()" [formGroup]="trickForm" class="addForm">
-
-    <div class="stripes-block">
-      <div class="line"></div>
-    </div>
-
-    <h3>About trick</h3>
-
-    <div class="addForm__inputGroup">
-      <label>Trick name:
-        <input formControlName="name" type="text"/></label>
-
-      <div *ngIf="error" class="addForm__alert"><p>{{error}}</p></div>
-
-      <label>Complexity:
-        <input formControlName="complexity" type="number"/></label>
-      <label>Description:
-        <input formControlName="description" type="text"/></label>
-    </div>
-
-    <div class="addForm__submitBlock">
-      <div class="addForm__submitButton">
-        <button [disabled]="!trickForm.valid" type="submit">Submit</button>
+<section class="section">
+  <div class="container">
+    <div>
+      <div class="back">
+        <button class="btn" (click)="goBack()">Return back</button>
       </div>
+      <form (ngSubmit)="save()" [formGroup]="trickForm" class="addForm">
+        <h3>Create new trick</h3>
+
+        <div class="form-group">
+          <label for="trickNameInput">Trick name:</label>
+          <input id="trickNameInput" formControlName="name" type="text" class="form-control"/>
+        </div>
+          <div *ngIf="error" class="addForm__alert"><p>{{error}}</p></div>
+
+        <div class="form-group">
+          <label for="complexlyInput">Complexity:</label>
+          <input id="complexlyInput" formControlName="complexity" type="number" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <label for="descriptionInput">Description:</label>
+          <input id="descriptionInput" formControlName="description" type="text" class="form-control"/>
+        </div>
+
+
+        <div class="addForm__submitBlock">
+          <div class="addForm__submitButton">
+            <button [disabled]="!trickForm.valid" type="submit" class="btn">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Test form
+      <div>
+        <p>Form Value: {{ trickForm.value | json }}</p>
+        <p>Form Status: {{ trickForm.status }}</p>
+      </div>
+      -->
     </div>
-
-  </form>
-
-  <div>
-    <p>Form Value: {{ trickForm.value | json }}</p>
-    <p>Form Status: {{ trickForm.status }}</p>
   </div>
-
-  <button (click)="goBack()">go back</button>
-</div>
+</section>

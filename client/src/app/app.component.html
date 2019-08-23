@@ -1,8 +1,37 @@
-<h1>Snowboard Tricks</h1>
-<nav>
-  <a routerLink="/home" routerLinkActive="active">HOME</a>
-  <a routerLink="/admin">ADMIN PAGE</a>
-  <a routerLink="/user">USER PAGE</a>
-  <a routerLink="/tricks">TRICKS</a>
-</nav>
-<router-outlet></router-outlet>
+<header class="header">
+  <div class="container">
+    <div class="header__inner d-flex justify-content-between">
+      <div><h1>Snowboard Tricks</h1></div>
+      <nav>
+        <a class="" routerLink="/home" routerLinkActive="active">HOME</a>
+        <a class="" routerLink="/admin">ADMIN PAGE</a>
+        <a class="" routerLink="/user">USER PAGE</a>
+        <a class="" routerLink="/tricks">TRICKS</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner d-flex justify-content-between">
+      <div class="footer__copyright">
+        Copyright © 2019 Thumbtack
+      </div>
+
+      <div class="footer__social">
+        <a href="#" class="social__link">Facebook</a>
+        <a href="#" class="social__link">VK</a>
+      </div>
+
+      <div class="footer__links">
+        <a href="#" class="footer__link">Safety Disclaimer</a> <!-- Страницы с юр инфой возможно -->
+        <a href="#" class="footer__link">Privacy Policy</a>
+      </div>
+    </div> <!-- /.footer__inner -->
+  </div> <!-- /.container -->
+</footer>
+
+

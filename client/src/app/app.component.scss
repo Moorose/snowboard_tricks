@@ -1,25 +1,38 @@
 nav {
+  color: white;
   a {
+    font-size: 1.25rem;
+    color: inherit;
+    display: inline-block;
     padding: 5px 10px;
-    text-decoration: none;
     margin-right: 10px;
     margin-top: 10px;
-    display: inline-block;
-    background-color: #eee;
-    border-radius: 4px;
+  }
+  a:visited, a:link {
+    color: inherit;
+  }
+  a:hover, a.active {
+    color: gray;
   }
 }
 
-nav a:visited, a:link {
-  color: #607D8B;
+.content {
+  padding-bottom: 90px;
 }
 
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
-}
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 
-nav a.active {
-  color: #039be5;
+  font-size: 0.9rem;
+  padding: 1.8em 0;
+  background: #333;
+  color: white;
+  a {
+    color: inherit;
+    margin-right: 12px;
+  }
 }
-
