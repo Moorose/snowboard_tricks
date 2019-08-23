@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage('Client npm install') {
+        stage('Client npm install'){
             steps {
                 dir("client") {
                     sh 'npm install'
