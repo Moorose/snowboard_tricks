@@ -1,0 +1,17 @@
+<div *ngIf="trick" class="trick">
+  <div class="trick__name">
+    <p>{{ trick.name }}</p>
+  </div>
+  <div class="trick__complexity">
+    <p>Complexity:{{ trick.complexity }}</p>
+  </div>
+  <div class="trick__description">
+    <p>{{ trick.description }}</p>
+  </div>
+  <button (click)="addToFavorite()" *ngIf="!favorite" class="trick__btnAdd">Add to favorite</button>
+  <button (click)="removeFromFavorite()" *ngIf="favorite" class="trick__btnRemove">Remove from favorite</button>
+  <button (click)="markAsDone(true)" *ngIf="favorite && !mark" class="trick__btnAdd">Mark as done</button>
+  <button (click)="markAsDone(false)" *ngIf="favorite && mark" class="trick__btnRemove">Unmark</button>
+  <button (click)="goBack()" class="trick__btnBack">go back</button>
+</div>
+
