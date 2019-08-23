@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TrickService } from 'src/app/service/trick.service';
+import { TrickService } from 'src/app/trick/trick.service';
 
 import { JSONInterceptor } from '../interceptor/JSONInterceptor';
 

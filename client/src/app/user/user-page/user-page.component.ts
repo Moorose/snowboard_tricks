@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../../service/user.service';
 import { ILevel } from '../model/level';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-page',

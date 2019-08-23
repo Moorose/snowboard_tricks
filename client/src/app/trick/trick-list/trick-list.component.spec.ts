@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
-import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
 import { TrickModule } from '../trick.module';
+import { TrickService } from '../trick.service';
 
 import { TrickListComponent } from './trick-list.component';
 

@@ -1,8 +1,7 @@
 import { of } from 'rxjs';
 
-import { ILevel } from '../user/model/level';
-import { IUser } from '../user/model/user';
-
+import { ILevel } from './model/level';
+import { IUser } from './model/user';
 import { UserService } from './user.service';
 
 describe('UserService', () => {

@@ -4,8 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { ILevel } from '../user/model/level';
-import { IUser } from '../user/model/user';
+
+import { ILevel } from './model/level';
+import { IUser } from './model/user';
 
 @Injectable({
   providedIn: 'root',

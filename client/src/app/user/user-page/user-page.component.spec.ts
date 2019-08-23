@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { UserService } from '../../service/user.service';
 import { ILevel } from '../model/level';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 import { UserPageComponent } from './user-page.component';
 

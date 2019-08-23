@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 
-import { ITrick } from '../trick/models/trick';
-
+import { ITrick } from './models/trick';
 import { TrickService } from './trick.service';
 
 describe('TrickService', () => {
@@ -40,7 +39,7 @@ describe('TrickService', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/tricks/1');
     });
   });
-  
+
   describe('addTrick()', () => {
     let trickMock: ITrick;
     let trickMockWithoutId: any;
