@@ -66,7 +66,8 @@ export class TrickPageComponent implements OnInit {
 
   private checkTrickJoinToUser(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.userTrickService.getTrickListByUserId().subscribe(tricks => tricks.map(trick => {
+    this.userTrickService.getTrickListByUserId().subscribe(tricks => tricks.map(
+      trick => {
         if (trick.id === id) {
           this.favorite = true;
           if (trick.UserTrick) {
