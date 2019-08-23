@@ -18,8 +18,8 @@ describe('userTrickService', () => {
     });
 
     const userMock = {dataValues: {id: 1}, addTrick: stub(), getTricks: stub(), removeTrick: stub()};
-    const trickMock = {dataValues: {id: 1}, complexity: 500, getUsers: stub()};
     const userTrickMock = {id: 1, UserId: 1, TrickId: 1, is_done: false};
+    const trickMock = {dataValues: {id: 1}, complexity: 500, getUsers: stub(), UserTrick: userTrickMock};
     let result;
 
     context('joinTrickToUser', () => {
@@ -96,7 +96,6 @@ describe('userTrickService', () => {
         describe('mark as done', () => {
             before(async () => {
                 userTrickMock.is_done = true;
-                UserTrick.findOne.resolves(userTrickMock);
                 result = await userTrickService.markTrick({is_done: true, userId: 1, trickId: 1});
             });
 
@@ -116,16 +115,6 @@ describe('userTrickService', () => {
                 expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {is_done: true}});
             });
 
-            it('should called UserTrick.findOne', () => {
-                expect(UserTrick.findOne).to.have.been.calledOnce;
-                expect(UserTrick.findOne).to.have.been.calledWith({
-                    where: {
-                        UserId: userMock.dataValues.id,
-                        TrickId: trickMock.dataValues.id
-                    }
-                });
-            });
-
             it('should return userTrickMock', () => {
                 expect(result).to.deep.equal(userTrickMock);
             });
@@ -134,7 +123,6 @@ describe('userTrickService', () => {
         describe('mark as undone', () => {
             before(async () => {
                 userTrickMock.is_done = false;
-                UserTrick.findOne.resolves(userTrickMock);
                 result = await userTrickService.markTrick({is_done: false, userId: 1, trickId: 1});
             });
 
@@ -153,16 +141,6 @@ describe('userTrickService', () => {
             it('should called userMock.addTrick', () => {
                 expect(userMock.addTrick).to.have.been.calledOnce;
                 expect(userMock.addTrick).to.have.been.calledWith(trickMock, {through: {is_done: false}});
-            });
-
-            it('should called UserTrick.findOne', () => {
-                expect(UserTrick.findOne).to.have.been.calledOnce;
-                expect(UserTrick.findOne).to.have.been.calledWith({
-                    where: {
-                        UserId: userMock.dataValues.id,
-                        TrickId: trickMock.dataValues.id
-                    }
-                });
             });
 
             it('should return userTrickMock', () => {

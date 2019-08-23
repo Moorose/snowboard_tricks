@@ -32,12 +32,7 @@ exports.markTrick = async ({is_done, userId, trickId}) => {
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Trick was not found!');
     await user.addTrick(trick, {through: {is_done}});
-    return await UserTrick.findOne({
-        where: {
-            UserId: user.dataValues.id,
-            TrickId: trick.dataValues.id
-        }
-    });
+    return trick.UserTrick;
 };
 
 exports.getUserListByTrickId = async (trickId) => {
