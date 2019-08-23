@@ -9,8 +9,8 @@ import { TrickPageComponent } from './trick-page/trick-page.component';
 const routes: Routes = [
   { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'list', component: TrickListComponent },
-  { path: 'list/:id', component: TrickPageComponent },
   { path: 'list/addTrick', component: AddTrickComponent },
+  { path: 'list/:id', component: TrickPageComponent },
   { path: 'list/editTrick/:id', component: EditTrickComponent },
 ];
 

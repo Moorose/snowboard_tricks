@@ -1,6 +1,6 @@
 <div class="auth">
 
-  <div class="auth__status">
+  <div *ngIf="user" class="auth__status">
     <span>Current user is {{ user.nickname }}</span>
   </div>
 

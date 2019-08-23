@@ -52,7 +52,7 @@ export class UserService {
     if (!id) {
       id = environment.currentUser;
     }
-    return this.http.get<IRank>(`${this.url}/grade/user/${id}/level`).pipe(
+    return this.http.get<IRank>(`${this.url}/user/${id}/level`).pipe(
       catchError(UserService.handleError)
     );
   }

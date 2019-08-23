@@ -40,7 +40,7 @@ describe('TrickService', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/tricks/1');
     });
   });
-  
+
   describe('addTrick()', () => {
     let trickMock: ITrick;
     let trickMockWithoutId: any;

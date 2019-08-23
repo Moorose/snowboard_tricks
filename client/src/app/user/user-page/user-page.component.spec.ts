@@ -46,7 +46,7 @@ describe('UserPageComponent', () => {
 
     it('should call getUserLevel', () => {
       expect(userServiceSpy.getUserLevel.calls.count()).toBe(1);
-      expect(component.level).toBe(levelMock);
+      expect(component.rank).toBe(levelMock);
     });
 
   });

@@ -72,7 +72,7 @@ describe('UserService', () => {
       it('should return level by id', () => {
         userService.getUserLevel(1).subscribe(result => expect(result).toEqual(levelMock));
         expect(httpClientSpy.get.calls.count()).toBe(1);
-        expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/grade/user/1/level');
+        expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/user/1/level');
       });
     });
 
@@ -80,7 +80,7 @@ describe('UserService', () => {
       it('should return level without id', () => {
         userService.getUserLevel().subscribe(result => expect(result).toEqual(levelMock));
         expect(httpClientSpy.get.calls.count()).toBe(1);
-        expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/grade/user/1/level');
+        expect(httpClientSpy.get).toHaveBeenCalledWith('http://localhost:3000/user/1/level');
       });
     });
   });

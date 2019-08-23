@@ -6,11 +6,12 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ITrick } from '../trick/models/trick';
 import { IUser } from '../user/model/user';
+import { IUserTrick } from '../user/model/userTrick';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GradeService {
+export class UserTrickService {
 
   url = environment.apiUrl;
 
@@ -38,41 +39,41 @@ export class GradeService {
     if (!id) {
       id = environment.currentUser;
     }
-    return this.http.get<ITrick[]>(`${this.url}/grade/user/${id}/tricks`).pipe(
-      catchError(GradeService.handleError)
+    return this.http.get<ITrick[]>(`${this.url}/user/${id}/tricks`).pipe(
+      catchError(UserTrickService.handleError)
     );
   }
 
   getUserListByTrickId(id: number): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.url}/grade/tricks/${id}`).pipe(
-      catchError(GradeService.handleError)
+    return this.http.get<IUser[]>(`${this.url}/tricks/users/${id}`).pipe(
+      catchError(UserTrickService.handleError)
     );
   }
 
-  joinTrickToUser(trickId: number, userId?: number): Observable<void> {
+  joinTrickToUser(trickId: number, userId?: number): Observable<IUserTrick> {
     if (!userId) {
       userId = environment.currentUser;
     }
-    return this.http.post<void>(`${this.url}/grade/user/${userId}/tricks/${trickId}`, { responseType: 'text' }).pipe(
-      catchError(GradeService.handleError)
+    return this.http.post<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}`, {}).pipe(
+      catchError(UserTrickService.handleError)
     );
   }
 
-  unJoinTrickToUser(trickId: () => void, userId?: number): Observable<void> {
+  unJoinTrickToUser(trickId: number, userId?: number): Observable<void> {
     if (!userId) {
       userId = environment.currentUser;
     }
-    return this.http.delete<void>(`${this.url}/grade/user/${userId}/tricks/${trickId}`).pipe(
-      catchError(GradeService.handleError)
+    return this.http.delete<void>(`${this.url}/user/${userId}/tricks/${trickId}`).pipe(
+      catchError(UserTrickService.handleError)
     );
   }
 
-  markTrick(done: boolean, trickId: number, userId?: number): Observable<void> {
+  markTrick(done: boolean, trickId: number, userId?: number): Observable<IUserTrick> {
     if (!userId) {
       userId = environment.currentUser;
     }
-    return this.http.patch<void>(`${this.url}/grade/user/${userId}/tricks/:trickId${trickId}`, { is_done: done }).pipe(
-      catchError(GradeService.handleError)
+    return this.http.patch<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}/mark`, { is_done: done }).pipe(
+      catchError(UserTrickService.handleError)
     );
   }
 

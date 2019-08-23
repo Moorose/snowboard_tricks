@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { GradeService } from '../../service/grade.service';
 import { TrickService } from '../../service/trick.service';
+import { UserTrickService } from '../../service/user-trick.service';
 import { ITrick } from '../models/trick';
 
 @Component({
@@ -19,7 +19,7 @@ export class TrickPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private gradeService: GradeService,
+    private userTrickService: UserTrickService,
     private location: Location,
     private trickService: TrickService,
   ) {
@@ -34,28 +34,46 @@ export class TrickPageComponent implements OnInit {
   }
 
   markAsDone(done: boolean) {
-    this.gradeService.markTrick(done, this.trick.id).subscribe(
-      () => this.mark = done
+    this.userTrickService.markTrick(done, this.trick.id).subscribe(
+      (userTrick) => this.mark = userTrick.is_done
     );
   }
 
   addToFavorite() {
-    this.gradeService.joinTrickToUser(this.trick.id).subscribe(
-      () => this.favorite = true
-    );
-  }
-
-  removeFromFavorite() {
-    this.gradeService.unJoinTrickToUser(
-      () => {
-        this.favorite = false;
-        this.mark = false;
+    this.userTrickService.joinTrickToUser(this.trick.id).subscribe(
+      (userTrick) => {
+        this.mark = userTrick.is_done;
+        this.favorite = true;
       }
     );
   }
 
+  removeFromFavorite() {
+    this.userTrickService.unJoinTrickToUser(this.trick.id).subscribe(
+      () => {
+        this.favorite = false;
+        this.mark = false;
+      });
+  }
+
   private getTrick(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.trickService.getTrickById(id).subscribe(trick => this.trick = trick);
+    this.trickService.getTrickById(id).subscribe(trick => {
+      this.trick = trick;
+      this.checkTrickJoinToUser();
+    });
+  }
+
+  private checkTrickJoinToUser(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.userTrickService.getTrickListByUserId().subscribe(tricks => tricks.map(trick => {
+        if (trick.id === id) {
+          this.favorite = true;
+          if (trick.UserTrick) {
+            this.mark = trick.UserTrick.is_done;
+          }
+        }
+      })
+    );
   }
 }
