@@ -10,10 +10,10 @@ module.exports = sequelize => {
                 primaryKey: true,
                 allowNull: false
             },
-            body: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
+            in_thread: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false
+            }
         },
         {
             timestamps: true,
