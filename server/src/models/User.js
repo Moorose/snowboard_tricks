@@ -4,6 +4,12 @@ module.exports = sequelize => {
     return sequelize.define(
         "User",
         {
+            id: {
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+                allowNull: false
+            },
             nickname: {
                 type: Sequelize.STRING,
                 allowNull: false,
