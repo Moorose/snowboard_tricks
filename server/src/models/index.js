@@ -21,15 +21,19 @@ const Message = require("./Message")(sequelize);
 User.belongsToMany(Trick, {through: UserTrick});
 Trick.belongsToMany(User, {through: UserTrick});
 
-User.hasMany(ThreadParticipant);
+User.belongsToMany(Thread, {through: ThreadParticipant});
+Thread.belongsToMany(User, {through: ThreadParticipant});
+
 User.hasMany(Message);
 Thread.hasMany(Message);
-Thread.hasMany(ThreadParticipant);
 UserTrick.hasMany(Thread);
 
 module.exports = {
     sequelize,
     Trick,
     User,
-    UserTrick
+    UserTrick,
+    ThreadParticipant,
+    Thread,
+    Message
 };

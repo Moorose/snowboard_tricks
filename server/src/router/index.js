@@ -22,4 +22,14 @@ router
     .delete('/tricks', trickController.deleteAllTricks)
     .delete('/tricks/:id', trickController.deleteTrickById);
 
+// exports post('', openThread
+// exports get('', getThreadInvite
+// exports patch('', acceptInvite
+// exports get('', getThreadById
+// exports delete('', leaveThread
+// exports get('', getThreadByUser
+// exports delete('', closeThread
+// exports post('', addMessage
+// exports get('', getMessages
+
 module.exports = router;
