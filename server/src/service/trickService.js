@@ -1,52 +1,52 @@
-"use strict";
+const { Trick } = require('../models');
 
-const {Trick} = require("../models");
+exports.createTrick = ({
+  name, complexity, description,
+}) => (
+  Trick.create({
+    name,
+    complexity,
+    description,
+  })
+);
 
-exports.createTrick = async ({name, complexity, description}) => {
-    return await Trick.create({
-        name,
-        complexity,
-        description,
-    });
-};
+exports.updateTrick = ({
+  id, name, complexity, description,
+}) => (
+  Trick.update(
+    {
+      name,
+      complexity,
+      description,
+    },
+    {
+      where: {
+        id,
+      },
+    },
+  )
+);
 
-exports.updateTrick = async ({id, name, complexity, description}) => {
-    return await Trick.update(
-        {
-            name,
-            complexity,
-            description,
-        },
-        {
-            where: {
-                id: id,
-            },
-        },
-    );
-};
+exports.getTrickById = (id) => (
+  Trick.findOne({
+    where: {
+      id,
+    },
+  })
+);
 
-exports.getTrickById = async id => {
-    return await Trick.findOne({
-        where: {
-            id: id,
-        },
-    });
-};
+exports.getTrickList = () => Trick.findAll();
 
-exports.getTrickList = async () => {
-    return await Trick.findAll();
-};
+exports.destroyTrickById = (id) => (
+  Trick.destroy({
+    where: {
+      id,
+    },
+  })
+);
 
-exports.destroyTrickById = async id => {
-    return await Trick.destroy({
-        where: {
-            id: id,
-        },
-    });
-};
-
-exports.destroyAllTricks = async () => {
-    return await Trick.destroy({
-        where: {},
-    });
-};
+exports.destroyAllTricks = () => (
+  Trick.destroy({
+    where: {},
+  })
+);

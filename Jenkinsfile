@@ -68,6 +68,13 @@ pipeline {
                         }
                     }
                 }
+                stage('Linter check') {
+                    steps {
+                        dir("client") {
+                            sh 'npm run lint'
+                        }
+                    }
+                }
                 stage('Unit tests') {
                     steps {
                         dir("server") {
