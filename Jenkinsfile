@@ -50,7 +50,7 @@ pipeline {
         }
         stage('Server npm install') {
             steps {
-                dir("server"){
+                dir("server") {
                     sh 'npm install'
                 }
             }
