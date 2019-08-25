@@ -70,7 +70,7 @@ pipeline {
                 }
                 stage('Linter check') {
                     steps {
-                        dir("client") {
+                        dir("server") {
                             sh 'npm run lint'
                         }
                     }
