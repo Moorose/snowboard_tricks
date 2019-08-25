@@ -9,7 +9,7 @@ pipeline {
         stage('Set pepline name') {
             steps {
                 script {
-                    currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.GIT_BRANCH}](${env.GIT_COMMIT.take(7)})"
+                    currentBuild.displayName = "#${env.BUILD_NUMBER.toInteger()}[${env.ghprbSourceBranch}](${env.ghprbActualCommit.take(7)})"
                 }
             }
         }
