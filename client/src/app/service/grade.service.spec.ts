@@ -48,5 +48,4 @@ describe('GradeService', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith(`${url}/grade/tricks/1`);
     });
   });
-
 });

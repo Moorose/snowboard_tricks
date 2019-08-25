@@ -10,11 +10,6 @@
       true,
       2
     ],
-    "indent": [
-      true,
-      "spaces",
-      2
-    ],
     "array-type": [
       true,
       "array-simple"
@@ -108,6 +103,7 @@
     "no-outputs-metadata-property": true,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
+    "ter-padded-blocks": [true, "never"],
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true
   },

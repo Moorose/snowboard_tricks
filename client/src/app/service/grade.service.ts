@@ -11,7 +11,6 @@ import { IUser } from '../user/model/user';
   providedIn: 'root',
 })
 export class GradeService {
-
   url = environment.apiUrl;
 
   constructor(private http: HttpClient) {
@@ -75,5 +74,4 @@ export class GradeService {
       catchError(GradeService.handleError)
     );
   }
-
 }

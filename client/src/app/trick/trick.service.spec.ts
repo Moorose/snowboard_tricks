@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 
-import { ITrick } from '../trick/models/trick';
-
+import { ITrick } from './models/trick';
 import { TrickService } from './trick.service';
 
 describe('TrickService', () => {
@@ -58,7 +57,6 @@ describe('TrickService', () => {
       expect(httpClientSpy.post.calls.count()).toBe(1);
       expect(httpClientSpy.post).toHaveBeenCalledWith('http://localhost:3000/tricks', trickMockWithoutId);
     });
-
   });
   describe('updateTrick()', () => {
     let trickMock: ITrick;
@@ -75,7 +73,5 @@ describe('TrickService', () => {
       expect(httpClientSpy.patch.calls.count()).toBe(1);
       expect(httpClientSpy.patch).toHaveBeenCalledWith('http://localhost:3000/tricks/1', trickMock);
     });
-
   });
-
 });

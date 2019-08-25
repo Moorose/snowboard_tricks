@@ -5,8 +5,8 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
-import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 import { TrickComponent } from '../trick/trick.component';
 
 import { EditTrickComponent } from './edit-trick.component';
@@ -68,7 +68,6 @@ describe('EditTrickComponent', () => {
       expect(component.trickForm.controls.description.value).toBe(trickMock.description);
       expect(component.trickForm.valid).toBeTruthy();
     });
-
   });
 
   describe('save()', () => {
@@ -116,12 +115,10 @@ describe('EditTrickComponent', () => {
   });
 
   describe('goBack()', () => {
-
     it('when call, it should call back()', () => {
       component.goBack();
       expect(locationSpy.back.calls.count()).toBe(1);
     });
-
   });
 
   describe('form validation', () => {
@@ -135,7 +132,5 @@ describe('EditTrickComponent', () => {
       component.trickForm.controls.description.setValue('Very hard');
       expect(component.trickForm.valid).toBeTruthy();
     });
-
   });
-
 });

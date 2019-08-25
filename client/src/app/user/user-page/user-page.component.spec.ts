@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { UserService } from '../../service/user.service';
 import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 import { UserPageComponent } from './user-page.component';
 
@@ -48,7 +48,5 @@ describe('UserPageComponent', () => {
       expect(userServiceSpy.getUserLevel.calls.count()).toBe(1);
       expect(component.rank).toBe(levelMock);
     });
-
   });
-
 });

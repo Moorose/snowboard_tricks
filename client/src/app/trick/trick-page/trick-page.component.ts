@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { TrickService } from '../../service/trick.service';
 import { UserTrickService } from '../../service/user-trick.service';
 import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-trick-page',
@@ -12,7 +12,6 @@ import { ITrick } from '../models/trick';
   styleUrls: ['./trick-page.component.scss']
 })
 export class TrickPageComponent implements OnInit {
-
   trick: ITrick = null;
   favorite = false;
   mark = false;

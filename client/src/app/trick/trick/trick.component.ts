@@ -8,7 +8,6 @@ import { ITrick } from '../models/trick';
   styleUrls: ['./trick.component.scss']
 })
 export class TrickComponent implements OnInit {
-
   @Input() trick: ITrick;
 
   constructor() {
@@ -16,5 +15,4 @@ export class TrickComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

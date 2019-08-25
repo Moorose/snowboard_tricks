@@ -1,11 +1,11 @@
 import { of } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { UserTrickService } from '../service/user-trick.service';
 import { ITrick } from '../trick/models/trick';
-import { IUser } from '../user/model/user';
-import { IUserTrick } from '../user/model/userTrick';
 
-import { UserTrickService } from './user-trick.service';
+import { IUser } from './model/user';
+import { IUserTrick } from './model/userTrick';
 
 describe('UserTrickService', () => {
   let userTrickService: UserTrickService;

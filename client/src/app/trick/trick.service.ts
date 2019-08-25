@@ -4,13 +4,12 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ITrick } from '../trick/models/trick';
+import { ITrick } from './models/trick';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrickService {
-
   url = environment.apiUrl;
 
   constructor(private http: HttpClient) {
@@ -56,5 +55,4 @@ export class TrickService {
       catchError(TrickService.handleError)
     );
   }
-
 }

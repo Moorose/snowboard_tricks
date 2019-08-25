@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
-import { TrickService } from '../../service/trick.service';
 import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 
 @Component({
   selector: 'app-trick-list',

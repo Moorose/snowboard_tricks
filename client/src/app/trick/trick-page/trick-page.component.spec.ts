@@ -5,10 +5,10 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
-import { TrickService } from '../../service/trick.service';
 import { UserTrickService } from '../../service/user-trick.service';
 import { IUserTrick } from '../../user/model/userTrick';
 import { ITrick } from '../models/trick';
+import { TrickService } from '../trick.service';
 import { TrickComponent } from '../trick/trick.component';
 
 import { TrickPageComponent } from './trick-page.component';
@@ -175,5 +175,4 @@ describe('TrickPageComponent', () => {
       expect(component.mark).toEqual(false);
     });
   });
-
 });

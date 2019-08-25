@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
-import { UserService } from '../../service/user.service';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,7 +10,6 @@ import { IUser } from '../model/user';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-
   user: IUser;
 
   constructor(private userService: UserService) {

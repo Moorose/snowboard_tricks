@@ -4,14 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { IRank } from '../user/model/rank';
-import { IUser } from '../user/model/user';
+
+import { IRank } from './model/rank';
+import { IUser } from './model/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-
   url = environment.apiUrl;
 
   constructor(private http: HttpClient) {

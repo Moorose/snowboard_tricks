@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../../service/user.service';
 import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-page',
@@ -10,7 +10,6 @@ import { IUser } from '../model/user';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
-
   user: IUser;
   rank: IRank;
 
@@ -22,16 +21,15 @@ export class UserPageComponent implements OnInit {
     this.getLevel();
   }
 
-  getUser(): void {
+  private getUser(): void {
     this.userService.getUserById().subscribe(
       user => this.user = user
     );
   }
 
-  getLevel(): void {
+  private getLevel(): void {
     this.userService.getUserLevel().subscribe(
       rank => this.rank = rank
     );
   }
-
 }

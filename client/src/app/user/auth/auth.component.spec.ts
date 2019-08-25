@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { UserService } from '../../service/user.service';
 import { IUser } from '../model/user';
+import { UserService } from '../user.service';
 
 import { AuthComponent } from './auth.component';
 

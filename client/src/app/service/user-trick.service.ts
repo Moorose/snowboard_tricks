@@ -12,7 +12,6 @@ import { IUserTrick } from '../user/model/userTrick';
   providedIn: 'root',
 })
 export class UserTrickService {
-
   url = environment.apiUrl;
 
   constructor(private http: HttpClient) {
@@ -76,5 +75,4 @@ export class UserTrickService {
       catchError(UserTrickService.handleError)
     );
   }
-
 }
