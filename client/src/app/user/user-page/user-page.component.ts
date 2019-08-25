@@ -22,13 +22,13 @@ export class UserPageComponent implements OnInit {
     this.getLevel();
   }
 
-  getUser(): void {
+  private getUser(): void {
     this.userService.getUserById().subscribe(
       user => this.user = user
     );
   }
 
-  getLevel(): void {
+  private getLevel(): void {
     this.userService.getUserLevel().subscribe(
       level => this.level = level
     );
