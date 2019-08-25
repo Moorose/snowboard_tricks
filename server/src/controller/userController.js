@@ -1,5 +1,6 @@
 "use strict";
 const userService = require("../service/userService");
+const userTrickService = require("../service/userTrickService");
 const resultSetter = require("../middlewares/resultSetter");
 
 exports.getUserById = async ctx => {
@@ -37,4 +38,30 @@ exports.deleteUserById = async ctx => {
     } else {
         ctx.throw(404);
     }
+};
+
+exports.joinTrickToUser = async ctx => {
+    const userTrickRow = await userTrickService.joinTrickToUser({...ctx.params});
+    await resultSetter.setResult(ctx, userTrickRow, 201);
+};
+
+exports.unJoinTrickToUser = async ctx => {
+    await userTrickService.unJoinTrickToUser({...ctx.params});
+    await resultSetter.setResult(ctx, null, 204);
+};
+
+exports.markTrick = async ctx => {
+    const userTrickRow = await userTrickService.markTrick({...ctx.request.body, ...ctx.params});
+    await resultSetter.setResult(ctx, userTrickRow, 201);
+};
+
+
+exports.getTrickListByUserId = async ctx => {
+    const trickList = await userTrickService.getTrickListByUserId(ctx.params.userId);
+    await resultSetter.setResult(ctx, trickList);
+};
+
+exports.getUserLevelById = async ctx => {
+    const level = await userTrickService.getUserLevel(ctx.params.userId);
+    await resultSetter.setResult(ctx, level);
 };

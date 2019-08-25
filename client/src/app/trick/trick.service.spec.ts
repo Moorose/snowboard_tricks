@@ -21,7 +21,6 @@ describe('TrickService', () => {
       trickService.getTrickList().subscribe(result => expect(result).toEqual(trickMock));
       expect(httpClientSpy.get.calls.count()).toBe(1);
     });
-
   });
 
   describe('getTrickById()', () => {

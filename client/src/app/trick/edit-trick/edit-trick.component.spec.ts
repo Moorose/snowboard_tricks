@@ -45,7 +45,6 @@ describe('EditTrickComponent', () => {
   });
 
   describe('onInit()', () => {
-
     beforeEach(() => {
       trickMock = {
         id: 1,
