@@ -1,48 +1,48 @@
-"use strict";
+const { User } = require('../models');
 
-const {User} = require("../models");
+exports.createUser = ({
+  nickname, fullName, email, description,
+}) => (
+  User.create({
+    fullName,
+    nickname,
+    email,
+    description,
+  })
+);
 
-exports.createUser = async ({nickname, fullName, email, description}) => {
-    return await User.create({
-        fullName,
-        nickname,
-        email,
-        description,
-    });
-};
+exports.updateUser = ({
+  id, nickname, fullName, email, description,
+}) => (
+  User.update(
+    {
+      fullName,
+      nickname,
+      email,
+      description,
+    },
+    {
+      where: {
+        id,
+      },
+    },
+  )
+);
 
-exports.updateUser = async ({id, nickname, fullName, email, description}) => {
-    return await User.update(
-        {
-            fullName,
-            nickname,
-            email,
-            description,
-        },
-        {
-            where: {
-                id: id,
-            },
-        },
-    );
-};
+exports.getUserById = (id) => (
+  User.findOne({
+    where: {
+      id,
+    },
+  })
+);
 
-exports.getUserById = async id => {
-    return await User.findOne({
-        where: {
-            id: id,
-        },
-    });
-};
+exports.getUserList = () => User.findAll();
 
-exports.getUserList = async () => {
-    return await User.findAll();
-};
-
-exports.destroyUserById = async id => {
-    return await User.destroy({
-        where: {
-            id: id,
-        },
-    });
-};
+exports.destroyUserById = (id) => (
+  User.destroy({
+    where: {
+      id,
+    },
+  })
+);

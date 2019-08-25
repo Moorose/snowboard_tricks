@@ -1,1 +1,26 @@
 <p>user-page works!</p>
+<div>
+
+  <div class="profile">
+    <div class="profile__photo">
+      <img alt="Avatar" src="https://avatars0.githubusercontent.com/u/42906431?s=460&v=4">
+    </div>
+    <div class="profile__level">
+      <p><span>Level </span>{{ level.level }}</p>
+      <p><span>exp: </span>{{ level.exp }}/{{ level.nextExp}}</p>
+    </div>
+    <div class="profile__nickname">
+      <p><span>Nickname </span>{{ user.nickname }}</p>
+    </div>
+    <div class="profile__fullName">
+      <p>{{ user.fullName}}</p>
+    </div>
+    <div class="profile__email">
+      <p><span>email: </span>{{ user.email }}</p>
+    </div>
+    <div class="profile__aboutMe">
+      <p><span>About me</span><br>{{ user.description }}</p>
+    </div>
+  </div>
+
+</div>
