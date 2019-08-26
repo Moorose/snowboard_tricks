@@ -1,5 +1,7 @@
 import { of } from 'rxjs';
 
+import { HandleErrorService } from '../handle-error.service';
+
 import { ITrick } from './models/trick';
 import { TrickService } from './trick.service';
 
@@ -14,7 +16,7 @@ describe('TrickService', () => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
       trickMock = [{ id: 1, name: 'BackFlip', complexity: 100, description: 'description' }];
       httpClientSpy.get.and.returnValue(of(trickMock));
-      trickService = new TrickService(httpClientSpy);
+      trickService = new TrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should return object list', () => {
@@ -30,7 +32,7 @@ describe('TrickService', () => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
       trickMock = { id: 1, name: 'BackFlip', complexity: 100, description: 'description' };
       httpClientSpy.get.and.returnValue(of(trickMock));
-      trickService = new TrickService(httpClientSpy);
+      trickService = new TrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should return object by id', () => {
@@ -49,7 +51,7 @@ describe('TrickService', () => {
       trickMock = { id: 1, name: 'BackFlip', complexity: 100, description: 'description' };
       trickMockWithoutId = { name: 'BackFlip', complexity: 100, description: 'description' };
       httpClientSpy.post.and.returnValue(of(trickMock));
-      trickService = new TrickService(httpClientSpy);
+      trickService = new TrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should return object with id', () => {
@@ -65,7 +67,7 @@ describe('TrickService', () => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['patch']);
       trickMock = { name: 'BackFlip', complexity: 100, description: 'description' };
       httpClientSpy.patch.and.returnValue(of());
-      trickService = new TrickService(httpClientSpy);
+      trickService = new TrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should called with mock', () => {

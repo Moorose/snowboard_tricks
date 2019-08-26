@@ -12,7 +12,7 @@ import { ITrick } from './models/trick';
   providedIn: 'root',
 })
 export class TrickService {
-  url = environment.apiUrl;
+  url: string = environment.apiUrl;
 
   constructor(private http: HttpClient,
               private handleErrorService: HandleErrorService) {

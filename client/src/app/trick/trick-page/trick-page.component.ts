@@ -13,8 +13,8 @@ import { UserTrickService } from '../user-trick.service';
 })
 export class TrickPageComponent implements OnInit {
   trick: ITrick = null;
-  favorite = false;
-  mark = false;
+  favorite: boolean = false;
+  mark: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class TrickPageComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getTrick();
   }
 
@@ -32,13 +32,13 @@ export class TrickPageComponent implements OnInit {
     this.location.back();
   }
 
-  markAsDone(done: boolean) {
+  markAsDone(done: boolean): void {
     this.userTrickService.markTrick(done, this.trick.id).subscribe(
       (userTrick) => this.mark = userTrick.is_done
     );
   }
 
-  addToFavorite() {
+  addToFavorite(): void {
     this.userTrickService.joinTrickToUser(this.trick.id).subscribe(
       (userTrick) => {
         this.mark = userTrick.is_done;
@@ -47,7 +47,7 @@ export class TrickPageComponent implements OnInit {
     );
   }
 
-  removeFromFavorite() {
+  removeFromFavorite(): void {
     this.userTrickService.unJoinTrickToUser(this.trick.id).subscribe(
       () => {
         this.favorite = false;

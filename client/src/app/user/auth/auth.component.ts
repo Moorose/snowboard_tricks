@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
-import { IUser } from '../model/user';
+import { EUser, IUser } from '../model/user';
 import { UserService } from '../user.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AuthComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getUser();
   }
 
@@ -25,13 +25,13 @@ export class AuthComponent implements OnInit {
     );
   }
 
-  signAsUser() {
-    environment.currentUser = 1;
+  signAsUser(): void {
+    environment.currentUser = EUser.USER;
     this.getUser();
   }
 
-  signAsAdmin() {
-    environment.currentUser = 2;
+  signAsAdmin(): void {
+    environment.currentUser = EUser.ADMIN;
     this.getUser();
   }
 }

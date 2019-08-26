@@ -1,6 +1,7 @@
 import { of } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { HandleErrorService } from '../handle-error.service';
 import { IUser } from '../user/model/user';
 import { IUserTrick } from '../user/model/userTrick';
 
@@ -20,7 +21,7 @@ describe('UserTrickService', () => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
       trickMockMas = [{ id: 1, name: 'testTrick', complexity: 500, description: 'description' }];
       httpClientSpy.get.and.returnValue(of(trickMockMas));
-      userTrickService = new UserTrickService(httpClientSpy);
+      userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should return trick list', () => {
@@ -41,7 +42,7 @@ describe('UserTrickService', () => {
         description: 'description'
       }];
       httpClientSpy.get.and.returnValue(of(userMockMas));
-      userTrickService = new UserTrickService(httpClientSpy);
+      userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
     });
 
     it('should return user list', () => {
@@ -62,7 +63,7 @@ describe('UserTrickService', () => {
           UserId: 1
         };
         httpClientSpy.post.and.returnValue(of(userTrickMock));
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return IUserTrick object', () => {
@@ -82,7 +83,7 @@ describe('UserTrickService', () => {
           UserId: 2
         };
         httpClientSpy.post.and.returnValue(of(userTrickMock));
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return IUserTrick object', () => {
@@ -98,7 +99,7 @@ describe('UserTrickService', () => {
       beforeAll(() => {
         httpClientSpy = jasmine.createSpyObj('HttpClient', ['delete']);
         httpClientSpy.delete.and.returnValue(of());
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return undefined', () => {
@@ -112,7 +113,7 @@ describe('UserTrickService', () => {
       beforeAll(() => {
         httpClientSpy = jasmine.createSpyObj('HttpClient', ['delete']);
         httpClientSpy.delete.and.returnValue(of());
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return undefined', () => {
@@ -134,7 +135,7 @@ describe('UserTrickService', () => {
           UserId: 1
         };
         httpClientSpy.patch.and.returnValue(of(userTrickMock));
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return undefined', () => {
@@ -154,7 +155,7 @@ describe('UserTrickService', () => {
           UserId: 1
         };
         httpClientSpy.patch.and.returnValue(of(userTrickMock));
-        userTrickService = new UserTrickService(httpClientSpy);
+        userTrickService = new UserTrickService(httpClientSpy, new HandleErrorService());
       });
 
       it('should return IUserTrick object', () => {
