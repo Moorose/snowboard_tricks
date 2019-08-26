@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { IUser } from '../model/user';
+import { EUser, IUser } from '../model/user';
 import { UserService } from '../user.service';
 
 import { AuthComponent } from './auth.component';
@@ -26,7 +26,7 @@ describe('AuthComponent', () => {
   });
 
   afterAll(() => {
-    environment.currentUser = 1;
+    environment.currentUser = EUser.USER;
   });
 
   it('should have a Component', () => {
@@ -35,7 +35,13 @@ describe('AuthComponent', () => {
 
   describe('onInit()', () => {
     beforeEach(() => {
-      userMock = { id: 1, nickname: 'mcTest', fullName: 'Test', email: 'test@mail.com', description: 'description' };
+      userMock = {
+        id: EUser.USER,
+        nickname: 'mcTest',
+        fullName: 'Test',
+        email: 'test@mail.com',
+        description: 'description'
+      };
       userServiceSpy.getUserById.and.returnValue(of(userMock));
       fixture.detectChanges();
     });
@@ -48,7 +54,13 @@ describe('AuthComponent', () => {
 
   describe('signAsUser()', () => {
     beforeEach(() => {
-      userMock = { id: 1, nickname: 'mcTest', fullName: 'Test', email: 'test@mail.com', description: 'description' };
+      userMock = {
+        id: EUser.USER,
+        nickname: 'mcTest',
+        fullName: 'Test',
+        email: 'test@mail.com',
+        description: 'description'
+      };
       userServiceSpy.getUserById.and.returnValue(of(userMock));
       fixture.detectChanges();
       component.signAsUser();
@@ -59,14 +71,20 @@ describe('AuthComponent', () => {
       expect(component.user).toBe(userMock);
     });
 
-    it('currentUser should equal 1', () => {
-      expect(environment.currentUser).toBe(1);
+    it('currentUser should equal user', () => {
+      expect(environment.currentUser).toBe(EUser.USER);
     });
   });
 
   describe('signAsAdmin()', () => {
     beforeEach(() => {
-      userMock = { id: 1, nickname: 'mcTest', fullName: 'Test', email: 'test@mail.com', description: 'description' };
+      userMock = {
+        id: EUser.ADMIN,
+        nickname: 'mcTest',
+        fullName: 'Test',
+        email: 'test@mail.com',
+        description: 'description'
+      };
       userServiceSpy.getUserById.and.returnValue(of(userMock));
       fixture.detectChanges();
       component.signAsAdmin();
@@ -77,9 +95,9 @@ describe('AuthComponent', () => {
       expect(component.user).toBe(userMock);
     });
 
-    it('currentUser should equal 2', () => {
+    it('currentUser should be Admin', () => {
       expect(environment.currentUser).toBe(2);
-      environment.currentUser = 1;
+      environment.currentUser = EUser.ADMIN;
     });
   });
 });
