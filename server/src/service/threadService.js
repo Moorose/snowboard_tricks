@@ -8,15 +8,16 @@ const {
 } = require("../models");
 const Op = sequelize.Op;
 
-exports.openThread = async (userTrickId) => {
+exports.openThread = async ({userId, userTrickId}) => {
     const userTrick = await UserTrick.findByPk(userTrickId);
     if (!userTrick) throw new Error('User and trick is unrelated!');
-    const [createStatus] = await userTrick.createThread({user_id: userTrick.userId, trick_id: userTrick.trickId});
+    const [createStatus] = await userTrick.createThread({user_id: userId, trick_id: userTrick.trickId});
     if (createStatus === 0) throw new Error('Error creating thread');
-    const thread = await exports.getThreadByUserId(userTrick.dataValues.UserId);
+    const thread = await exports.getThreadByUserId(userId);
     const inviteUser = UserTrick.findAll({
         where: {
             TrickId: userTrick.dataValues.TrickId,
+            is_done: true,
             id: {
                 [Op.ne]: userTrick.dataValues.id
             }
@@ -44,11 +45,12 @@ exports.getThreadInvite = async (userId) => {
     return threadInvite.filter(invite => !invite.in_thread)
 };
 
-exports.acceptInvite = async (inviteId) => {
+exports.acceptInvite = async ({userId, inviteId}) => {
     const [updateCount] = await ThreadParticipant.update(
         {in_thread: true}, {
             where: {
-                id: inviteId
+                id: inviteId,
+                UserId: userId
             }
         });
     if (updateCount === 0) throw new Error('Error accept invite to thread');
@@ -58,7 +60,7 @@ exports.getThreadById = async (threadId) => {
     return await Thread.findByPk(threadId);
 };
 
-exports.leaveThread = async (userId, threadId) => {
+exports.leaveThread = async ({userId, threadId}) => {
     const thread = await Thread.findByPk(threadId);
     if (!thread) throw new Error('Thread was not found!');
     const user = await User.findByPk(userId);
@@ -69,17 +71,18 @@ exports.leaveThread = async (userId, threadId) => {
 exports.getThreadByUserId = async (userId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
-    const thread = await user.getThreads({
-        where: {
-            in_thread: true // ???
-        }
-    });
-    const threadRaw = await user.getThreads({
-        where: {
-            in_thread: true // ???
-        },
-        raw: true
-    });
+    const thread = await user.getThreads();
+    // const thread = await user.getThreads({
+    //     where: {
+    //         in_thread: true // ???
+    //     }
+    // });
+    // const threadRaw = await user.getThreads({
+    //     where: {
+    //         in_thread: true // ???
+    //     },
+    //     raw: true
+    // });
     console.log(thread);
     console.log('   raw data:\n',threadRaw);
     return thread;
@@ -93,7 +96,7 @@ exports.closeThread = async (threadId) => {
     });
 };
 
-exports.addMessage = async ({threadId, userId, body}) => {
+exports.addMessage = async ({userId, threadId, body}) => {
     const thread = await Thread.findByPk(threadId);
     if (!thread) throw new Error('Thread was not found!');
     const user = await User.findByPk(userId);

@@ -55,7 +55,6 @@ exports.markTrick = async ctx => {
     await resultSetter.setResult(ctx, userTrickRow, 201);
 };
 
-
 exports.getTrickListByUserId = async ctx => {
     const trickList = await userTrickService.getTrickListByUserId(ctx.params.userId);
     await resultSetter.setResult(ctx, trickList);

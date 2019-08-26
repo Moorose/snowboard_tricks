@@ -18,13 +18,12 @@ exports.joinTrickToUser = async ({userId, trickId}) => {
     });
 };
 
-
 exports.unJoinTrickToUser = async ({userId, trickId}) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User was not found!');
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Tricks were not found!');
-    const [removeCount] = await user.removeTrick(trick);
+    const removeCount = await user.removeTrick(trick);
     if (removeCount === 0) throw new Error('Remove error!');
 };
 
@@ -34,6 +33,7 @@ exports.markTrick = async ({is_done, userId, trickId}) => {
     const [trick] = await user.getTricks({where: {id: trickId}});
     if (!trick) throw new Error('Trick was not found!');
     await user.addTrick(trick, {through: {is_done}});
+    trick.UserTrick.is_done = is_done;
     return trick.UserTrick;
 };
 
