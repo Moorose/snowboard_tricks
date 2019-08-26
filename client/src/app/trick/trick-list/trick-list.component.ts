@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { environment } from '../../../environments/environment';
+import { UserService } from '../../user/user.service';
 import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 
@@ -14,13 +14,12 @@ export class TrickListComponent implements OnInit {
   tricks: ITrick[] = [];
   error: string;
 
-  constructor(private trickService: TrickService) {
+  constructor(private trickService: TrickService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    if (environment.currentUser === 2) {
-      this.adminRole = true;
-    }
+    this.adminRole = this.userService.isAdmin();
     this.getTricks();
   }
 

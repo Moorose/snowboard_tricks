@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class HandleErrorService {
-  static handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {

@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'list', component: TrickListComponent },
   { path: 'list/:id', component: TrickPageComponent },
   { path: 'list/addTrick', component: AddTrickComponent },
-  { path: 'list/:id', component: TrickPageComponent },
   { path: 'list/editTrick/:id', component: EditTrickComponent },
 ];
 

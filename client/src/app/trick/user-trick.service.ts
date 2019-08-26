@@ -16,7 +16,8 @@ import { ITrick } from './models/trick';
 export class UserTrickService {
   url = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private handleErrorService: HandleErrorService) {
   }
 
   getTrickListByUserId(id?: number): Observable<ITrick[]> {
@@ -24,13 +25,13 @@ export class UserTrickService {
       id = environment.currentUser;
     }
     return this.http.get<ITrick[]>(`${this.url}/user/${id}/tricks`).pipe(
-      catchError(HandleErrorService.handleError)
+      catchError(this.handleErrorService.handleError)
     );
   }
 
   getUserListByTrickId(id: number): Observable<IUser[]> {
     return this.http.get<IUser[]>(`${this.url}/tricks/users/${id}`).pipe(
-      catchError(HandleErrorService.handleError)
+      catchError(this.handleErrorService.handleError)
     );
   }
 
@@ -39,7 +40,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.post<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}`, {}).pipe(
-      catchError(HandleErrorService.handleError)
+      catchError(this.handleErrorService.handleError)
     );
   }
 
@@ -48,7 +49,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.delete<void>(`${this.url}/user/${userId}/tricks/${trickId}`).pipe(
-      catchError(HandleErrorService.handleError)
+      catchError(this.handleErrorService.handleError)
     );
   }
 
@@ -57,7 +58,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.patch<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}/mark`, { is_done: done }).pipe(
-      catchError(HandleErrorService.handleError)
+      catchError(this.handleErrorService.handleError)
     );
   }
 }
