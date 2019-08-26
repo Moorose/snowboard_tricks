@@ -27,7 +27,7 @@ module.exports = sequelize => {
                 }
             ],
             timestamps: true,
-            tableName: "thread_participant",
+            tableName: "thread",
         },
     );
 };
