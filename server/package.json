@@ -7,7 +7,7 @@
         "start": "node app.js",
         "dev": "nodemon app.js",
         "test": "mocha --exit --recursive './test/**/*.test.js'",
-        "lint": "./node_modules/eslint/bin/eslint.js ."
+        "lint": "eslint ."
     },
     "dependencies": {
         "bunyan": "^1.8.12",

@@ -20,7 +20,9 @@ const runServer = async () => {
       await sequelize.sync();
     }
   } catch (error) {
+    /* eslint-disable */
     console.log('Database is not allowed!');
+    /* eslint-enable */
   }
 
   app.use(koaBody());
@@ -31,7 +33,9 @@ const runServer = async () => {
   app.use(router.allowedMethods());
 
   return app.listen(PORT, () => {
+    /* eslint-disable */
     console.log(`Server start http://localhost:${PORT}`);
+    /* eslint-enable */
   });
 };
 
