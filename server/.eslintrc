@@ -1,11 +1,18 @@
 {
   "extends": "airbnb-base",
-  "env": {"mocha": true},
+  "env": {
+    "mocha": true
+  },
   "plugins": [
     "chai-friendly"
   ],
   "rules": {
-    "max-len": ["error", {"code": 120}],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
     "no-unused-expressions": "off",
     "chai-friendly/no-unused-expressions": "error",
     "camelcase": "off"

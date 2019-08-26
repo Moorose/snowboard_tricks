@@ -68,7 +68,6 @@ describe('EditTrickComponent', () => {
       expect(component.trickForm.controls.description.value).toBe(trickMock.description);
       expect(component.trickForm.valid).toBeTruthy();
     });
-
   });
 
   describe('save()', () => {
@@ -116,12 +115,10 @@ describe('EditTrickComponent', () => {
   });
 
   describe('goBack()', () => {
-
     it('when call, it should call back()', () => {
       component.goBack();
       expect(locationSpy.back.calls.count()).toBe(1);
     });
-
   });
 
   describe('form validation', () => {
@@ -135,7 +132,5 @@ describe('EditTrickComponent', () => {
       component.trickForm.controls.description.setValue('Very hard');
       expect(component.trickForm.valid).toBeTruthy();
     });
-
   });
-
 });

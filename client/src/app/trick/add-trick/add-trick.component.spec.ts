@@ -39,12 +39,10 @@ describe('AddTrickComponent', () => {
   });
 
   describe('goBack()', () => {
-
     it('when call, it should call back()', () => {
       component.goBack();
       expect(locationSpy.back.calls.count()).toBe(1);
     });
-
   });
 
   describe('save()', () => {
@@ -65,7 +63,6 @@ describe('AddTrickComponent', () => {
     });
 
     describe('when adding tricks request is successful', () => {
-
       it('should call back()', () => {
         component.save();
         expect(locationSpy.back.calls.count()).toBe(1);
@@ -73,7 +70,6 @@ describe('AddTrickComponent', () => {
     });
 
     describe('when adding tricks request is failed', () => {
-
       beforeEach(() => {
         trickServiceSpy.addTrick.and.returnValue(throwError(new Error('error')));
       });
@@ -96,7 +92,5 @@ describe('AddTrickComponent', () => {
       component.trickForm.controls.description.setValue('Very hard');
       expect(component.trickForm.valid).toBeTruthy();
     });
-
   });
-
 });

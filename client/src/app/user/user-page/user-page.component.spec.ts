@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { ILevel } from '../model/level';
+import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
 import { UserService } from '../user.service';
 
@@ -12,7 +12,7 @@ describe('UserPageComponent', () => {
   let fixture: ComponentFixture<UserPageComponent>;
   let userServiceSpy: any;
   let userMock: IUser;
-  let levelMock: ILevel;
+  let levelMock: IRank;
 
   beforeEach(() => {
     userServiceSpy = jasmine.createSpyObj('UserService', ['getUserById', 'getUserLevel']);
@@ -46,9 +46,7 @@ describe('UserPageComponent', () => {
 
     it('should call getUserLevel', () => {
       expect(userServiceSpy.getUserLevel.calls.count()).toBe(1);
-      expect(component.level).toBe(levelMock);
+      expect(component.rank).toBe(levelMock);
     });
-
   });
-
 });

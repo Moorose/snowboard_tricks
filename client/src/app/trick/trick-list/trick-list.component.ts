@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { UserService } from '../../user/user.service';
 import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 
@@ -9,17 +10,20 @@ import { TrickService } from '../trick.service';
   styleUrls: ['./trick-list.component.scss'],
 })
 export class TrickListComponent implements OnInit {
-  @Input() adminRole = true;
+  adminRole: boolean = false;
   tricks: ITrick[] = [];
   error: string;
 
-  constructor(private trickService: TrickService) {}
+  constructor(private trickService: TrickService,
+              private userService: UserService) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.adminRole = this.userService.isAdmin();
     this.getTricks();
   }
 
-  getTricks() {
+  getTricks(): void {
     this.trickService.getTrickList().subscribe(
       tricks => this.tricks = tricks,
       error => this.error = error

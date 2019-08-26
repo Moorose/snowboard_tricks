@@ -9,6 +9,7 @@ import { JSONInterceptor } from '../interceptor/JSONInterceptor';
 import { AddTrickComponent } from './add-trick/add-trick.component';
 import { EditTrickComponent } from './edit-trick/edit-trick.component';
 import { TrickListComponent } from './trick-list/trick-list.component';
+import { TrickPageComponent } from './trick-page/trick-page.component';
 import { TrickRoutingModule } from './trick-routing.module';
 import { TrickComponent } from './trick/trick.component';
 
@@ -18,6 +19,7 @@ import { TrickComponent } from './trick/trick.component';
     TrickComponent,
     AddTrickComponent,
     EditTrickComponent,
+    TrickPageComponent,
   ],
   providers: [
     TrickService,

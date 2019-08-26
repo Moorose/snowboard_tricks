@@ -1,4 +1,3 @@
-
 const trickService = require('../service/trickService');
 const resultSetter = require('../middlewares/resultSetter');
 const userTrickService = require('../service/userTrickService');
