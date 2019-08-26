@@ -1,8 +1,9 @@
-'use strict';
+
 const Router = require('koa-router');
-const trickController = require("../controller/trickController");
-const userController = require("../controller/userController");
-const threadController = require("../controller/threadController");
+const trickController = require('../controller/trickController');
+const userController = require('../controller/userController');
+const threadController = require('../controller/threadController');
+
 const router = new Router();
 
 router
