@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TrickService } from '../trick.service';
 
@@ -12,7 +12,7 @@ import { TrickService } from '../trick.service';
 export class AddTrickComponent {
   error: string;
 
-  trickForm = this.fb.group({
+  trickForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     complexity: [
       '',
@@ -27,7 +27,7 @@ export class AddTrickComponent {
     private location: Location,
   ) {}
 
-  save() {
+  save(): void {
     this.trickService.addTrick(this.trickForm.value).subscribe(
       () => {
         this.location.back();

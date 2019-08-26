@@ -13,13 +13,13 @@ import { EUser, IUser } from './model/user';
   providedIn: 'root',
 })
 export class UserService {
-  url = environment.apiUrl;
+  url: string = environment.apiUrl;
 
   constructor(private http: HttpClient,
               private handleErrorService: HandleErrorService) {
   }
 
-  isAdmin() {
+  isAdmin(): boolean {
     return environment.currentUser === EUser.ADMIN;
   }
 

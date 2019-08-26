@@ -10,7 +10,7 @@ import { TrickService } from '../trick.service';
   styleUrls: ['./trick-list.component.scss'],
 })
 export class TrickListComponent implements OnInit {
-  adminRole = false;
+  adminRole: boolean = false;
   tricks: ITrick[] = [];
   error: string;
 
@@ -18,12 +18,12 @@ export class TrickListComponent implements OnInit {
               private userService: UserService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.adminRole = this.userService.isAdmin();
     this.getTricks();
   }
 
-  getTricks() {
+  getTricks(): void {
     this.trickService.getTrickList().subscribe(
       tricks => this.tricks = tricks,
       error => this.error = error

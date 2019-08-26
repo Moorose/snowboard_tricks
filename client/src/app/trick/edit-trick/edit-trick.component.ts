@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { ITrick } from '../models/trick';
@@ -14,7 +14,7 @@ import { TrickService } from '../trick.service';
 export class EditTrickComponent implements OnInit {
   error: string;
 
-  trickForm = this.fb.group({
+  trickForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     complexity: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
     description: [''],
@@ -30,11 +30,11 @@ export class EditTrickComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getTrick();
   }
 
-  save() {
+  save(): void {
     const trick = { ...this.trickForm.value };
     this.trickService.updateTrick(this.trick.id, trick).subscribe(
       () => {

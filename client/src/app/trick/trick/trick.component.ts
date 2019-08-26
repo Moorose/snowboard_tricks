@@ -7,12 +7,9 @@ import { ITrick } from '../models/trick';
   templateUrl: './trick.component.html',
   styleUrls: ['./trick.component.scss']
 })
-export class TrickComponent implements OnInit {
+export class TrickComponent {
   @Input() trick: ITrick;
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }
