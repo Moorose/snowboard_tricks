@@ -44,5 +44,6 @@ exports.addMessage = async ctx => {
 
 exports.getMessages = async ctx => {
   const messageList = await threadService.getMessages(ctx.params.threadId);
+  console.log(messageList);
   await resultSetter.setResult(ctx, messageList);
 };
