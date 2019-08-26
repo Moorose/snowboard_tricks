@@ -22,5 +22,5 @@ module.exports = {
   sequelize,
   Trick,
   User,
-    UserTrick,
+  UserTrick,
 };
