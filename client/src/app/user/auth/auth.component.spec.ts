@@ -96,7 +96,7 @@ describe('AuthComponent', () => {
     });
 
     it('currentUser should be Admin', () => {
-      expect(environment.currentUser).toBe(2);
+      expect(environment.currentUser).toBe(EUser.ADMIN);
     });
   });
 });
