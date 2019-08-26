@@ -6,7 +6,6 @@ const {
   Thread,
   Message
 } = require('../models');
-const Op = require('sequelize').Op;
 
 exports.openThread = async ({ userId, userTrickId }) => {
   const userTrick = await UserTrick.findByPk(userTrickId);
@@ -25,7 +24,7 @@ exports.openThread = async ({ userId, userTrickId }) => {
     raw: true
   });
   inviteUser.map(invite => addParticipant(invite.UserId, thread));
-  // return
+  return thread;
 };
 
 async function addParticipant(userId, thread) {
@@ -37,15 +36,15 @@ async function addParticipant(userId, thread) {
 
 exports.getThreadInvite = async (userId) => {
   const threadInvite = await ThreadParticipant.findAll(
-    //   {
-    //     where: {
-    //         UserId: userId
-    //     },
-    //     raw: true
-    // }
+    {
+      where: {
+        UserId: userId,
+        in_thread: false
+      },
+      raw: true
+    }
   );
-  console.log(threadInvite);
-  return threadInvite.filter(invite => !invite.in_thread);
+  return threadInvite;
 };
 
 exports.acceptInvite = async ({ userId, inviteId }) => {
@@ -72,27 +71,30 @@ exports.leaveThread = async ({ userId, threadId }) => {
 };
 
 exports.getThreadsByUserId = async (userId) => {
-  const user = await User.findByPk(userId);
-  if (!user) throw new Error('User was not found!');
-  // const thread = await Thread.findAll({
-  //   // where: {
-  //   //   user_id: userId
-  //   // },
-  //   include: [
-  //     {
-  //       model: ThreadParticipant,
-  //     }
-  //   ],
-  //   raw: true
-  // });
-  const thread = await ThreadParticipant.findAll({
-    include: [
-      {
-        model: Thread,
-      }
-    ]
+  const partList = await ThreadParticipant.findAll({
+    where: {
+      UserId: userId,
+      in_thread: true,
+    },
+    raw: true
   });
-  return thread;
+  const threadList = [];
+  for (let i = 0; i < partList.length; i++) {
+    let thread = await Thread.findOne({
+      where: {
+        id: partList[i].ThreadId
+      }
+    });
+    threadList.push(thread);
+  }
+  threadList.push(...await Thread.findAll({
+      where: {
+        user_id: userId
+      },
+      raw: true
+    })
+  );
+  return threadList;
 };
 
 exports.closeThread = async (threadId) => {
@@ -104,20 +106,21 @@ exports.closeThread = async (threadId) => {
 };
 
 exports.addMessage = async ({ userId, threadId, body }) => {
-  const thread = await Thread.findByPk(threadId);
-  if (!thread) throw new Error('Thread was not found!');
-  const user = await User.findByPk(userId);
-  if (!user) throw new Error('User was not found!');
-  const [createCount] = await Message.create({
+  const createCount = await Message.create({
     body,
-    threadId: threadId,
+    ThreadId: threadId,
     UserId: userId
   });
-  if (createCount) throw new Error('Error adding message to thread!');
+  if (!createCount) throw new Error('Error adding message to thread!');
 };
 
 exports.getMessages = async (threadId) => {
-  const thread = await Thread.findByPk(threadId);
-  if (!thread) throw new Error('Thread was not found!');
-  return await thread.getMessages();
+  return await Message.findAll(
+    {
+      where: {
+        ThreadId: threadId
+      },
+      raw: true
+    }
+  );
 };
