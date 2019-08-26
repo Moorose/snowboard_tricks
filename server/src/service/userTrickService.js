@@ -1,6 +1,4 @@
 "use strict";
-
-
 const {User, Trick, UserTrick} = require("../models");
 
 exports.joinTrickToUser = async ({userId, trickId}) => {

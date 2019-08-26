@@ -1,4 +1,5 @@
-const bunyan = require('bunyan');
+'use strict';
+const bunyan = require("bunyan");
 
 const logger = bunyan.createLogger({
   name: 'app',

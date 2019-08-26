@@ -26,7 +26,7 @@ module.exports = sequelize => {
                     fields: ['user_id', 'trick_id']
                 }
             ],
-            timestamps: true,
+          timestamps: false,
             tableName: "thread",
         },
     );
