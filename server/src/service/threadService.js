@@ -81,15 +81,14 @@ exports.getThreadsByUserId = async (userId) => {
     },
     raw: true,
   });
-  const threadList = [];
-  for (let i = 0; i < partList.length; i + 1) {
-    const thread = await Thread.findOne({
+  const threadList = await Promise.all(
+    partList.map((part) => Thread.findOne({
       where: {
-        id: partList[i].ThreadId,
+        id: part.ThreadId,
       },
-    });
-    threadList.push(thread);
-  }
+    })),
+  );
+
   threadList.push(...await Thread.findAll({
     where: {
       user_id: userId,
