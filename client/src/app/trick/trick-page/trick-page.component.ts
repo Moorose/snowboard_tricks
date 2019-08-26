@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { UserTrickService } from '../../service/user-trick.service';
 import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
+import { UserTrickService } from '../user-trick.service';
 
 @Component({
   selector: 'app-trick-page',

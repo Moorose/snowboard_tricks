@@ -1,12 +1,14 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { ITrick } from '../trick/models/trick';
+import { HandleErrorService } from '../handle-error.service';
 import { IUser } from '../user/model/user';
 import { IUserTrick } from '../user/model/userTrick';
+
+import { ITrick } from './models/trick';
 
 @Injectable({
   providedIn: 'root',
@@ -17,35 +19,18 @@ export class UserTrickService {
   constructor(private http: HttpClient) {
   }
 
-  private static handleError(error: HttpErrorResponse) {
-    console.log(error);
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    if (error.status === 409) {
-      return throwError(
-        'This name already exist!');
-    }
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
-
   getTrickListByUserId(id?: number): Observable<ITrick[]> {
     if (!id) {
       id = environment.currentUser;
     }
     return this.http.get<ITrick[]>(`${this.url}/user/${id}/tricks`).pipe(
-      catchError(UserTrickService.handleError)
+      catchError(HandleErrorService.handleError)
     );
   }
 
   getUserListByTrickId(id: number): Observable<IUser[]> {
     return this.http.get<IUser[]>(`${this.url}/tricks/users/${id}`).pipe(
-      catchError(UserTrickService.handleError)
+      catchError(HandleErrorService.handleError)
     );
   }
 
@@ -54,7 +39,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.post<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}`, {}).pipe(
-      catchError(UserTrickService.handleError)
+      catchError(HandleErrorService.handleError)
     );
   }
 
@@ -63,7 +48,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.delete<void>(`${this.url}/user/${userId}/tricks/${trickId}`).pipe(
-      catchError(UserTrickService.handleError)
+      catchError(HandleErrorService.handleError)
     );
   }
 
@@ -72,7 +57,7 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.patch<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}/mark`, { is_done: done }).pipe(
-      catchError(UserTrickService.handleError)
+      catchError(HandleErrorService.handleError)
     );
   }
 }

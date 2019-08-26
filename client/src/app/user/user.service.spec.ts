@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { UserTrickService } from '../service/user-trick.service';
 import { ITrick } from '../trick/models/trick';
+import { UserTrickService } from '../trick/user-trick.service';
 
 import { IUser } from './model/user';
 import { IUserTrick } from './model/userTrick';
