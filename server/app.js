@@ -30,8 +30,8 @@ const runServer = async function() {
   app.use(koaLogger(logger));
   app.use(httpConf.setCORS);
   app.use(resultSetter.errorHandler);
-  app.use(router.routes());
-  app.use(router.allowedMethods());
+  app.use(router.routes())
+    .use(router.allowedMethods());
 
   return app.listen(PORT, () => {
     console.log(`Server start http://localhost:${PORT}`);

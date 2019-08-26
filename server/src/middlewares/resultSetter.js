@@ -1,3 +1,4 @@
+'use strict';
 const Sequelize = require('sequelize');
 
 exports.setResult = async (ctx, result, status) => {
