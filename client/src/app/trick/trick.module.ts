@@ -12,6 +12,8 @@ import { TrickListComponent } from './trick-list/trick-list.component';
 import { TrickPageComponent } from './trick-page/trick-page.component';
 import { TrickRoutingModule } from './trick-routing.module';
 import { TrickComponent } from './trick/trick.component';
+import { Page404trickComponent } from './page404trick/page404trick.component';
+import { TrickNavComponent } from './trick-nav/trick-nav.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { TrickComponent } from './trick/trick.component';
     AddTrickComponent,
     EditTrickComponent,
     TrickPageComponent,
+    Page404trickComponent,
+    TrickNavComponent,
   ],
   providers: [
     TrickService,

@@ -14,8 +14,10 @@ export class TrickListComponent implements OnInit {
   tricks: ITrick[] = [];
   error: string;
 
-  constructor(private trickService: TrickService,
-              private userService: UserService) {
+  constructor(
+    private trickService: TrickService,
+    private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {

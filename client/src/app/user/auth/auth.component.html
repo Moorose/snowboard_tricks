@@ -3,12 +3,16 @@
   <div *ngIf="user" class="auth__status">
     <span>Current user is {{ user.nickname }}</span>
   </div>
-
-  <div class="auth__user">
-    <button (click)="signAsUser()" class="auth__btn">Sing in as User</button>
-  </div>
-  <div class="auth__admin">
-    <button (click)="signAsAdmin()" class="auth__btn">Sing in as Admin</button>
-  </div>
-
+  <ul>
+    <li>
+      <div class="auth__user">
+        <button (click)="signAsUser()" class="auth__btn">Sing in as User</button>
+      </div>
+    </li>
+    <li>
+      <div class="auth__admin">
+        <button (click)="signAsAdmin()" class="auth__btn">Sing in as Admin</button>
+      </div>
+    </li>
+  </ul>
 </div>

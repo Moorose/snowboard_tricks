@@ -116,7 +116,7 @@ exports.addMessage = async ({ userId, threadId, body }) => {
 };
 
 exports.getMessages = async (threadId) => {
-  await Message.findAll(
+  const mesList= await Message.findAll(
     {
       where: {
         ThreadId: threadId,
@@ -124,4 +124,5 @@ exports.getMessages = async (threadId) => {
       raw: true,
     },
   );
+  return mesList;
 };

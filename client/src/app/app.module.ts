@@ -5,14 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrickModule } from './trick/trick.module';
 import { UserModule } from './user/user.module';
+import { ThreadModule } from "./thread/thread.module";
+import { Page404Component } from './page404/page404.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Page404Component
   ],
   imports: [
     AppRoutingModule,
     TrickModule,
+    ThreadModule,
     UserModule,
     BrowserModule
   ],
