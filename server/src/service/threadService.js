@@ -6,10 +6,14 @@ const {
   Message,
 } = require('../models');
 
-async function addParticipant(userId, thread) {
+async function addParticipant(userId, thread, flag) {
+  let status = false;
+  if (flag) {
+    status = true;
+  }
   const user = await User.findByPk(userId);
   if (!user) throw new Error('User was not found!');
-  const participant = await thread.addUser(user, { through: { in_thread: false } });
+  const participant = await thread.addUser(user, { through: { in_thread: status } });
   if (!participant) throw new Error('Error adding user to thread');
 }
 
@@ -30,9 +34,9 @@ exports.openThread = async ({ userId, userTrickId }) => {
     raw: true,
   });
   inviteUser.map((invite) => addParticipant(invite.UserId, thread));
+  await addParticipant(userId, thread, true);
   return thread;
 };
-
 
 exports.getThreadInvite = async (userId) => {
   const threadInvite = await ThreadParticipant.findAll(
@@ -59,10 +63,25 @@ exports.acceptInvite = async ({ userId, inviteId }) => {
   if (updateCount === 0) throw new Error('Error accept invite to thread');
 };
 
+exports.deleteInvite = async ({ userId, inviteId }) => {
+  const [deleteCount] = await ThreadParticipant.destroy({
+    where: {
+      id: inviteId,
+      UserId: userId,
+    },
+  });
+  if (deleteCount === 0) throw new Error('Error deleted invite to thread');
+};
+
 exports.getThreadById = async (threadId) => {
   const thread = await Thread.findByPk(threadId);
   if (!thread) throw new Error('Thread was not found!');
   return thread;
+};
+
+exports.getUsersByThreadId = async (threadId) => {
+  const thread = await exports.getThreadById(threadId);
+  return await thread.getUsers();
 };
 
 exports.leaveThread = async ({ userId, threadId }) => {
@@ -73,7 +92,7 @@ exports.leaveThread = async ({ userId, threadId }) => {
   await thread.removeUser(user);
 };
 
-exports.getThreadsByUserId = async (userId) => {
+exports.getThreadByUserId = async (userId) => {
   const partList = await ThreadParticipant.findAll({
     where: {
       UserId: userId,
@@ -88,13 +107,6 @@ exports.getThreadsByUserId = async (userId) => {
       },
     })),
   );
-
-  threadList.push(...await Thread.findAll({
-    where: {
-      user_id: userId,
-    },
-    raw: true,
-  }));
   return threadList;
 };
 
@@ -113,10 +125,20 @@ exports.addMessage = async ({ userId, threadId, body }) => {
     UserId: userId,
   });
   if (!createCount) throw new Error('Error adding message to thread!');
+  const messageList = await Message.findAll(
+    {
+      where: {
+        ThreadId: threadId,
+        UserId: userId,
+      },
+      raw: true,
+    },
+  );
+  return messageList[messageList.length - 1];
 };
 
 exports.getMessages = async (threadId) => {
-  const mesList= await Message.findAll(
+  const messageList = await Message.findAll(
     {
       where: {
         ThreadId: threadId,
@@ -124,5 +146,5 @@ exports.getMessages = async (threadId) => {
       raw: true,
     },
   );
-  return mesList;
+  return messageList;
 };

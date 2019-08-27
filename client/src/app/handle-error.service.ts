@@ -12,7 +12,7 @@ export class HandleErrorService {
     } else {
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error}`);
     }
     if (error.status === 409) {
       return throwError(

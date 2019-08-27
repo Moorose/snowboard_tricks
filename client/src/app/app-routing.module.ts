@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { Page404Component } from './page404/page404.component';
 import { AuthComponent } from './user/auth/auth.component';
 import { HomePageComponent } from './user/home-page/home-page.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
-import { Page404Component } from "./page404/page404.component";
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },

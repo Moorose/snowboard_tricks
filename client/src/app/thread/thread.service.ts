@@ -5,10 +5,11 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { HandleErrorService } from '../handle-error.service';
-import { IThread } from "./models/thread";
-import { IMessage } from "./models/message";
-import { IInvite } from "./models/invite";
+import { IUser } from '../user/model/user';
 
+import { IInvite } from './models/invite';
+import { IMessage } from './models/message';
+import { IThread } from './models/thread';
 
 @Injectable({
   providedIn: 'root',
@@ -53,9 +54,9 @@ export class ThreadService {
     );
   }
 
-  addMessage(threadId: number, body: string): Observable<void> {
+  addMessage(threadId: number, body: string): Observable<IMessage> {
     const userId = environment.currentUser;
-    return this.http.post<void>(`${this.url}/user/${userId}/thread/${threadId}/message`, body).pipe(
+    return this.http.post<IMessage>(`${this.url}/user/${userId}/thread/${threadId}/message`, { body }).pipe(
       catchError(this.handleErrorService.handleError)
     );
   }
@@ -77,6 +78,19 @@ export class ThreadService {
   closeThread(threadId: number): Observable<void> {
     const userId = environment.currentUser;
     return this.http.delete<void>(`${this.url}/user/${userId}/thread/${threadId}/close`).pipe(
+      catchError(this.handleErrorService.handleError)
+    );
+  }
+
+  getUserByThreadId(threadId: number): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.url}/user/thread/${threadId}/members`).pipe(
+      catchError(this.handleErrorService.handleError)
+    );
+  }
+
+  deleteInvite(inviteId: number): Observable<void> {
+    const userId = environment.currentUser;
+    return this.http.delete<void>(`${this.url}/user/${userId}/invite/${inviteId}`, {}).pipe(
       catchError(this.handleErrorService.handleError)
     );
   }

@@ -27,10 +27,12 @@ router
   .get('/user/:userId/invite', threadController.getThreadInvite)
   .get('/user/:userId/thread', threadController.getThreadByUserId)
   .get('/user/thread/:threadId', threadController.getThreadById)
+  .get('/user/thread/:threadId/members', threadController.getUsersByThreadId)
   .get('/user/thread/:threadId/message', threadController.getMessages)
   .post('/user/:userId/thread/:userTrickId/open', threadController.openThread)
   .post('/user/:userId/thread/:threadId/message', threadController.addMessage)
   .patch('/user/:userId/invite/:inviteId', threadController.acceptInvite)
+  .delete('/user/:userId/invite/:inviteId', threadController.deleteInvite)
   .delete('/user/:userId/thread/:threadId/leave', threadController.leaveThread)
   .delete('/user/:userId/thread/:threadId/close', threadController.closeThread);
 

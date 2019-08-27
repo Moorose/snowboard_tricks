@@ -18,7 +18,6 @@ export class TrickPageComponent implements OnInit {
   thread: IThread = null;
   favorite: boolean = false;
 
-
   constructor(
     private route: ActivatedRoute,
     private userTrickService: UserTrickService,
@@ -56,10 +55,10 @@ export class TrickPageComponent implements OnInit {
     this.threadService.getThreadByUserId().subscribe(
       threadList => {
         threadList.map(thread => {
-            if (thread.UserTrickId === this.trick.UserTrick.id) {
-              this.thread = thread;
-            }
+          if (thread.UserTrickId === this.trick.UserTrick.id) {
+            this.thread = thread;
           }
+        }
         );
       });
   }

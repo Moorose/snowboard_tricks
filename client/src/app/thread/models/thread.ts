@@ -1,5 +1,5 @@
-import { IUser } from "../../user/model/user";
-import { ITrick } from "../../trick/models/trick";
+import { ITrick } from '../../trick/models/trick';
+import { IUser } from '../../user/model/user';
 
 export interface IThread {
   id: number;

@@ -1,4 +1,3 @@
-
 const threadService = require('../service/threadService');
 const resultSetter = require('../middlewares/resultSetter');
 
@@ -17,13 +16,24 @@ exports.acceptInvite = async (ctx) => {
   await resultSetter.setResult(ctx, null, 204);
 };
 
+exports.deleteInvite = async (ctx) => {
+  await threadService.deleteInvite({ ...ctx.params });
+  await resultSetter.setResult(ctx, null, 204);
+};
+
 exports.getThreadById = async (ctx) => {
   const thread = await threadService.getThreadById(ctx.params.threadId);
   await resultSetter.setResult(ctx, thread);
 };
 
+exports.getUsersByThreadId = async (ctx) => {
+  const thread = await threadService.getUsersByThreadId(ctx.params.threadId);
+  await resultSetter.setResult(ctx, thread);
+};
+
+
 exports.getThreadByUserId = async (ctx) => {
-  const threadList = await threadService.getThreadsByUserId(ctx.params.userId);
+  const threadList = await threadService.getThreadByUserId(ctx.params.userId);
   await resultSetter.setResult(ctx, threadList);
 };
 
@@ -38,8 +48,8 @@ exports.closeThread = async (ctx) => {
 };
 
 exports.addMessage = async (ctx) => {
-  await threadService.addMessage({ ...ctx.params, ...ctx.request.body });
-  await resultSetter.setResult(ctx, null, 201);
+  const messageList = await threadService.addMessage({ ...ctx.params, ...ctx.request.body });
+  await resultSetter.setResult(ctx, messageList, 201);
 };
 
 exports.getMessages = async (ctx) => {

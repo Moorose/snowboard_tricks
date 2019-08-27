@@ -26,7 +26,7 @@
       </div>
     </li>
 
-    <li *ngIf="trick.UserTrick && thread">
+    <li *ngIf="trick.UserTrick && !thread">
       <div>
         <button (click)="createThread()" class="trick__btnRemove">Create thread</button>
       </div>
@@ -34,6 +34,6 @@
     <li>
       <button (click)="goBack()" class="trick__btnBack">go back</button>
     </li>
-  </ul><span>{{thread}}</span>
+  </ul>
 </div>
 
