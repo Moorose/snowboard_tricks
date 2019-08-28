@@ -81,7 +81,8 @@ exports.getThreadById = async (threadId) => {
 
 exports.getUsersByThreadId = async (threadId) => {
   const thread = await exports.getThreadById(threadId);
-  return await thread.getUsers();
+  const users = await thread.getUsers();
+  return users;
 };
 
 exports.leaveThread = async ({ userId, threadId }) => {

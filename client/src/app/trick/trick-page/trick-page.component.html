@@ -8,7 +8,7 @@
   <div class="trick__description">
     <p>{{ trick.description }}</p>
   </div>
-  <ul>
+  <ul *ngIf="trick">
     <li>
       <div *ngIf="!trick.UserTrick">
         <button (click)="addToFavorite()"  class="trick__btnAdd">Add to favorite</button>
@@ -26,9 +26,12 @@
       </div>
     </li>
 
-    <li *ngIf="trick.UserTrick && !thread">
-      <div>
-        <button (click)="createThread()" class="trick__btnRemove">Create thread</button>
+    <li *ngIf="trick.UserTrick && !trick.UserTrick.is_done">
+      <div *ngIf="!thread">
+        <button (click)="createThread()" class="trick__btnAdd">Create thread</button>
+      </div>
+      <div *ngIf="thread">
+        <a [routerLink]="['/thread','list',thread.id]">Go to thread</a>
       </div>
     </li>
     <li>
