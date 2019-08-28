@@ -3,6 +3,7 @@ const Router = require('koa-router');
 const trickController = require('../controller/trickController');
 const userController = require('../controller/userController');
 const threadController = require('../controller/threadController');
+const awsController = require('../controller/awsController');
 
 const router = new Router();
 
@@ -24,6 +25,10 @@ router
   .patch('/tricks/:id', trickController.updateTrick)
   .delete('/tricks', trickController.deleteAllTricks)
   .delete('/tricks/:id', trickController.deleteTrickById)
+  .get('/aws/bucket/check', awsController.checkBucket)
+  .get('/aws/:fileName/check', awsController.checkFile)
+  .get('/aws/:fileName/put/url', awsController.getSignedUrlForPut)
+  .get('/aws/:fileName/get/url', awsController.getSignedUrlForGet)
   .get('/user/:userId/invite', threadController.getThreadInvite)
   .get('/user/:userId/thread', threadController.getThreadByUserId)
   .get('/user/thread/:threadId', threadController.getThreadById)

@@ -5,5 +5,6 @@ export interface ITrick {
   name: string;
   complexity: number;
   description: string;
+  videoKey?: string;
   UserTrick?: IUserTrick;
 }

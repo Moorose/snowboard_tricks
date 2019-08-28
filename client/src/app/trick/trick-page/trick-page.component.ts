@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IThread } from '../../thread/models/thread';
 import { ThreadService } from '../../thread/thread.service';
+import { FileService } from '../file.service';
 import { ITrick } from '../models/trick';
+import { IUrl } from '../models/Url';
 import { TrickService } from '../trick.service';
 import { UserTrickService } from '../user-trick.service';
 
@@ -17,6 +19,7 @@ export class TrickPageComponent implements OnInit {
   trick: ITrick = null;
   thread: IThread = null;
   favorite: boolean = false;
+  url: IUrl;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +27,7 @@ export class TrickPageComponent implements OnInit {
     private threadService: ThreadService,
     private location: Location,
     private trickService: TrickService,
+    private fileService: FileService,
   ) {
   }
 
@@ -36,6 +40,15 @@ export class TrickPageComponent implements OnInit {
     this.trickService.getTrickById(id).subscribe(trick => {
       this.trick = trick;
       this.checkTrickJoinToUser();
+      if (trick.videoKey) {
+        this.getUrl();
+      }
+    });
+  }
+
+  private getUrl(): void {
+    this.fileService.getSignedUrlForGet(this.trick.videoKey).subscribe(url => {
+      this.url = url;
     });
   }
 
