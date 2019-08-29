@@ -1,0 +1,19 @@
+<div *ngIf="trick" class="trick">
+  <div class="trick__name">
+    <p>{{ trick.name }}</p>
+  </div>
+  <div *ngIf="url" style="width: 50vw">
+    <mat-video src="{{url.link}}"></mat-video>
+  </div>
+  <div class="trick__complexity">
+    <p>Complexity:{{ trick.complexity }}</p>
+  </div>
+  <div class="trick__description">
+    <p>{{ trick.description }}</p>
+  </div>
+
+
+  <div>
+    <button (click)="goBack()" class="trick__btnBack">go back</button>
+  </div>
+</div>

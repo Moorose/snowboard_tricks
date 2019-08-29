@@ -1,0 +1,16 @@
+<h2>Threads</h2>
+<div class="thread">
+  <div *ngFor="let thread of threadList">
+    <a [routerLink]="[thread.id]">
+      <div *ngIf="thread.trick && thread.user">
+        <h3>{{ thread.user.nickname }} ask help with {{ thread.trick.name }}</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="alert">
+    <span *ngIf="!threadList" class="alert__text">Threads was not found!</span>
+  </div>
+</div>
+
+

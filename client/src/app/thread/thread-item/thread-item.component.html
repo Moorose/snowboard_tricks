@@ -1,0 +1,30 @@
+<div *ngIf="thread">
+  <button *ngIf="currentUser === thread.user_id" (click)="closeThread()">Close thread</button>
+  <button *ngIf="currentUser !== thread.user_id" (click)="leaveThread()">Leave thread</button>
+</div>
+<div *ngIf="thread && thread.trick && thread.user">
+  <h3>{{ thread.user.nickname }} ask help with {{ thread.trick.name }}</h3>
+</div>
+
+
+<div>
+  <ul *ngIf="users && thread && messages">
+    <li *ngFor="let message of messages">
+      <div>{{ getUserByMessage(message) }}</div>
+      <div>{{ message.body }}</div>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <form (ngSubmit)="send()" [formGroup]="messageForm">
+    <div>
+    <label>Message:
+      <input formControlName="message" type="textarea"/></label>
+    </div>
+    <div >
+      <button [disabled]="!messageForm.valid" type="submit">Send</button>
+    </div>
+  </form>
+</div>
+

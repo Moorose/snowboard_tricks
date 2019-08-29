@@ -1,0 +1,16 @@
+<h2>Tricks</h2>
+<div class="tricks">
+  <div *ngFor="let trick of tricks">
+    <a [routerLink]="['/tricks', 'list' ,trick.id]">
+      <app-trick [trick]="trick"></app-trick>
+    </a>
+  </div>
+  <div class="alert">
+    <span *ngIf="!tricks.length && !error" class="alert__text">Tricks was not found!</span>
+  </div>
+  <div class="alert">
+    <span *ngIf="error" class="alert__text">{{ error.message }}</span>
+  </div>
+</div>
+
+
