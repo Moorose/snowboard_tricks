@@ -1,0 +1,16 @@
+<h3>Trick navigation bar</h3>
+<ul>
+  <li>
+    <a [routerLink]="'list'" routerLinkActive="active"> Light tricks </a>
+  </li>
+  <li>
+    <a [routerLink]="'list'" routerLinkActive="active"> Hard tricks</a>
+  </li>
+  <li>
+    <a [routerLink]="'list/myTricks'" routerLinkActive="active"> My tricks </a>
+  </li>
+  <li *ngIf="adminRole">
+    <a [routerLink]="'list/addTrick'"> Add new trick </a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

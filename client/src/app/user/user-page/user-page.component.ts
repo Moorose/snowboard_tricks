@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
+import { ITrick } from '../../trick/models/trick';
+import { UserTrickService } from '../../trick/user-trick.service';
 import { IRank } from '../model/rank';
 import { IUser } from '../model/user';
 import { UserService } from '../user.service';
@@ -12,17 +15,24 @@ import { UserService } from '../user.service';
 export class UserPageComponent implements OnInit {
   user: IUser;
   rank: IRank;
+  tricks: ITrick[];
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private userTrick: UserTrickService
+  ) {
   }
 
   ngOnInit(): void {
     this.getUser();
     this.getLevel();
+    this.getTrick();
   }
 
   private getUser(): void {
-    this.userService.getUserById().subscribe(
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.userService.getUserById(id).subscribe(
       user => this.user = user
     );
   }
@@ -30,6 +40,13 @@ export class UserPageComponent implements OnInit {
   private getLevel(): void {
     this.userService.getUserLevel().subscribe(
       rank => this.rank = rank
+    );
+  }
+
+  private getTrick(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.userTrick.getTrickListByUserId(id).subscribe(
+      tricks => this.tricks = tricks
     );
   }
 }

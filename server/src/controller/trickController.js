@@ -1,3 +1,4 @@
+
 const trickService = require('../service/trickService');
 const resultSetter = require('../middlewares/resultSetter');
 const userTrickService = require('../service/userTrickService');
@@ -47,4 +48,13 @@ exports.deleteAllTricks = async (ctx) => {
 exports.getUserListByTrickId = async (ctx) => {
   const userList = await userTrickService.getUserListByTrickId(ctx.params.trickId);
   await resultSetter.setResult(ctx, userList);
+};
+
+exports.getUserTrick = async (ctx) => {
+  const userTrick = await userTrickService.getUserTrick({ ...ctx.params });
+  if (userTrick) {
+    await resultSetter.setResult(ctx, userTrick, 200);
+  } else {
+    ctx.throw(404);
+  }
 };

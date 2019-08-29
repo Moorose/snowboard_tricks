@@ -1,0 +1,15 @@
+<p>Invite list</p>
+<div>
+  <ul *ngIf="invites">
+    <li *ngFor="let invite of invites">
+      <div *ngIf="invite.user && invite.trick">
+        <span>{{invite.user.nickname}} ask you about help with {{invite.trick.name}}</span>
+        <span>{{invite.message}}</span>
+      </div>
+      <div *ngIf="!invite.message">
+        <button (click)="acceptInvite(invite)">Accept</button>
+        <button (click)="skipInvite(invite)">Skip</button>
+      </div>
+    </li>
+  </ul>
+</div>

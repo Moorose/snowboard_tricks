@@ -11,13 +11,14 @@ exports.createTrick = ({
 );
 
 exports.updateTrick = ({
-  id, name, complexity, description,
+  id, name, complexity, description, videoKey,
 }) => (
   Trick.update(
     {
       name,
       complexity,
       description,
+      videoKey,
     },
     {
       where: {

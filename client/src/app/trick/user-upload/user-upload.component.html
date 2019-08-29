@@ -1,0 +1,18 @@
+<p>user-upload works!</p>
+<div *ngIf="trick">
+  <span>You upload video for {{ trick.name }}</span>
+</div>
+<div *ngIf="userTrick">
+  <span *ngIf="userTrick.videoKey"> If you upload video, old version will be deleted!</span>
+</div>
+<div *ngIf="uploader" class="container">
+  <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+  <button type="button" class="btn btn-success btn-s"
+          (click)="uploader.uploadAll()"
+          [disabled]="disable" >
+    Upload
+  </button>
+  <div>
+    <span> uploader.progress: {{ uploader.progress || 0}}</span>
+  </div>
+</div>

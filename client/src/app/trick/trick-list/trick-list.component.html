@@ -7,6 +7,9 @@
     <a *ngIf="adminRole" [routerLink]="['editTrick', trick.id]">
       <button>EDIT TRICK</button>
     </a>
+    <a *ngIf="adminRole" [routerLink]="['addVideo', trick.id]">
+      <button>Add video</button>
+    </a>
   </div>
   <div class="alert">
     <span *ngIf="!tricks.length && !error" class="alert__text">Tricks was not found!</span>

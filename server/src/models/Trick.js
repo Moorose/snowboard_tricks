@@ -22,6 +22,10 @@ module.exports = (sequelize) => sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    videoKey: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   },
   {
     timestamps: false,

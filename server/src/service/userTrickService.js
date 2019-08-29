@@ -1,4 +1,3 @@
-
 const { User, Trick, UserTrick } = require('../models');
 
 exports.joinTrickToUser = async ({ userId, trickId }) => {
@@ -63,4 +62,39 @@ exports.getUserLevel = async (userId) => {
     nextExp: Math.ceil(exp / 1000) * 1000,
     exp,
   };
+};
+
+exports.getUserTrick = async ({ userId, trickId }) => {
+  const userTrick = await UserTrick.findOne({
+    where: {
+      UserId: userId,
+      TrickId: trickId,
+    },
+  });
+  return userTrick;
+};
+
+exports.updateUserTrick = async ({
+  id, is_done, UserId, TrickId, videoKey,
+}) => {
+  await UserTrick.update(
+    {
+      is_done,
+      UserId,
+      TrickId,
+      videoKey,
+    },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  const usertrick = await UserTrick.findOne({
+    where: {
+      UserId,
+      TrickId,
+    },
+  });
+  return usertrick;
 };
