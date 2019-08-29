@@ -1,3 +1,4 @@
+
 const userService = require('../service/userService');
 const userTrickService = require('../service/userTrickService');
 const resultSetter = require('../middlewares/resultSetter');
@@ -63,4 +64,9 @@ exports.getTrickListByUserId = async (ctx) => {
 exports.getUserLevelById = async (ctx) => {
   const level = await userTrickService.getUserLevel(ctx.params.userId);
   await resultSetter.setResult(ctx, level);
+};
+
+exports.updateUserTrick = async (ctx) => {
+  const userTrick = await userTrickService.updateUserTrick({ ...ctx.request.body });
+  await resultSetter.setResult(ctx, userTrick, 204);
 };

@@ -13,6 +13,10 @@ module.exports = (sequelize) => sequelize.define(
       type: Sequelize.BOOLEAN,
       allowNull: false,
     },
+    videoKey: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   },
   {
     timestamps: false,

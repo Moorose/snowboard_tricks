@@ -9,6 +9,7 @@ import { TrickService } from 'src/app/trick/trick.service';
 import { JSONInterceptor } from '../interceptor/JSONInterceptor';
 
 import { AddTrickComponent } from './add-trick/add-trick.component';
+import { AdminUploadComponent } from './admin-upload/admin-upload.component';
 import { EditTrickComponent } from './edit-trick/edit-trick.component';
 import { MyTrickComponent } from './my-trick/my-trick.component';
 import { Page404trickComponent } from './page404trick/page404trick.component';
@@ -17,7 +18,8 @@ import { TrickNavComponent } from './trick-nav/trick-nav.component';
 import { TrickPageComponent } from './trick-page/trick-page.component';
 import { TrickRoutingModule } from './trick-routing.module';
 import { TrickComponent } from './trick/trick.component';
-import { UploadComponent } from './upload/upload.component';
+import { UserTrickPageComponent } from './user-trick-page/user-trick-page.component';
+import { UserUploadComponent } from './user-upload/user-upload.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { UploadComponent } from './upload/upload.component';
     Page404trickComponent,
     TrickNavComponent,
     FileSelectDirective,
-    UploadComponent,
-    MyTrickComponent
+    MyTrickComponent,
+    UserTrickPageComponent,
+    AdminUploadComponent,
+    UserUploadComponent
   ],
   providers: [
     TrickService,

@@ -23,4 +23,19 @@
     </div>
   </div>
 
+  <div *ngIf="tricks && user">
+    <span>{{user.nickname}} can do:</span>
+    <ul>
+      <li *ngFor="let trick of tricks">
+        <a [routerLink]="['/tricks','user',user.id,'list',trick.id]">
+          <span>{{trick.name}}
+          <span *ngIf="trick.UserTrick.videoKey">
+            with video!
+          </span>
+        </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
 </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IThread } from '../../thread/models/thread';
 import { ThreadService } from '../../thread/thread.service';
+import { IUser } from '../../user/model/user';
 import { FileService } from '../file.service';
 import { ITrick } from '../models/trick';
 import { IUrl } from '../models/Url';
@@ -20,6 +21,7 @@ export class TrickPageComponent implements OnInit {
   thread: IThread = null;
   favorite: boolean = false;
   url: IUrl;
+  users: IUser[];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,11 +41,21 @@ export class TrickPageComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.trickService.getTrickById(id).subscribe(trick => {
       this.trick = trick;
+      this.getUsers();
       this.checkTrickJoinToUser();
       if (trick.videoKey) {
         this.getUrl();
       }
     });
+  }
+
+  private getUsers(): void {
+    this.userTrickService.getUserListByTrickId(this.trick.id).subscribe(
+      users => {
+        this.users = users;
+        this.users.map(user => this.getUserTrick(user));
+      }
+    );
   }
 
   private getUrl(): void {
@@ -74,6 +86,14 @@ export class TrickPageComponent implements OnInit {
         }
         );
       });
+  }
+
+  private getUserTrick(user: IUser): void {
+    this.userTrickService.getUserTrick(user.id, this.trick.id).subscribe(
+      userTrick => {
+        user.userTrick = userTrick;
+      }
+    );
   }
 
   markAsDone(done: boolean): void {

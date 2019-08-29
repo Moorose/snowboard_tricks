@@ -2,19 +2,41 @@
   <div class="trick__name">
     <p>{{ trick.name }}</p>
   </div>
-  <div *ngIf="url">
+  <div *ngIf="url" style="width: 50vw">
     <mat-video src="{{url.link}}"></mat-video>
   </div>
+      <div *ngIf="trick && trick.UserTrick && trick.UserTrick.is_done">
+        <a [routerLink]="['/tricks','user','list',trick.id,'addVideo']">Add your video with trick</a>
+      </div>
   <div class="trick__complexity">
     <p>Complexity:{{ trick.complexity }}</p>
   </div>
   <div class="trick__description">
     <p>{{ trick.description }}</p>
   </div>
+</div>
+
+<div *ngIf="users">
+  <span>This user can do it!</span>
+  <ul>
+    <li *ngFor="let user of users">
+      <div *ngIf="user.userTrick">
+      <a [routerLink]="['/user', user.id]">
+        <span>{{ user.nickname }}</span>
+        <a *ngIf="user.userTrick.videoKey" [routerLink]="['/tricks','user',user.id,'list',trick.id]">
+          <span> watch video </span>
+        </a>
+      </a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div>
   <ul *ngIf="trick">
     <li>
       <div *ngIf="!trick.UserTrick">
-        <button (click)="addToFavorite()"  class="trick__btnAdd">Add to favorite</button>
+        <button (click)="addToFavorite()" class="trick__btnAdd">Add to favorite</button>
       </div>
       <div *ngIf="trick.UserTrick">
         <button (click)="removeFromFavorite()" class="trick__btnRemove">Remove from favorite</button>
@@ -42,4 +64,3 @@
     </li>
   </ul>
 </div>
-

@@ -1,8 +1,8 @@
 const AWS = require('aws-sdk');
 
 AWS.config.update({
-  accessKeyId: 'AKIAIRTQRSJP7YEVEYCQ',
-  secretAccessKey: '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',
+  accessKeyId: '',
+  secretAccessKey: '',
 });
 
 const s3 = new AWS.S3({
@@ -46,7 +46,6 @@ exports.getSignedUrlForPut = async ({ fileName }) => {
   const params = {
     Bucket: 'snowboard-tricks',
     Key: fileName,
-    // Expires: 60 // expires in 60 seconds
   };
   return s3.getSignedUrl('putObject', params);
 };
@@ -58,4 +57,5 @@ exports.getSignedUrlForGet = async ({ fileName }) => {
     Key: fileName,
   };
   return s3.getSignedUrl('getObject', params);
+  // return 'link-getObject';
 };

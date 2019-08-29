@@ -30,7 +30,7 @@ export class UserTrickService {
   }
 
   getUserListByTrickId(id: number): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.url}/tricks/users/${id}`).pipe(
+    return this.http.get<IUser[]>(`${this.url}/tricks/${id}/users`).pipe(
       catchError(this.handleErrorService.handleError)
     );
   }
@@ -58,6 +58,18 @@ export class UserTrickService {
       userId = environment.currentUser;
     }
     return this.http.patch<IUserTrick>(`${this.url}/user/${userId}/tricks/${trickId}/mark`, { is_done: done }).pipe(
+      catchError(this.handleErrorService.handleError)
+    );
+  }
+
+  getUserTrick(userId: number, trickId: number): Observable<IUserTrick> {
+    return this.http.get<IUserTrick>(`${this.url}/tricks/${trickId}/users/${userId}`).pipe(
+      catchError(this.handleErrorService.handleError)
+    );
+  }
+
+  updateUserTrick(userTrick: IUserTrick): Observable<IUserTrick> {
+    return this.http.patch<IUserTrick>(`${this.url}/user/tricks/update`, userTrick).pipe(
       catchError(this.handleErrorService.handleError)
     );
   }

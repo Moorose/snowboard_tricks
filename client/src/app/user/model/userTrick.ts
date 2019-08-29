@@ -3,4 +3,5 @@ export interface IUserTrick {
   is_done: boolean;
   UserId: number;
   TrickId: number;
+  videoKey?: string;
 }
