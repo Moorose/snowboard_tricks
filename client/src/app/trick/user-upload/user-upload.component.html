@@ -1,18 +1,25 @@
-<p>user-upload works!</p>
-<div *ngIf="trick">
-  <span>You upload video for {{ trick.name }}</span>
-</div>
-<div *ngIf="userTrick">
-  <span *ngIf="userTrick.videoKey"> If you upload video, old version will be deleted!</span>
-</div>
-<div *ngIf="uploader" class="container">
-  <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-  <button type="button" class="btn btn-success btn-s"
-          (click)="uploader.uploadAll()"
-          [disabled]="disable" >
-    Upload
-  </button>
-  <div>
-    <span> uploader.progress: {{ uploader.progress || 0}}</span>
+<div class="container uploader">
+
+  <div class="row">
+    <div *ngIf="trick" class="col-4 uploader__message">
+      <span> You upload video for {{ trick.name }}</span>
+    </div>
   </div>
+  <div *ngIf="userTrick">
+    <div *ngIf="userTrick.videoKey" class="alert alert-danger uploader__message" role="alert">
+      <span> If you upload video, old version will be deleted!</span>
+    </div>
+  </div>
+  <div *ngIf="uploader" class="uploader_form">
+    <input [uploader]="uploader" name="photo" ng2FileSelect type="file"/>
+    <button (click)="uploader.uploadAll()" [disabled]="disable"
+            class="btn btn-success btn-s"
+            type="button">
+      Upload
+    </button>
+  </div>
+  <div class="uploader__progressbar">
+    <ngb-progressbar [height]="height" [value]="uploader.progress || 0" type="danger"></ngb-progressbar>
+  </div>
+
 </div>

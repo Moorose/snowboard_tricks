@@ -25,8 +25,12 @@ export class AuthComponent implements OnInit {
     );
   }
 
-  signAsUser(): void {
-    environment.currentUser = EUser.USER;
+  signAsUser(number: number): void {
+    if (number === EUser.USER) {
+      environment.currentUser = EUser.USER;
+    } else {
+      environment.currentUser = EUser.SECOND_USER;
+    }
     this.getUser();
   }
 

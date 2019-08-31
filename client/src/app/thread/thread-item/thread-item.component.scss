@@ -1,0 +1,35 @@
+.thread {
+  padding: 1vh;
+  margin-top: 2em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+  li {
+    list-style-type: none;
+  }
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  &__exitButton {
+    margin-right: 0.5em;
+  }
+
+  &__name {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-weight: bold;
+  }
+
+  &__item {
+    margin-top: 0.5vh;
+    background-color: #2b23ee;
+    border-radius: 8px;
+    border-color: #40b0b5;
+    border-style: solid;
+  }
+}

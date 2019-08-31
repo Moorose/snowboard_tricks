@@ -1,0 +1,36 @@
+.alert {
+
+}
+
+.thread {
+  &__item {
+    margin-top: 2vh;
+    background-color: #eee;
+    border-radius: 8px;
+    height: 6vw;
+    border-color: #607D8B;
+    border-style: groove;
+  }
+
+  &__message {
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited, a:link {
+    color: #607D8B;
+  }
+
+  a:hover {
+    color: #039be5;
+  }
+
+  a.active {
+    color: #000000;
+  }
+
+
+}

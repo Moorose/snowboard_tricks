@@ -1,15 +1,29 @@
-<p>Invite list</p>
-<div>
-  <ul *ngIf="invites">
-    <li *ngFor="let invite of invites">
-      <div *ngIf="invite.user && invite.trick">
-        <span>{{invite.user.nickname}} ask you about help with {{invite.trick.name}}</span>
-        <span>{{invite.message}}</span>
-      </div>
-      <div *ngIf="!invite.message">
-        <button (click)="acceptInvite(invite)">Accept</button>
-        <button (click)="skipInvite(invite)">Skip</button>
-      </div>
-    </li>
-  </ul>
+<div class="container invite">
+  <div class="row">
+    <div class="col invite__header">
+      <h3>Invite list</h3>
+    </div>
+  </div>
+  <div class="invite__list">
+    <ul *ngIf="invites">
+      <li *ngFor="let invite of invites" class="row invite__item">
+        <div *ngIf="invite.user && invite.trick" class="col invite__message">
+          <span>
+            <span class="invite__name">{{invite.user.nickname}}</span>
+              ask you about help with
+            <span class="invite__name">{{invite.trick.name}}</span>
+            </span>
+          <span>{{invite.message}}</span>
+        </div>
+        <div *ngIf="!invite.message" class="row invite__button">
+          <div class="col">
+            <button (click)="acceptInvite(invite)" class="btn btn-success">Accept</button>
+          </div>
+          <div class="col">
+            <button (click)="skipInvite(invite)" class="btn btn-danger">Skip</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,0 +1,18 @@
+.tricks {
+
+  &__item{
+    display: inline-block;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited, a:link {
+    color: #000000;
+  }
+
+  a:hover {
+    color: #000000;
+  }
+}

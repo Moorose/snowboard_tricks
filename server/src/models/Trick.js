@@ -19,7 +19,7 @@ module.exports = (sequelize) => sequelize.define(
       allowNull: false,
     },
     description: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     videoKey: {

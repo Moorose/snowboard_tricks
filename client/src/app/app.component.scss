@@ -1,25 +1,23 @@
-nav {
-  a {
-    padding: 5px 10px;
-    text-decoration: none;
+.header {
+ background-color: #000000;
+  height: 8vh;
+  &__name {
+    display: inline;
+    color: white;
+  }
+
+  &__nav {
+    display: inline;
+  }
+
+  &__link {
+    display: inline;
     margin-right: 10px;
     margin-top: 10px;
-    display: inline-block;
-    background-color: #eee;
-    border-radius: 4px;
-  }
+   }
 }
 
-nav a:visited, a:link {
-  color: #607D8B;
-}
 
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
-}
 
-nav a.active {
-  color: #039be5;
-}
+
 

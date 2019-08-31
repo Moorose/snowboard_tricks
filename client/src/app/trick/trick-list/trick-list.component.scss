@@ -1,9 +1,24 @@
 .tricks {
 
+  &__item {
+    display: inline-block;
+  }
+
+  &__alert {
+    display: inline-block;
+  }
+
+  &__admin {
+    margin-left: 1em;
+  }
+
+  &__btn {
+    margin-right: 1em;
+    display: inline-block;
+  }
+
   a {
-    margin: 10px 20vh;
     text-decoration: none;
-    display: block;
   }
 
   a:visited, a:link {

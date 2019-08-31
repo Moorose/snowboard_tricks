@@ -1,0 +1,61 @@
+.trick {
+
+  padding-top: 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+
+  &__name {
+    margin-top: 1vh;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  &__video {
+    width: 50vw;
+    margin-top: 1vh;
+    margin: auto;
+  }
+
+  &__addVideo {
+    margin-top: 1vh;
+    margin-right: 1em;
+  }
+
+  &__base {
+    border-color: #7da3b5;
+    border-bottom-style: solid;
+  }
+}
+
+.list {
+  li {
+    list-style-type: none;
+    margin-top: 1em;
+  }
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  &__item {
+
+  }
+
+  &__watch{
+    margin-left: 2em;
+  }
+
+  &__name {
+    color: #eeeeee;
+    font-weight: bold;
+  }
+
+  &__line{
+    border-color: #7da3b5;
+    border-bottom-style: solid;
+  }
+}

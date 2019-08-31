@@ -1,11 +1,11 @@
-<div *ngIf="uploader" class="container">
+<div *ngIf="uploader" class="container uploader">
   <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
   <button type="button" class="btn btn-success btn-s"
           (click)="uploader.uploadAll()"
           [disabled]="disable" >
     Upload
   </button>
-  <div>
-    <span> uploader.progress: {{ uploader.progress || 0}}</span>
+  <div class="uploader__progressbar">
+    <ngb-progressbar [height]="height" [value]="uploader.progress || 0" type="danger"></ngb-progressbar>
   </div>
 </div>

@@ -1,19 +1,27 @@
-<div *ngIf="trick" class="trick">
-  <div class="trick__name">
-    <p>{{ trick.name }}</p>
+<div class="container trick">
+  <div *ngIf="trick" class="trick__base">
+    <div class="row justify-content-start trick__name">
+      <div class="col offset-1">
+        <span>{{ trick.name }}</span>
+      </div>
+    </div>
+    <div *ngIf="url" class="row justify-content-center trick__video">
+      <div class="col">
+        <mat-video class="col" src="{{url.link}}"></mat-video>
+      </div>
+    </div>
+    <div class="row trick__complexity">
+      <div class="col">
+        <p>Complexity:{{ trick.complexity }}</p>
+      </div>
+    </div>
+    <div class="row trick__description">
+      <div class="col">
+        <p>{{ trick.description }}</p>
+      </div>
+    </div>
   </div>
-  <div *ngIf="url" style="width: 50vw">
-    <mat-video src="{{url.link}}"></mat-video>
-  </div>
-  <div class="trick__complexity">
-    <p>Complexity:{{ trick.complexity }}</p>
-  </div>
-  <div class="trick__description">
-    <p>{{ trick.description }}</p>
-  </div>
-
-
-  <div>
-    <button (click)="goBack()" class="trick__btnBack">go back</button>
+  <div class="trick__goBack">
+    <button (click)="goBack()" class="btn btn-primary">go back</button>
   </div>
 </div>

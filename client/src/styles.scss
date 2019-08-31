@@ -1,6 +1,15 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-/* everywhere else */
-* {
-  font-family: Arial, Helvetica, sans-serif;
+
+body {
+  background: #1f24c7 url('/assets/images/back2.jpg');
+  background-size: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
+
+.progress {
+  display: inline !important;
+  background: none !important;
+}
+
+.mat-slider-horizontal {
+  //height: 5px !important;
+}

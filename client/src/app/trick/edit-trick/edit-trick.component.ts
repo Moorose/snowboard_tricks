@@ -15,7 +15,7 @@ export class EditTrickComponent implements OnInit {
   error: string;
 
   trickForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(5)]],
+    name: ['', [Validators.required, Validators.minLength(1)]],
     complexity: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
     description: [''],
   });

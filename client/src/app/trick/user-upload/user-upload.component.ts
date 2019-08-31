@@ -22,6 +22,7 @@ export class UserUploadComponent implements OnInit {
   uploader: FileUploader;
   disable: boolean;
   userTrick: IUserTrick;
+  height: string = '20px';
 
   constructor(
     private route: ActivatedRoute,

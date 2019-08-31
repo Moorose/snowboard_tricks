@@ -1,9 +1,18 @@
-<h1>Snowboard Tricks</h1>
-<nav>
-  <a [routerLink]="'/home'" routerLinkActive="active">Home page</a>
-  <a [routerLink]="'/user'" routerLinkActive="active">My page</a>
-  <a [routerLink]="'/thread'" routerLinkActive="active">My messages</a>
-  <a [routerLink]="'/tricks'" routerLinkActive="active">Tricks</a>
-  <a [routerLink]="'/auth'" routerLinkActive="active">Sign in</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="container-fluid header">
+  <div class="row  align-items-center justify-content-between">
+    <div class="col-lg-4">
+    <h1 class="header__name">Snowboard Tricks</h1>
+    </div>
+    <div class="col-lg-4">
+    <nav class="header__nav">
+      <a [routerLink]="'/user'" class="btn btn-primary header__link" routerLinkActive="active">My page</a>
+      <a [routerLink]="'/thread'" class="btn btn-primary header__link" routerLinkActive="active">My messages</a>
+      <a [routerLink]="'/tricks'" class="btn btn-primary header__link" routerLinkActive="active">Tricks</a>
+      <a [routerLink]="'/auth'" class="btn btn-primary header__link" routerLinkActive="active">Sign in</a>
+    </nav>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

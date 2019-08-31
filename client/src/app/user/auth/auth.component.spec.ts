@@ -63,7 +63,7 @@ describe('AuthComponent', () => {
       };
       userServiceSpy.getUserById.and.returnValue(of(userMock));
       fixture.detectChanges();
-      component.signAsUser();
+      component.signAsUser(2);
     });
 
     it('should call getUserById through getUser', () => {

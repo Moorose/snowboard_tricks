@@ -1,0 +1,37 @@
+.trick {
+
+  padding-top: 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+
+  &__name {
+    margin-top: 1vh;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  &__complexity{
+    margin-top: 3em;
+  }
+
+  &__video {
+    width: 50vw;
+    display: block;
+    //margin-top: 1vh;
+    margin: auto;
+  }
+
+  &__base {
+    border-color: #7da3b5;
+    border-bottom-style: solid;
+  }
+
+  &__goBack{
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}
+

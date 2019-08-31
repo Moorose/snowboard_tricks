@@ -20,6 +20,7 @@ import { TrickRoutingModule } from './trick-routing.module';
 import { TrickComponent } from './trick/trick.component';
 import { UserTrickPageComponent } from './user-trick-page/user-trick-page.component';
 import { UserUploadComponent } from './user-upload/user-upload.component';
+import { NgbProgressbarModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UserUploadComponent } from './user-upload/user-upload.component';
     TrickRoutingModule,
     ReactiveFormsModule,
     MatVideoModule,
+    NgbProgressbarModule,
   ]
 })
 export class TrickModule {

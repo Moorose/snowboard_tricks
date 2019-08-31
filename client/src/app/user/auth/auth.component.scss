@@ -1,0 +1,19 @@
+.auth {
+
+  padding: 1em 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+
+  &__status{
+    margin-left: 1em;
+  }
+
+  &__btn {
+    display: inline-block;
+    margin: 1em 1em;
+  }
+}

@@ -7,6 +7,7 @@ import { Page404Component } from './page404/page404.component';
 import { ThreadModule } from './thread/thread.module';
 import { TrickModule } from './trick/trick.module';
 import { UserModule } from './user/user.module';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { UserModule } from './user/user.module';
     Page404Component
   ],
   imports: [
+    NgbModule,
     AppRoutingModule,
     TrickModule,
     ThreadModule,

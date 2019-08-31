@@ -1,0 +1,54 @@
+.profile {
+
+  padding-top: 1em;
+  margin-top: 1em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+
+  li {
+    list-style-type: none;
+  }
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  &__photo {
+    img {
+      height: 200px
+    }
+  }
+
+  &__level {
+
+  }
+
+  &__nickname {
+
+  }
+
+  &__fullName {
+
+  }
+
+  &__email {
+
+  }
+
+  &__aboutMe {
+
+  }
+
+  &__trick {
+
+  }
+
+  &__item {
+    display: inline-block;
+    margin: 1em 1em;
+  }
+}

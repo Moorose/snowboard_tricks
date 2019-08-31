@@ -1,66 +1,83 @@
-<div *ngIf="trick" class="trick">
-  <div class="trick__name">
-    <p>{{ trick.name }}</p>
-  </div>
-  <div *ngIf="url" style="width: 50vw">
-    <mat-video src="{{url.link}}"></mat-video>
-  </div>
-      <div *ngIf="trick && trick.UserTrick && trick.UserTrick.is_done">
-        <a [routerLink]="['/tricks','user','list',trick.id,'addVideo']">Add your video with trick</a>
-      </div>
-  <div class="trick__complexity">
-    <p>Complexity:{{ trick.complexity }}</p>
-  </div>
-  <div class="trick__description">
-    <p>{{ trick.description }}</p>
-  </div>
-</div>
+<div class="container trick">
 
-<div *ngIf="users">
-  <span>This user can do it!</span>
-  <ul>
-    <li *ngFor="let user of users">
-      <div *ngIf="user.userTrick">
-      <a [routerLink]="['/user', user.id]">
-        <span>{{ user.nickname }}</span>
-        <a *ngIf="user.userTrick.videoKey" [routerLink]="['/tricks','user',user.id,'list',trick.id]">
-          <span> watch video </span>
-        </a>
-      </a>
+  <div *ngIf="trick" class="trick__base">
+    <div class="row justify-content-start trick__name">
+      <div class="col offset-1">
+        <span>{{ trick.name }}</span>
       </div>
-    </li>
-  </ul>
-</div>
+    </div>
+    <div *ngIf="url" class="trick__video" >
+<!--      <div class="col">-->
+        <mat-video src="{{url.link}}"></mat-video>
+<!--      </div>-->
+    </div>
+    <div *ngIf="trick && trick.UserTrick && trick.UserTrick.is_done" class="row justify-content-end trick__addVideo">
+      <a [routerLink]="['/tricks','user','list',trick.id,'addVideo']" class="btn btn-primary btn-lg">Add your video
+        with
+        trick</a>
+    </div>
+    <div class="row trick__complexity">
+      <div class="col">
+        <p>Complexity:{{ trick.complexity }}</p>
+      </div>
+    </div>
+    <div class="row trick__description">
+      <div class="col">
+        <p>{{ trick.description }}</p>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <ul *ngIf="trick">
-    <li>
-      <div *ngIf="!trick.UserTrick">
-        <button (click)="addToFavorite()" class="trick__btnAdd">Add to favorite</button>
+  <div *ngIf="users" class="list">
+    <div class="row">
+      <div class="col">
+        <span>This user can do it!</span>
       </div>
-      <div *ngIf="trick.UserTrick">
-        <button (click)="removeFromFavorite()" class="trick__btnRemove">Remove from favorite</button>
-      </div>
-    </li>
-    <li *ngIf="trick.UserTrick">
-      <div *ngIf="!trick.UserTrick.is_done">
-        <button (click)="markAsDone(true)" class="trick__btnAdd">Mark as done</button>
-      </div>
-      <div *ngIf="trick.UserTrick.is_done">
-        <button (click)="markAsDone(false)" class="trick__btnRemove">Unmark</button>
-      </div>
-    </li>
+    </div>
+    <ul>
+      <li *ngFor="let user of users" class="list__item">
+        <div *ngIf="user.userTrick" class="col">
+          <a [routerLink]="['/user', user.id]">
+            <span class="list__name">{{ user.nickname }}</span>
+          </a>
+          <a *ngIf="user.userTrick.videoKey" [routerLink]="['/tricks','user',user.id,'list',trick.id]"
+             class="btn btn-primary list__watch">
+            <span> watch video </span>
+          </a>
+        </div>
+      </li>
+    </ul>
 
-    <li *ngIf="trick.UserTrick && !trick.UserTrick.is_done">
-      <div *ngIf="!thread">
-        <button (click)="createThread()" class="trick__btnAdd">Create thread</button>
-      </div>
-      <div *ngIf="thread">
-        <a [routerLink]="['/thread','list',thread.id]">Go to thread</a>
-      </div>
-    </li>
-    <li>
-      <button (click)="goBack()" class="trick__btnBack">go back</button>
-    </li>
-  </ul>
+    <div class="list__line"></div>
+
+    <ul *ngIf="trick">
+      <li>
+        <div *ngIf="!trick.UserTrick">
+          <button (click)="addToFavorite()" class="trick__btnAdd btn btn-primary ">Add to favorites</button>
+        </div>
+        <div *ngIf="trick.UserTrick">
+          <button (click)="removeFromFavorite()" class="trick__btnRemove btn btn-warning">Remove from favorites</button>
+        </div>
+      </li>
+      <li *ngIf="trick.UserTrick">
+        <div *ngIf="!trick.UserTrick.is_done">
+          <button (click)="markAsDone(true)" class="trick__btnAdd btn btn-primary">Mark as done</button>
+        </div>
+        <div *ngIf="trick.UserTrick.is_done">
+          <button (click)="markAsDone(false)" class="trick__btnRemove btn btn-warning">Unmark</button>
+        </div>
+      </li>
+      <li *ngIf="trick.UserTrick && !trick.UserTrick.is_done">
+        <div *ngIf="!thread">
+          <button (click)="createThread()" class="trick__btnAdd btn btn-primary">Create thread</button>
+        </div>
+        <div *ngIf="thread">
+          <a [routerLink]="['/thread','list',thread.id]" class="btn btn-primary">Go to thread</a>
+        </div>
+      </li>
+      <li>
+        <button (click)="goBack()" class="btn btn-primary">go back</button>
+      </li>
+    </ul>
+  </div>
 </div>

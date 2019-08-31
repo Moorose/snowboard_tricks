@@ -1,0 +1,33 @@
+.invite {
+
+  padding: 1vh;
+  margin-top: 2em;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+
+  &__header {
+  }
+
+  &__list {
+  }
+
+  &__item {
+    padding-bottom: 1em;
+    border-color: #7da3b5;
+    border-bottom-style: solid;
+    margin: 0;
+  }
+
+  &__message {
+  }
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__button {
+  }
+}

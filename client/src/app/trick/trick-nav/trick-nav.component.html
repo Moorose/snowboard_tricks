@@ -1,16 +1,15 @@
-<h3>Trick navigation bar</h3>
-<ul>
-  <li>
-    <a [routerLink]="'list'" routerLinkActive="active"> Light tricks </a>
-  </li>
-  <li>
-    <a [routerLink]="'list'" routerLinkActive="active"> Hard tricks</a>
-  </li>
-  <li>
-    <a [routerLink]="'list/myTricks'" routerLinkActive="active"> My tricks </a>
-  </li>
-  <li *ngIf="adminRole">
-    <a [routerLink]="'list/addTrick'"> Add new trick </a>
-  </li>
-</ul>
+<div class="container-fluid header">
+  <div class="row  align-items-center justify-content-between">
+    <div class="col-lg-4">
+      <h3 class="header__name">Tricks</h3>
+    </div>
+    <div class="col-lg-4">
+      <nav class="header__nav">
+        <a [routerLink]="'list'" class="btn btn-primary header__link" routerLinkActive="active">All tricks </a>
+        <a [routerLink]="'list/myTricks'" class="btn btn-primary header__link" routerLinkActive="active"> My tricks </a>
+        <a *ngIf="adminRole" [routerLink]="'list/addTrick'" class="btn btn-primary header__link" routerLinkActive="active"> Add new trick </a>
+      </nav>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

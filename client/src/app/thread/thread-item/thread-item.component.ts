@@ -49,7 +49,7 @@ export class ThreadItemComponent implements OnInit {
         this.userService.getUserById(thread.user_id).subscribe(
           user => this.thread.user = user
         );
-        this.trickService.getTrickById(thread.user_id).subscribe(
+        this.trickService.getTrickById(thread.trick_id).subscribe(
           trick => this.thread.trick = trick
         );
         this.getUsers();

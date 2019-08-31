@@ -1,12 +1,17 @@
 .trick {
   margin: 1em;
   border-radius: 1em;
-  background-color: cadetblue;
+  background-color: #373dc5;
   padding: 1em;
   width: 50vh;
+  color: #eeeeee;
 
   &__name {
     text-align: center;
     font-weight: bold;
+    font-size: 2em;
+  }
+  &__complexity{
+    font-size: 1.5em;
   }
 }

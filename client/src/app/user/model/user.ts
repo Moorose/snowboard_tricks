@@ -11,5 +11,6 @@ export interface IUser {
 
 export const enum EUser {
   USER = 1,
-  ADMIN = 2
+  SECOND_USER = 2,
+  ADMIN = 3
 }

@@ -1,12 +1,14 @@
-<h3>Thread Navigation bar</h3>
-<ul>
-  <li>
-    <a [routerLink]="'list'" routerLinkActive="active"> Threads </a>
-  </li>
-  <li>
-    <a [routerLink]="'invite'" routerLinkActive="active">
-      Invite
-    </a>
-  </li>
-</ul>
+<div class="container-fluid header">
+  <div class="row  align-items-center justify-content-between">
+    <div class="col-lg-4">
+      <h3 class="header__name"> Threads </h3>
+    </div>
+    <div class="col-lg-4">
+      <nav class="header__nav">
+        <a [routerLink]="'list'" class="btn btn-primary header__link" routerLinkActive="active"> Threads </a>
+        <a [routerLink]="'invite'" class="btn btn-primary header__link" routerLinkActive="active"> Invite </a>
+      </nav>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

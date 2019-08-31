@@ -1,0 +1,14 @@
+.uploader {
+  padding: 1vh;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  background-color: #373dc5;
+  color: #eeeeee;
+  margin-top: 2em;
+
+  &__progressbar {
+
+    margin-top: 2em;
+  }
+}

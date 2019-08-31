@@ -1,18 +1,17 @@
-<div class="auth">
+<div class="container auth">
 
-  <div *ngIf="user" class="auth__status">
+  <div *ngIf="user" class=" row auth__status">
     <span>Current user is {{ user.nickname }}</span>
   </div>
-  <ul>
-    <li>
-      <div class="auth__user">
-        <button (click)="signAsUser()" class="auth__btn">Sing in as User</button>
-      </div>
-    </li>
-    <li>
-      <div class="auth__admin">
-        <button (click)="signAsAdmin()" class="auth__btn">Sing in as Admin</button>
-      </div>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="auth__btn">
+      <button (click)="signAsUser(1)" class="btn btn-warning">Sing in as first user</button>
+    </div>
+    <div class="auth__btn">
+      <button (click)="signAsUser(2)" class="btn btn-warning">Sing in as second user</button>
+    </div>
+    <div class="auth__btn">
+      <button (click)="signAsAdmin()" class="btn btn-warning">Sing in as admin</button>
+    </div>
+  </div>
 </div>

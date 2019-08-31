@@ -13,10 +13,10 @@ export class AddTrickComponent {
   error: string;
 
   trickForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(5)]],
+    name: ['', [Validators.required, Validators.minLength(1)]],
     complexity: [
       '',
-      [Validators.required, Validators.min(1), Validators.max(1000)],
+      [Validators.required, Validators.min(1)],
     ],
     description: [''],
   });
