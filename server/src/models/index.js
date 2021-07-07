@@ -14,13 +14,27 @@ const sequelize = new Sequelize(db.name, db.username, db.password, {
 const Trick = require('./Trick')(sequelize);
 const User = require('./User')(sequelize);
 const UserTrick = require('./UserTrick')(sequelize);
+const ThreadParticipant = require('./ThreadParticipant')(sequelize);
+const Thread = require('./Thread')(sequelize);
+const Message = require('./Message')(sequelize);
+
 
 User.belongsToMany(Trick, { through: UserTrick });
 Trick.belongsToMany(User, { through: UserTrick });
+
+User.belongsToMany(Thread, { through: ThreadParticipant });
+Thread.belongsToMany(User, { through: ThreadParticipant });
+
+User.hasMany(Message);
+Thread.hasMany(Message);
+UserTrick.hasMany(Thread);
 
 module.exports = {
   sequelize,
   Trick,
   User,
   UserTrick,
+  ThreadParticipant,
+  Thread,
+  Message,
 };

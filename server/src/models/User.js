@@ -3,6 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => sequelize.define(
   'User',
   {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
     nickname: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -24,6 +30,6 @@ module.exports = (sequelize) => sequelize.define(
   },
   {
     timestamps: false,
-    tableName: 'users',
+    tableName: 'user',
   },
 );

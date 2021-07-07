@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => sequelize.define(
-  'UserTrick',
+  'ThreadParticipant',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -9,13 +9,13 @@ module.exports = (sequelize) => sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    is_done: {
+    in_thread: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
     },
   },
   {
     timestamps: false,
-    tableName: 'user_trick',
+    tableName: 'thread_participant',
   },
 );

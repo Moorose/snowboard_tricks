@@ -1,3 +1,4 @@
+
 exports.setCORS = async (ctx, next) => {
   ctx.response.set('Access-Control-Allow-Origin', '*');
   ctx.response.set('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');

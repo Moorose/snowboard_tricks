@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => sequelize.define(
-  'UserTrick',
+  'Message',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -9,13 +9,13 @@ module.exports = (sequelize) => sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    is_done: {
-      type: Sequelize.BOOLEAN,
+    body: {
+      type: Sequelize.STRING,
       allowNull: false,
     },
   },
   {
-    timestamps: false,
-    tableName: 'user_trick',
+    timestamps: true,
+    tableName: 'message',
   },
 );

@@ -1,8 +1,9 @@
 <h1>Snowboard Tricks</h1>
 <nav>
-  <a routerLink="/home" routerLinkActive="active">HOME</a>
-  <a routerLink="/user" routerLinkActive="active">USER PAGE</a>
-  <a routerLink="/tricks" routerLinkActive="active">TRICKS</a>
-  <a routerLink="/auth" routerLinkActive="active">Sign in</a>
+  <a [routerLink]="'/home'" routerLinkActive="active">Home page</a>
+  <a [routerLink]="'/user'" routerLinkActive="active">My page</a>
+  <a [routerLink]="'/thread'" routerLinkActive="active">My messages</a>
+  <a [routerLink]="'/tricks'" routerLinkActive="active">Tricks</a>
+  <a [routerLink]="'/auth'" routerLinkActive="active">Sign in</a>
 </nav>
 <router-outlet></router-outlet>

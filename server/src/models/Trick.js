@@ -25,6 +25,6 @@ module.exports = (sequelize) => sequelize.define(
   },
   {
     timestamps: false,
-    tableName: 'tricks',
+    tableName: 'trick',
   },
 );

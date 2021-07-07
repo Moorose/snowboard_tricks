@@ -2,6 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { IThread } from '../../thread/models/thread';
+import { ThreadService } from '../../thread/thread.service';
 import { ITrick } from '../models/trick';
 import { TrickService } from '../trick.service';
 import { UserTrickService } from '../user-trick.service';
@@ -13,12 +15,13 @@ import { UserTrickService } from '../user-trick.service';
 })
 export class TrickPageComponent implements OnInit {
   trick: ITrick = null;
+  thread: IThread = null;
   favorite: boolean = false;
-  mark: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private userTrickService: UserTrickService,
+    private threadService: ThreadService,
     private location: Location,
     private trickService: TrickService,
   ) {
@@ -26,33 +29,6 @@ export class TrickPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTrick();
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
-
-  markAsDone(done: boolean): void {
-    this.userTrickService.markTrick(done, this.trick.id).subscribe(
-      (userTrick) => this.mark = userTrick.is_done
-    );
-  }
-
-  addToFavorite(): void {
-    this.userTrickService.joinTrickToUser(this.trick.id).subscribe(
-      (userTrick) => {
-        this.mark = userTrick.is_done;
-        this.favorite = true;
-      }
-    );
-  }
-
-  removeFromFavorite(): void {
-    this.userTrickService.unJoinTrickToUser(this.trick.id).subscribe(
-      () => {
-        this.favorite = false;
-        this.mark = false;
-      });
   }
 
   private getTrick(): void {
@@ -64,16 +40,58 @@ export class TrickPageComponent implements OnInit {
   }
 
   private checkTrickJoinToUser(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.userTrickService.getTrickListByUserId().subscribe(tricks => tricks.map(
-      trick => {
-        if (trick.id === id) {
-          this.favorite = true;
-          if (trick.UserTrick) {
-            this.mark = trick.UserTrick.is_done;
+    this.userTrickService.getTrickListByUserId().subscribe(tricks => {
+      tricks.map(
+        trick => {
+          if (trick.id === this.trick.id) {
+            this.trick.UserTrick = trick.UserTrick;
+            this.checkThreadToUser();
+          }
+        });
+    });
+  }
+
+  private checkThreadToUser(): void {
+    this.threadService.getThreadByUserId().subscribe(
+      threadList => {
+        threadList.map(thread => {
+          if (thread.UserTrickId === this.trick.UserTrick.id) {
+            this.thread = thread;
           }
         }
-      })
+        );
+      });
+  }
+
+  markAsDone(done: boolean): void {
+    this.userTrickService.markTrick(done, this.trick.id).subscribe(
+      (userTrick) => this.trick.UserTrick = userTrick
     );
+  }
+
+  addToFavorite(): void {
+    this.userTrickService.joinTrickToUser(this.trick.id).subscribe(
+      (userTrick) => {
+        this.trick.UserTrick = userTrick;
+      }
+    );
+  }
+
+  removeFromFavorite(): void {
+    this.userTrickService.unJoinTrickToUser(this.trick.id).subscribe(
+      () => {
+        this.trick.UserTrick = null;
+      });
+  }
+
+  createThread(): void {
+    this.threadService.openThread(this.trick.UserTrick.id).subscribe(
+      thread => this.thread = thread,
+      error => console.log(error)
+    );
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
